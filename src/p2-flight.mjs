@@ -54,8 +54,31 @@ export function policyPhases(p, design) {
   return phases;
 }
 
-export function replay(p, contract, propellant, phases, {step = 0.02, samples = false, ship = null} = {}) {
-  let y = initialState(p, contract, propellant);
+export function scheduledPhases(schedule) {
+  const phases = schedule.map(phase => {
+    const times = phase.knots;
+    function command(t) {
+      if (!phase.powered) return off();
+      let left = 0;
+      let right = times.length - 1;
+      while (right - left > 1) {
+        const mid = (left + right) >> 1;
+        if (t >= times[mid]) left = mid;
+        else right = mid;
+      }
+      const fraction = clamp((t - times[left]) / (times[right] - times[left]), 0, 1);
+      return {throttle: phase.throttle[left] + fraction * (phase.throttle[right] - phase.throttle[left]),
+        gimbalRad: phase.gimbalRad[left] + fraction * (phase.gimbalRad[right] - phase.gimbalRad[left])};
+    }
+    return {name: phase.name, powered: phase.powered, command, duration: times.at(-1) - times[0]};
+  });
+  // Preserve the P2 allowance for contact just after the last control knot.
+  if (phases.at(-1).powered) phases.at(-1).duration += 0.5;
+  return phases;
+}
+
+export function replay(p, contract, propellant, phases, {step = 0.02, samples = false, ship = null, startState = null} = {}) {
+  let y = startState === null ? initialState(p, contract, propellant) : [...startState];
   const initial = [...y];
   let time = 0;
   let event = 'schedule_ended';

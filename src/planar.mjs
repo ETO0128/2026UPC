@@ -65,3 +65,12 @@ export function pitchControl(target,y,a,p,throttle){
  const T=p.maxThrustN*clamp(throttle,p.minThrottle,1);
  return {throttle,gimbalRad:Math.asin(clamp(-tau/(p.lengthM/2*T),-1,1))};
 }
+
+// Local P1 demonstration: regulate descent speed and pitch, without tracking a deck position.
+export function terminalDemoControl(y, a, p) {
+ const gap = Math.max(.01, y[1] - p.lengthM / 2);
+ const desiredSpeed = -Math.min(90, Math.sqrt(2 * 1.5 * gap + 1));
+ const acceleration = 4 * (desiredSpeed - y[3]);
+ const throttle = Math.max(.001, (y[4] * (g0 + acceleration) - a.fz) / p.maxThrustN);
+ return pitchControl(Math.PI / 2, y, a, p, throttle);
+}

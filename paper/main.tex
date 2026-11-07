@@ -1,6 +1,8 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,graphicx,booktabs,hyperref,fancyhdr}
+\hypersetup{hidelinks}
+\setcounter{tocdepth}{2}
 \input{paper/upc-layout.tex}
 \newcommand{\draftnote}[1]{\par\noindent\textit{Draft plan: #1}\par}
 \title{Controlled Descent and Propellant Estimation\\for a First-Stage Rocket Booster}
@@ -10,7 +12,8 @@
 \upctitle{Controlled Descent and Propellant Estimation\\for a First-Stage Rocket Booster}
 \renewcommand{\abstractname}{Summary}
 \begin{abstract}
-\draftnote{Write last. Summarize the descent model, verified landing strategy, separation propellant estimate, scenario dependence, and remaining safety checks.}
+We model first-stage recovery with coupled downrange, vertical, and pitch dynamics, using a reference liquid-oxygen and methane propulsion design. A nominal one-ignition trajectory satisfies the selected touchdown criteria with a separation propellant inventory of approximately 26.23 t. Fixed-schedule perturbation cases motivate further guidance analysis. Planning separately for known initial-state and steady-wind variations gives eleven feasible cases at a common 30 t inventory and fixed ship position. The remaining assessment includes uncertain measurements, disturbances arising during flight, actuator response, and structural and thermal limits.
+\draftnote{Complete the summary with the selected full-flight strategy, separation propellant load, recovery site, and principal safety limits. Keep the final summary within 300 words.}
 \end{abstract}
 \clearpage
 \tableofcontents
@@ -20,7 +23,7 @@
 Reusable first-stage boosters require controlled descent and a safe vertical landing before refurbishment and reuse.
 \subsection{Restatement of the Problem}
 At separation, the booster has an altitude of 70 km and a speed of 6000 km/h. Its dry mass is 130000 kg, its height is 65 m, and its diameter is 7.0 m. It uses liquid oxygen and methane. The recovery ship may be placed at a convenient location. The task is to analyze a safe descent and controlled vertical landing, and estimate the fuel required at separation~\cite{problem}.
-\draftnote{Distinguish total propellant from methane fuel. State the initial velocity direction as an explicit assumption or scenario parameter.}
+The problem specifies the initial speed magnitude. The direction affects the time aloft, downrange distance, and state at landing-burn ignition, so it is an explicit scenario input. We use \emph{propellant} for the combined mass of liquid oxygen and methane and \emph{fuel} for the methane component.
 \section{Assumptions}
 The booster is initially approximated as a rigid circular cylinder. This external geometry does not establish a uniform internal mass distribution. Atmospheric drag is retained using air-relative velocity and altitude-dependent density. The baseline translational model assumes planar motion and zero wind; steady uniform wind is a subsequent scenario, rather than a justification for neglecting aerodynamic torque.
 
@@ -49,11 +52,7 @@ $q$ & Dynamic pressure & Pa \\
 \input{paper/p1-model.tex}
 \section{Landing Strategy and Propellant Estimation}
 \input{paper/p2-optimization.tex}
-\section{Sensitivity and Uncertainty Analysis}
-\subsection{Initial Velocity Direction and Atmospheric Conditions}
-\subsection{Specific Impulse, Thrust, and Aerodynamic Parameters}
-\subsection{Landing Tolerances and Propellant Reserve}
-\draftnote{Report scenario ranges and propagate justified input uncertainty; do not assign unsupported probability distributions.}
+\input{paper/p3-sensitivity.tex}
 \section{Model Evaluation}
 \subsection{Overview and Comparison of Model Levels}
 \subsection{Verification and Validation}
@@ -65,13 +64,13 @@ $q$ & Dynamic pressure & Pa \\
 \subsubsection{Parameter and Operational Uncertainty}
 \section{Further Discussion}
 \subsection{Attitude Stability and Vertical Touchdown}
-\draftnote{Assess whether translational modeling is sufficient; identify torque, control authority, and rotational dynamics needed to support vertical landing claims.}
+The local pitch controller brings the body upright under the tested conditions, but the case with an initial pitch-rate error illustrates that attitude recovery can occur alongside a position miss. A full recovery trajectory must satisfy the position, velocity, tilt, and pitch-rate limits at the same contact event. Control authority also depends on gimbal saturation and whether the engine is on.
 \subsection{Structural Loads and Aerothermal Constraints}
+Dynamic pressure $q=\rho\lVert\mathbf u\rVert^2/2$ identifies intervals with high aerodynamic loading potential. Forces also depend on the coefficients and on the orientation of the vehicle relative to the flow. Acceleration and heating require their own diagnostics. Peak values describe exposure under the adopted assumptions. The reference contract has no adopted structural or thermal thresholds against which to judge them.
 \subsection{Ship Placement, Wind, and Deck Motion}
+Downrange placement can avoid a return maneuver. Once the ship is positioned, the guidance must target its location and meet the speed and attitude limits relative to its deck. The present stationary, horizontal deck sets the reference for the fixed-site examples. A moving deck would alter the target position, relative velocity, and contact orientation.
 \subsection{Conclusions and Practical Recommendations}
 \draftnote{Answer the separation-fuel question with assumptions, units, uncertainty, and feasibility limits.}
-\section{Report on the Use of AI}
-AI assistance was used to organize the manuscript, develop the reference dynamics and verification scripts, derive model equations, and generate P1 figures and draft text. It was also used to implement the P2 search, optimization, and replay, generate its figure, and draft the landing-strategy section. The team must review the derivations, assumptions, code, and numerical results, and retain the required interaction records before submission.
 \begin{thebibliography}{9}
 \bibitem{be4} Blue Origin. BE-4. Manufacturer webpage, accessed November 7, 2026. \url{https://www.blueorigin.com/es-MX/engines/be-4}.
 \bibitem{cylinder} F. E. Gowen and E. W. Perkins. Drag of Circular Cylinders for a Wide Range of Reynolds Numbers and Mach Numbers. NACA-TN-2960, 1953.
@@ -80,11 +79,24 @@ AI assistance was used to organize the manuscript, develop the reference dynamic
 \bibitem{kelly} M. Kelly. An Introduction to Trajectory Optimization: How to Do Your Own Direct Collocation. SIAM Review 59(4), 849--904, 2017. \url{https://doi.org/10.1137/16M1062569}.
 \bibitem{casadi} J. A. E. Andersson et al. CasADi: A Software Framework for Nonlinear Optimization and Optimal Control. Mathematical Programming Computation 11, 1--36, 2019. \url{https://doi.org/10.1007/s12532-018-0139-4}.
 \bibitem{ipopt} A. W\"achter and L. T. Biegler. On the Implementation of an Interior-Point Filter Line-Search Algorithm for Large-Scale Nonlinear Programming. Mathematical Programming 106, 25--57, 2006. \url{https://doi.org/10.1007/s10107-004-0559-y}.
-\bibitem{problem} UPC 2026, Problem A: Landing a First-Stage Rocket Booster. User-provided problem image.
+\bibitem{problem} The University Physics Competition. Problem A: Landing a First-Stage Rocket Booster, 2026. \href{https://university-physics-competition.com/2026-competition}{Official problem statement.}
 \end{thebibliography}
 \appendix
 \section{Reproducibility and Source Code}
-\draftnote{Document software versions, parameter files, run commands, and scripts generating every reported result.}
+From the repository root, run \texttt{node src/run-planar.mjs} to reproduce the demonstration trajectories and \texttt{node src/verify-p1.mjs} to reproduce the P1 numerical comparisons.
+
+Run \texttt{node src/p3-scenarios.mjs} to reproduce the fixed-ship and atmosphere coverage cases. The command reads the reference contract and the selected P2 command history, then writes \path{results/p3-scenarios.json}.
+The following commands compute the reference corrective schedule and rebuild the full-flight comparison from the saved schedules.
+\begin{verbatim}
+python src/p3-replan.py --case nominal
+python src/p3-replan.py --replay-all
+\end{verbatim}
+The schedules are stored in \path{results/p3/replanned/}. The planner uses the dependencies in \path{requirements-p2.txt}.
+\draftnote{Add the full-flight solver and final figure generation commands and versions.}
 \section{Supplementary Derivations and Results}
 \draftnote{Include dimensional checks, convergence tables, and additional scenario results.}
+\section*{Report on the Use of AI}
+\addcontentsline{toc}{section}{Report on the Use of AI}
+AI assistance was used to organize the manuscript, develop the reference dynamics and verification scripts, derive model equations, and generate P1 figures and draft text. It was also used to implement the P2 search, optimization, and replay, generate its figure, and draft the landing-strategy section. OpenAI Codex also assisted with the sensitivity calculations, corrective planning, and manuscript integration.
+\draftnote{Complete the disclosure with the tools used, exact prompts, and complete outputs required by the competition rules.}
 \end{document}

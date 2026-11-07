@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
-import {aero,rhs,inertia,run,pitchControl,rad,g0} from './planar.mjs';
+import {aero,rhs,inertia,run,pitchControl,terminalDemoControl,rad,g0} from './planar.mjs';
 const p=JSON.parse(fs.readFileSync('config/reference.json','utf8').replace(/^\uFEFF/,''));
 const off=()=>({throttle:0,gimbalRad:0});
 // Physical sign/limit checks: axial/crossflow deceleration, rotational damping, tail-gimbal torque.
@@ -11,12 +11,7 @@ const symmetric={...p,cpOffsetM:0};y=[0,1000,0,0,180000,0,.1];assert.ok(aero(y,s
 y=[0,1000,0,0,180000,0,0];let d=rhs(0,y,p,()=>({throttle:1,gimbalRad:.01}));assert.ok(d[6]<0);assert.ok(Math.abs(d[4]+p.maxThrustN/(p.ispS*g0))<1e-9);
 for(const theta of [0,.3,1.57]){y=[0,1000,100,30,180000,theta,.03];a=aero(y,symmetric);assert.ok(a.fx*100+a.fz*30+a.torque*.03<=1e-8);}
 // Terminal demonstrator: vertical reference, feedback throttle and torque compensation.
-function terminal(t,y,a){
- const gap=Math.max(.01,y[1]-p.lengthM/2),desired=-Math.min(90,Math.sqrt(2*1.5*gap+1));
- const az=4*(desired-y[3]);
- const throttle=Math.max(.001,(y[4]*(g0+az)-a.fz)/p.maxThrustN);
- return pitchControl(Math.PI/2,y,a,p,throttle);
-}
+const terminal=(_t,y,a)=>terminalDemoControl(y,a,p);
 const initial=[0,1200,0,-90,180000,Math.PI/2,0];
 const fine=run(p,initial,terminal,.01,100),coarse=run(p,initial,terminal,.02,100);
 assert.equal(fine.event,'contact');assert.ok(Math.abs(fine.state[3]-coarse.state[3])<.1);

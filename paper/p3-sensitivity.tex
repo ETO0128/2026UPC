@@ -1,0 +1,63 @@
+\section{Sensitivity and Uncertainty Analysis}
+\subsection{Initial Flight-Path Angle and Atmospheric Coverage}
+We first use an unpowered ascent to determine whether the selected flight-path angles stay within the range of the implemented atmosphere. The initial body pitch follows the flight-path angle in each case. At $0^\circ$ the booster starts descending from 70.0 km. At $15^\circ$ the simulated ascent reaches approximately 79.71 km. At $30^\circ$ an integration stage exceeds the atmosphere ceiling near 86 km while the vehicle is still climbing. The last supported step is at 85.99 km, about 22.0 s after separation. The $30^\circ$ result identifies a model coverage limit for a coast-first trajectory. Evaluating that trajectory through its apex requires a higher-altitude atmosphere model.
+
+\subsection{Wind, Initial Attitude, and Fixed-Ship Capture}
+We replay the selected one-ignition schedule from separation with the ship fixed at 278.310 km downrange and the initial inventory fixed at 26.228 t. The ignition time, throttle, and gimbal commands are held at their nominal histories, so the replay does not correct for perturbations. We change one input at a time. Wind is uniform and positive downrange. Pitch offsets are applied to the body alone, leaving the initial flight-path angle at $15^\circ$. Each replay runs until first contact with the deck plane or the end of the P2 replay window, which extends 0.5 s beyond the last control knot.
+
+\begin{table}[htbp]
+\centering
+\caption{Full-flight replay with the nominal P2 commands and fixed ship position. The signed position error is measured from the ship. Positive vertical velocity points upward. Contact quantities are shown only when the booster reaches the deck plane.}
+\label{tab:fixed-ship-p2}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Input change & Outcome & $\Delta x$ (m) & $v_x$ (m/s) & $v_h$ (m/s) \\
+\midrule
+Nominal & Within limits & 0.0 & $-0.01$ & $-1.53$ \\
+Wind $-10$ m/s & Schedule ended & -- & -- & -- \\
+Wind $+10$ m/s & Outside limits & $+378.3$ & 9.31 & $-14.80$ \\
+Pitch $-2^\circ$ & Schedule ended & -- & -- & -- \\
+Pitch $+2^\circ$ & Outside limits & $+139.0$ & 25.97 & $-25.16$ \\
+Pitch rate $-1^\circ$/s & Outside limits & $-1061.7$ & 151.71 & $-71.68$ \\
+Pitch rate $+1^\circ$/s & Outside limits & $+34.1$ & 106.40 & $-72.73$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The nominal replay passes all P0 touchdown criteria. In Table~\ref{tab:fixed-ship-p2}, the $-10$ m/s wind case and the $-2^\circ$ pitch case end with the lowest point of the body still 9.6 m and 46.8 m above the deck plane, respectively. Each of the four perturbed trajectories that reaches the deck plane exceeds the 5 m position tolerance and both speed limits. The $+1^\circ$/s pitch-rate case reaches the deck plane within $2^\circ$ of upright but still exceeds the position, speed, and pitch-rate limits. Thus the conditions for a controlled landing must be met together. These deterministic cases characterize the nominal commands without feedback correction. Estimating recovery under perturbations would require replaying a guidance law that adjusts the trajectory toward the fixed ship.
+
+\subsection{Separation-Time Replanning at a Fixed Inventory}
+We next use the initial state and steady wind as known inputs at separation and compute a new schedule for each case. The ship remains at the reference location. We select a common separation inventory of 30 t and retain the 5 t minimum usable reserve. A coast prediction supplies a state at 25 km. From that state, the optimizer chooses the remaining coast duration and the throttle and gimbal histories, with fixed initial mass and fixed ship position. The resulting commands are replayed from separation, including the preceding coast. This procedure uses the flight time before ignition to prepare a case-specific schedule.
+
+The reference case and ten one-factor perturbations satisfy all P0 touchdown criteria at replay steps of 0.005 s and 0.0025 s. Table~\ref{tab:p3-replanned} uses the finer replay. The largest position error among these cases is approximately 0.026 m, and the largest downward contact speed is approximately 1.584 m/s. Each case retains more than 7.16 t. With the same 30 t inventory but the original P2 commands, all eleven cases fail at least one touchdown criterion.
+
+\begin{table}[htbp]
+\centering
+\caption{Full-flight replay after case-specific planning at separation. The ship position and 30 t initial inventory are common to all cases. Each row satisfies the P0 touchdown criteria.}
+\label{tab:p3-replanned}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Input change & Retained (t) & $|v_x|$ (m/s) & $|v_h|$ (m/s) \\
+\midrule
+Nominal & 7.882 & 0.03 & 1.58 \\
+Wind $-1$ m/s & 7.939 & 0.00 & 1.49 \\
+Wind $+1$ m/s & 7.793 & 0.03 & 1.42 \\
+Pitch $-0.1^\circ$ & 7.866 & 0.03 & 1.42 \\
+Pitch $+0.1^\circ$ & 7.861 & 0.02 & 1.43 \\
+Wind $-10$ m/s & 8.497 & 0.00 & 1.51 \\
+Wind $+10$ m/s & 7.165 & 0.02 & 1.45 \\
+Pitch $-2^\circ$ & 7.951 & 0.00 & 1.51 \\
+Pitch $+2^\circ$ & 7.809 & 0.02 & 1.54 \\
+Pitch rate $-1^\circ$/s & 7.434 & 0.02 & 1.56 \\
+Pitch rate $+1^\circ$/s & 7.551 & 0.00 & 1.49 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The common 30 t inventory is a trial design choice, 3.772 t above the nominal P2 inventory. These runs establish feasibility for the individual modeled cases. The minimum common inventory and combined disturbances remain open questions. Planning takes approximately 14--43 s on the machine used here, with first ignition approximately 173--176 s after separation. These timings describe the recorded computations and leave room before ignition in these runs.
+
+The calculation assumes exact initial-state information, known uniform wind, and the reference dynamics. Commands are then executed as a precomputed schedule. Wind changes or state errors arising later in flight require further estimation and guidance updates. Actuator rate limits, sensing and computation delays, three-dimensional motion, Earth curvature and rotation, and structural and thermal limits also remain to be incorporated before operational safety can be assessed.
+
+\subsection{Whole-Flight Parameters and Reserve}
+For each complete trajectory, we distinguish a recovery site chosen for that trajectory from an already positioned ship whose location must remain fixed. The full-flight comparison varies flight-path angle, effective specific impulse, thrust, aerodynamic parameters, and reserve using the reference scenario points. Reserve contributes to vehicle mass, so its effect can include a change in burn consumption as well as the extra mass retained. The resulting range describes the scenarios examined.
+\draftnote{Add reoptimized propellant and feasibility results for the engine, aerodynamic, and reserve scenarios. Report the governing contact or flight limit for each case.}

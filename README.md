@@ -23,7 +23,7 @@
 latexmk -pdf -outdir=paper/build paper/main.tex
 ```
 
-当前只提交源文件；尚未验证 PDF 编译和排版。模板不代表赛事官方格式，提交前需核对当届要求。
+当前工作稿已编译并检查版面。已完成部分及剩余工作见各交接文档。
 
 ## 当前平面刚体参考模型
 参数见 `config/reference.json`，模型见 `docs/planar-model.md`。运行 `node src/run-planar.mjs` 可重现 P1 演示。全程优化与复算见 P2 交付。
@@ -33,3 +33,11 @@ latexmk -pdf -outdir=paper/build paper/main.tex
 
 ## P1 交付
 推导与内部验证已完成，见 [P1验证说明](docs/p1-verification.md)。运行 `node src/verify-p1.mjs` 重现检查；`python src/plot-p1.py` 生成三张论文配图（需matplotlib、numpy）。独立P1报告源文件为 paper/p1-report.tex；完整论文通过input复用正文。P1不包含全程轨迹优化或最终燃料答案。
+
+## P3 本轮交付
+
+[控制修正与局限](docs/p3-control-revision.md)说明固定原船位、统一 30 t 试算库存的分离时重规划。主情景和十个单因素扰动均满足 P0 触舰条件，前提为初态和恒定风准确已知。持续扰动、联合误差、最低共同库存及结构和热条件仍待完善。
+
+- [完整轨迹复算结果](results/p3/replanned/summary.json)及同目录中的逐情景控制节点。
+- [英文 P3 正文](paper/p3-sensitivity.tex)。
+- [本轮 PDF 工作稿](output/pdf/758A-P3-progress.pdf)。

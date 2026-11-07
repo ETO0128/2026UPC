@@ -1,0 +1,426 @@
+{
+  "scope": "Deterministic perturbations with fixed P2 commands and ship position, local terminal comparisons, and unpowered ascent coverage.",
+  "fixedShipReplay": {
+    "scheduleSource": "single-collocation.json history[4]",
+    "propellantKg": 26228.111328278872,
+    "shipLocationM": 278310.43659683835,
+    "stepS": 0.005,
+    "cases": [
+      {
+        "factor": "nominal",
+        "value": null,
+        "event": "contact",
+        "passes": true,
+        "timeS": 207.473914787635,
+        "touchdown": {
+          "shipErrorM": 0.000004258123226463795,
+          "horizontalMps": 0.011084218938196468,
+          "verticalMps": 1.532589908666378,
+          "tiltDeg": 0.00030616808330889873,
+          "pitchRateDegS": 0.05899731405835071,
+          "reserveKg": 5077.605055061285
+        },
+        "signedShipErrorM": 0.000004258123226463795,
+        "failedTouchdownChecks": [],
+        "finalState": [
+          278310.4366010965,
+          32.500018702033145,
+          -0.011084218938196468,
+          -1.532589908666378,
+          135077.60505506129,
+          1.5708016704360148,
+          -0.0010296973801513579
+        ],
+        "clearanceM": -2.4675553466233717e-10,
+        "consumedKg": 21150.506273217587,
+        "peakQPa": {
+          "value": 297334.035229561,
+          "timeS": 170.83999999991713,
+          "altitudeM": 9691.716667401704
+        },
+        "peakLoadG": {
+          "value": 7.703470046052025,
+          "timeS": 183.12644701708066,
+          "altitudeM": 2894.616042783817
+        }
+      },
+      {
+        "factor": "windMps",
+        "value": -10,
+        "event": "schedule_ended",
+        "passes": false,
+        "timeS": 207.9768764620272,
+        "touchdown": null,
+        "signedShipErrorM": null,
+        "failedTouchdownChecks": [],
+        "finalState": [
+          277914.2211712143,
+          42.221697088989146,
+          -9.961981061467851,
+          2.98093136663603,
+          134635.28796244212,
+          1.6389819333553426,
+          0.17724044512784587
+        ],
+        "clearanceM": 9.558753831222532,
+        "consumedKg": 21592.823365836754,
+        "peakQPa": {
+          "value": 298608.0606946381,
+          "timeS": 170.79499999991717,
+          "altitudeM": 9734.818097942716
+        },
+        "peakLoadG": {
+          "value": 7.6899007150815475,
+          "timeS": 183.12644701708066,
+          "altitudeM": 2910.5965696461235
+        }
+      },
+      {
+        "factor": "windMps",
+        "value": 10,
+        "event": "contact",
+        "passes": false,
+        "timeS": 206.17170866297283,
+        "touchdown": {
+          "shipErrorM": 378.29871703346726,
+          "horizontalMps": 9.308502787279266,
+          "verticalMps": 14.801572293015905,
+          "tiltDeg": 15.419300996355801,
+          "pitchRateDegS": 23.213427975469187,
+          "reserveKg": 6222.798473911389
+        },
+        "signedShipErrorM": 378.29871703346726,
+        "failedTouchdownChecks": [
+          "ship",
+          "horizontal",
+          "vertical",
+          "tilt",
+          "pitchRate"
+        ],
+        "finalState": [
+          278688.7353138718,
+          32.260774565724255,
+          9.308502787279266,
+          -14.801572293015905,
+          136222.7984739114,
+          1.8399138975373475,
+          -0.4051507488464988
+        ],
+        "clearanceM": -4.395001029777745e-9,
+        "consumedKg": 20005.312854367483,
+        "peakQPa": {
+          "value": 296064.13821807964,
+          "timeS": 170.8799999999171,
+          "altitudeM": 9652.198992004047
+        },
+        "peakLoadG": {
+          "value": 7.714623792514729,
+          "timeS": 183.12644701708066,
+          "altitudeM": 2878.4269399454765
+        }
+      },
+      {
+        "factor": "pitchOffsetDeg",
+        "value": -2,
+        "event": "schedule_ended",
+        "passes": false,
+        "timeS": 207.9768764620272,
+        "touchdown": null,
+        "signedShipErrorM": null,
+        "failedTouchdownChecks": [],
+        "finalState": [
+          278140.01308326185,
+          79.46691390446698,
+          -5.376312608692827,
+          -1.1073956118905026,
+          134635.28796244212,
+          1.7265237708302714,
+          0.19015069871637
+        ],
+        "clearanceM": 46.81735175849635,
+        "consumedKg": 21592.823365836754,
+        "peakQPa": {
+          "value": 292935.65232949576,
+          "timeS": 171.05499999991693,
+          "altitudeM": 9690.569620851431
+        },
+        "peakLoadG": {
+          "value": 7.73730096522253,
+          "timeS": 183.12144701708067,
+          "altitudeM": 3010.891273930863
+        }
+      },
+      {
+        "factor": "pitchOffsetDeg",
+        "value": 2,
+        "event": "contact",
+        "passes": false,
+        "timeS": 204.16447229461653,
+        "touchdown": {
+          "shipErrorM": 138.9734982344089,
+          "horizontalMps": 25.966518872994246,
+          "verticalMps": 25.15808880793655,
+          "tiltDeg": 34.424316515571796,
+          "pitchRateDegS": 1.4335811914363819,
+          "reserveKg": 7988.016020643641
+        },
+        "signedShipErrorM": 138.9734982344089,
+        "failedTouchdownChecks": [
+          "ship",
+          "horizontal",
+          "vertical",
+          "tilt",
+          "pitchRate"
+        ],
+        "finalState": [
+          278449.41009507276,
+          28.787003590254734,
+          25.966518872994246,
+          -25.15808880793655,
+          137988.01602064364,
+          2.171613992740286,
+          0.025020711885228
+        ],
+        "clearanceM": -6.130690177741371e-9,
+        "consumedKg": 18240.09530763523,
+        "peakQPa": {
+          "value": 301682.4311607184,
+          "timeS": 170.6349999999173,
+          "altitudeM": 9685.260697556314
+        },
+        "peakLoadG": {
+          "value": 7.676366543871423,
+          "timeS": 183.12644701708066,
+          "altitudeM": 2781.979324482607
+        }
+      },
+      {
+        "factor": "initialPitchRateDegS",
+        "value": -1,
+        "event": "contact",
+        "passes": false,
+        "timeS": 194.79851031410337,
+        "touchdown": {
+          "shipErrorM": 1061.7045534147765,
+          "horizontalMps": 151.7131574649994,
+          "verticalMps": 71.67503388689812,
+          "tiltDeg": 79.8284923528128,
+          "pitchRateDegS": 24.63094103526078,
+          "reserveKg": 14283.984926156525
+        },
+        "signedShipErrorM": -1061.7045534147765,
+        "failedTouchdownChecks": [
+          "ship",
+          "horizontal",
+          "vertical",
+          "tilt",
+          "pitchRate"
+        ],
+        "finalState": [
+          277248.7320434236,
+          9.184339409976186,
+          151.7131574649994,
+          -71.67503388689812,
+          144283.98492615653,
+          -3.3191189519249913,
+          -0.42989101892988135
+        ],
+        "clearanceM": -9.734879125034013e-9,
+        "consumedKg": 11944.126402122347,
+        "peakQPa": {
+          "value": 317060.61330607,
+          "timeS": 169.1049999999187,
+          "altitudeM": 9800.867936415074
+        },
+        "peakLoadG": {
+          "value": 7.025355863501391,
+          "timeS": 183.25144701708055,
+          "altitudeM": 2046.7814370438455
+        }
+      },
+      {
+        "factor": "initialPitchRateDegS",
+        "value": 1,
+        "event": "contact",
+        "passes": false,
+        "timeS": 196.91204296814846,
+        "touchdown": {
+          "shipErrorM": 34.08093438553624,
+          "horizontalMps": 106.39859105707858,
+          "verticalMps": 72.7342926293506,
+          "tiltDeg": 1.633269694090273,
+          "pitchRateDegS": 33.89791642658535,
+          "reserveKg": 12425.288288528827
+        },
+        "signedShipErrorM": 34.08093438553624,
+        "failedTouchdownChecks": [
+          "ship",
+          "horizontal",
+          "vertical",
+          "pitchRate"
+        ],
+        "finalState": [
+          278344.5175312239,
+          32.58655358135416,
+          106.39859105707858,
+          -72.7342926293506,
+          142425.28828852883,
+          1.5993022605298124,
+          -0.591630251209785
+        ],
+        "clearanceM": -1.0112064074974114e-8,
+        "consumedKg": 13802.823039750045,
+        "peakQPa": {
+          "value": 318479.68505938066,
+          "timeS": 169.57999999991827,
+          "altitudeM": 9784.686394591252
+        },
+        "peakLoadG": {
+          "value": 7.492671856962589,
+          "timeS": 178.10144701708523,
+          "altitudeM": 4397.379164874127
+        }
+      }
+    ]
+  },
+  "terminalInitial": [
+    0,
+    1200,
+    0,
+    -90,
+    180000,
+    1.5707963267948966,
+    0
+  ],
+  "terminalStepS": 0.005,
+  "shipXM": 5.15269121104742e-13,
+  "shipToleranceM": 5,
+  "terminal": [
+    {
+      "factor": "nominal",
+      "value": null,
+      "event": "contact",
+      "shipErrorM": 0,
+      "vxMps": 2.7018575694314073e-14,
+      "vhMps": -1.5029088567813726,
+      "pitchDeg": 90,
+      "pitchRateDegS": -1.500333390600965e-48,
+      "consumedKg": 22679.119104944257,
+      "remainingKg": 27320.880895055743,
+      "peakDynamicPressurePa": 4414.474152748386,
+      "passesSpeedAttitudeAndReserve": true,
+      "capturesFixedShip": true
+    },
+    {
+      "factor": "windMps",
+      "value": -10,
+      "event": "contact",
+      "shipErrorM": -89.19870902698962,
+      "vxMps": -4.320598511491027,
+      "vhMps": -1.5029094243338224,
+      "pitchDeg": 90,
+      "pitchRateDegS": 4.58998541692171e-19,
+      "consumedKg": 22679.125507065182,
+      "remainingKg": 27320.874492934818,
+      "peakDynamicPressurePa": 4468.973833646514,
+      "passesSpeedAttitudeAndReserve": false,
+      "capturesFixedShip": false
+    },
+    {
+      "factor": "windMps",
+      "value": 10,
+      "event": "contact",
+      "shipErrorM": 89.19870902698919,
+      "vxMps": 4.320598511491057,
+      "vhMps": -1.5029094243338224,
+      "pitchDeg": 90,
+      "pitchRateDegS": -3.3860548157619163e-19,
+      "consumedKg": 22679.125507065182,
+      "remainingKg": 27320.874492934818,
+      "peakDynamicPressurePa": 4468.973833646514,
+      "passesSpeedAttitudeAndReserve": false,
+      "capturesFixedShip": false
+    },
+    {
+      "factor": "pitchOffsetDeg",
+      "value": -2,
+      "event": "contact",
+      "shipErrorM": 44.63446967005415,
+      "vxMps": 1.2291606969659445,
+      "vhMps": -1.5029258742256262,
+      "pitchDeg": 89.99999999841282,
+      "pitchRateDegS": 8.808723759947833e-10,
+      "consumedKg": 22679.008375016158,
+      "remainingKg": 27320.991624983842,
+      "peakDynamicPressurePa": 4414.474152748386,
+      "passesSpeedAttitudeAndReserve": false,
+      "capturesFixedShip": false
+    },
+    {
+      "factor": "pitchOffsetDeg",
+      "value": 2,
+      "event": "contact",
+      "shipErrorM": -44.634469670054195,
+      "vxMps": -1.229160696965895,
+      "vhMps": -1.5029258742256257,
+      "pitchDeg": 90.00000000158718,
+      "pitchRateDegS": -8.808723759947831e-10,
+      "consumedKg": 22679.008375016158,
+      "remainingKg": 27320.991624983842,
+      "peakDynamicPressurePa": 4414.474152748386,
+      "passesSpeedAttitudeAndReserve": false,
+      "capturesFixedShip": false
+    },
+    {
+      "factor": "initialPitchRateDegS",
+      "value": -1,
+      "event": "contact",
+      "shipErrorM": 23.504601037175323,
+      "vxMps": 0.6727526487549409,
+      "vhMps": -1.5029092194629228,
+      "pitchDeg": 89.99999999911944,
+      "pitchRateDegS": 2.6371797452979934e-10,
+      "consumedKg": 22679.11961181066,
+      "remainingKg": 27320.88038818934,
+      "peakDynamicPressurePa": 4414.474152748386,
+      "passesSpeedAttitudeAndReserve": true,
+      "capturesFixedShip": false
+    },
+    {
+      "factor": "initialPitchRateDegS",
+      "value": 1,
+      "event": "contact",
+      "shipErrorM": -23.50460103717524,
+      "vxMps": -0.6727526487548857,
+      "vhMps": -1.502909219462922,
+      "pitchDeg": 90.00000000088055,
+      "pitchRateDegS": -2.637179745277526e-10,
+      "consumedKg": 22679.11961181066,
+      "remainingKg": 27320.88038818934,
+      "peakDynamicPressurePa": 4414.474152748386,
+      "passesSpeedAttitudeAndReserve": true,
+      "capturesFixedShip": false
+    }
+  ],
+  "coastStepS": 0.02,
+  "coast": [
+    {
+      "angleDeg": 0,
+      "status": "apexWithinModel",
+      "timeS": 0,
+      "altitudeM": 70000
+    },
+    {
+      "angleDeg": 15,
+      "status": "apexWithinModel",
+      "timeS": 45.060000000001445,
+      "altitudeM": 79710.71607174003
+    },
+    {
+      "angleDeg": 30,
+      "status": "outsideAtmosphereModel",
+      "lastSupportedTimeS": 21.95999999999962,
+      "lastSupportedAltitudeM": 85989.79059038914
+    }
+  ]
+}

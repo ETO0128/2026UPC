@@ -102,7 +102,8 @@ def rk_interval(rhs, substeps):
     return ca.Function("rk4_interval", [state, u0, u1, duration], [y])
 
 
-def optimize(p, contract, seed, step, max_iter, *, shooting=False, altitude_buffer=0, substeps=8):
+def optimize(p, contract, seed, step, max_iter, *, shooting=False, altitude_buffer=0, substeps=8,
+             fixed_initial_mass=False, fixed_ship=None):
     nlp = ca.Opti()
     rhs = p1_rhs(p)
     step_function = rk_interval(rhs, substeps) if shooting else None
@@ -138,7 +139,7 @@ def optimize(p, contract, seed, step, max_iter, *, shooting=False, altitude_buff
         if stages:
             nlp.subject_to(x[:, 0] == stages[-1][2][:, -1])
         else:
-            fixed = np.r_[0:4, 5:7]
+            fixed = np.arange(7) if fixed_initial_mass else np.r_[0:4, 5:7]
             nlp.subject_to(x[fixed, 0] == np.array(seed["initialState"])[fixed] / SCALE[fixed])
         if powered:
             u = nlp.variable(2, intervals + 1)
@@ -171,7 +172,9 @@ def optimize(p, contract, seed, step, max_iter, *, shooting=False, altitude_buff
     upright = 0.5 + 2 * round((seed["finalState"][5] - np.pi / 2) / (2 * np.pi))
     nlp.subject_to(final[5:7] == [upright, 0])
     nlp.subject_to(final[4] >= (floor + 75) / SCALE[4])
-    nlp.minimize(first[4])
+    if fixed_ship is not None:
+        nlp.subject_to(final[0] == fixed_ship / SCALE[0])
+    nlp.minimize(first[4] - final[4] if fixed_initial_mass else first[4])
     nlp.solver("ipopt", {"print_time": False}, {"print_level": 0, "max_iter": max_iter,
                "max_wall_time": 140, "tol": 1e-8, "acceptable_tol": 2e-6,
                "acceptable_iter": 10, "bound_relax_factor": 0})
