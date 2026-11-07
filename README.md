@@ -36,7 +36,7 @@ latexmk -pdf -outdir=paper/build paper/main.tex
 
 ## P3 本轮交付
 
-[P3 收尾交接](docs/p3-closeout.md)与[正文修整记录](docs/p3-editorial-revision.md)说明当前主线：发动机与阻力假设怎样改变分离装载量，以及同一条名义轨迹的全程载荷和安全局限。P3 已完成本轮约定范围，没有新增计算或控制方案。
+[P3 收尾交接](docs/p3-closeout.md)与[正文修整记录](docs/p3-editorial-revision.md)说明当前主线：发动机与阻力假设怎样改变分离装载量，以及同一条名义轨迹的全程载荷。限定计算与正文整理已交付；全程结构与热安全仍未闭合，不能据此声称已证明安全回收。[结论边界](docs/p3-conclusion-boundaries.md)逐项区分假设、范围外扩展和核心未解事项。
 
 - [发动机效率与推进剂需求](docs/p3-propulsion-sensitivity.md)：三档已知有效比冲的局部设计库存为 28.781、26.228、24.199 t，每档分别选择合适船位。
 - [限定阻力对比](docs/p3-drag-sensitivity.md)：横流系数 1.6 的已接受局部设计为 27.130 t；系数 0.8 的限时搜索未得到通过候选，不作为燃料需求。
