@@ -23,3 +23,6 @@ latexmk -pdf -outdir=paper/build paper/main.tex
 ```
 
 当前只提交源文件；尚未验证 PDF 编译和排版。模板不代表赛事官方格式，提交前需核对当届要求。
+
+## 当前平面刚体参考模型
+参数：config/reference.json；说明：docs/planar-model.md。运行：node src/run-planar.mjs。包含轴向/横流、有动力制动及俯仰；全程可行轨迹仍待优化。

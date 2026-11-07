@@ -1,0 +1,23 @@
+{
+  "description": "Reference design, not identification of an actual booster",
+  "dryMassKg":130000,"lengthM":65,"diameterM":7,
+  "altitudeM":70000,"speedMps":1666.6666666667,"flightPathDeg":15,
+  "propellantKg":80000,"pitchDeg":15,"pitchRateRadS":0,
+  "ispS":330,"oxygenFuelRatio":3.5,
+  "maxThrustN":2846000,"minThrottle":0.4,"gimbalLimitDeg":10,
+  "axialCd":0.8,"crossflowCd":1.2,"cpOffsetM":3.25,"strips":20,
+  "windMps":0,"deckHeightM":0,"reserveKg":5000,
+  "touchdown": {"horizontalMps":1,"verticalMps":2,"tiltDeg":2,"pitchRateDegS":1},
+  "provenance": {
+    "maxThrustN":"BE-4 manufacturer thrust scale, adopted as a one-engine reference design; not the engine specified by the problem",
+    "ispS":"assumed effective descent value; sensitivity required",
+    "oxygenFuelRatio":"assumed 3.5, guided by NASA 19950021840 Fig.2; not a measured sea-level engine ratio",
+    "minThrottle":"design assumption, not manufacturer specification",
+    "axialCd":"engineering closure assumption, not extracted NACA data",
+    "crossflowCd":"engineering closure assumption guided by cylinder crossflow literature, not a digitized experimental fit",
+    "cpOffsetM":"design uncertainty: +0.05 L toward nose; deliberately nonzero",
+    "gimbalLimitDeg":"control authority design assumption",
+    "propellantKg":"trial inventory, not minimum or recommended answer",
+    "touchdown":"chosen mission tolerances, not certified hardware limits"
+  }
+}

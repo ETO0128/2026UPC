@@ -1,0 +1,73 @@
+{
+  "checks": "Axial/crossflow signs, damping, gimbal sign, mass flow, dissipativity and terminal step comparison passed",
+  "reference": "Reference design, not identification of an actual booster",
+  "terminalFine": {
+    "event": "contact",
+    "timeS": 35.975063352281225,
+    "state": [
+      5.152695607461267e-13,
+      32.5,
+      2.701858055692832e-14,
+      -1.502985784019542,
+      157320.87706118388,
+      1.5707963267948966,
+      -3.4022767217486053e-50
+    ],
+    "peakDynamicPressurePa": 4414.474152748386,
+    "consumedKg": 22679.122938816115,
+    "remainingKg": 27320.877061183885,
+    "passesChosenTouchdownCriteria": true
+  },
+  "terminalCoarse": {
+    "event": "contact",
+    "timeS": 35.9750971774999,
+    "state": [
+      5.152704924841627e-13,
+      32.5,
+      2.7018601358256176e-14,
+      -1.5029777786052665,
+      157320.8605845822,
+      1.5707963267948966,
+      -8.329430726704101e-50
+    ],
+    "peakDynamicPressurePa": 4414.474152748386,
+    "consumedKg": 22679.139415417798,
+    "remainingKg": 27320.860584582202,
+    "passesChosenTouchdownCriteria": true
+  },
+  "terminalPerturbed": {
+    "event": "contact",
+    "timeS": 35.97472736137687,
+    "state": [
+      16.56010319614433,
+      32.50000000003303,
+      0.4670843931808624,
+      -1.5029853313675732,
+      157320.89840520997,
+      1.5707963267854597,
+      6.365063275752317e-12
+    ],
+    "peakDynamicPressurePa": 4414.474152748386,
+    "consumedKg": 22679.10159479003,
+    "remainingKg": 27320.89840520997,
+    "passesChosenTouchdownCriteria": true
+  },
+  "fullScheduled": {
+    "event": "contact",
+    "timeS": 184.52670859885436,
+    "state": [
+      273802.88804293034,
+      32.555677382766696,
+      209.225781870266,
+      -456.81067998800694,
+      191505.5926524372,
+      1.7680548723719092,
+      -0.05119215790770504
+    ],
+    "peakDynamicPressurePa": 339884.274238047,
+    "consumedKg": 18494.40734756281,
+    "remainingKg": 61505.59265243719,
+    "passesChosenTouchdownCriteria": false
+  },
+  "warning": "Terminal demonstration is not a complete separation-to-landing solution. Full scheduled burn is not optimized."
+}
