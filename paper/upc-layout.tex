@@ -1,0 +1,18 @@
+% Shared UPC layout, modeled on the supplied previous-year summary sheet.
+\setlength{\headheight}{42pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Team \# 758}
+\fancyhead[R]{Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancypagestyle{summarypage}{%
+  \fancyhf{}%
+  \fancyhead[L]{\parbox[b]{.30\textwidth}{\centering\bfseries\small Problem Chosen\\[3pt]\large A}}%
+  \fancyhead[C]{\parbox[b]{.32\textwidth}{\centering\bfseries\small University Physics\\Competition\vspace{3pt}}}%
+  \fancyhead[R]{\parbox[b]{.34\textwidth}{\centering\bfseries\small Team Control Number\\[3pt]\large 758}}%
+  \renewcommand{\headrulewidth}{0.8pt}%
+}
+\newcommand{\upctitle}[1]{%
+  \thispagestyle{summarypage}%
+  \begin{center}\LARGE #1\end{center}\vspace{5pt}%
+}

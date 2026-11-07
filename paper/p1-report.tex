@@ -1,22 +1,17 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,graphicx,booktabs,hyperref,fancyhdr}
-\setlength{\headheight}{15pt}
-\pagestyle{fancy}
-\fancyhf{}
-\lhead{Problem A -- UPC 2026}
-\rhead{Team: 758}
-\cfoot{\thepage}
+\input{paper/upc-layout.tex}
 \newcommand{\draftnote}[1]{\par\noindent\textit{Draft plan: #1}\par}
 \title{P1: Dynamics Derivation and Internal Verification}
-\author{Problem A \qquad Team Control Number: 758}
+\author{}
 \date{}
 
 \makeatletter
 \setlength{\@fptop}{0pt}
 \makeatother
 \begin{document}
-\maketitle
+\upctitle{P1: Dynamics Derivation and Internal Verification}
 \noindent This P1 report establishes and verifies the reference dynamics. Whole-flight guidance and fuel optimization are outside its scope.
 \setcounter{section}{3}
 \input{paper/p1-model.tex}
