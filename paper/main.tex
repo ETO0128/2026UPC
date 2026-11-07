@@ -1,47 +1,105 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,graphicx,booktabs,hyperref,fancyhdr}
+\setlength{\headheight}{15pt}
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{UPC 2026 -- Draft}
+\lhead{Problem A -- UPC 2026}
 \rhead{Team: TBD}
 \cfoot{\thepage}
-\title{Physics Modeling Study\\\large Problem and Team Number: To Be Determined}
-\author{Team: TBD}
+\newcommand{\draftnote}[1]{\par\noindent\textit{Draft plan: #1}\par}
+\title{Controlled Descent and Propellant Estimation\\for a First-Stage Rocket Booster}
+\author{Problem A \qquad Team Control Number: TBD}
 \date{}
 \begin{document}
 \maketitle
+\renewcommand{\abstractname}{Summary}
 \begin{abstract}
-Draft scaffold. Complete this summary after model validation: state the selected problem, assumptions, method, quantitative results, uncertainty, and limitations.
+\draftnote{Write last. Summarize the descent model, landing strategy, separation propellant requirement, uncertainty range, and safety constraints. No numerical findings have yet been established.}
 \end{abstract}
 \clearpage
 \tableofcontents
 \clearpage
 \section{Introduction}
 \subsection{Background}
+Reusable first-stage boosters require controlled descent and a safe vertical landing before refurbishment and reuse.
 \subsection{Restatement of the Problem}
-\section{Assumptions and Justifications}
-\section{Notation and Units}
-\section{Physical Model}
-\subsection{Force Analysis}
-\subsection{Governing Equations}
-\subsection{Initial and Boundary Conditions}
-\section{Solution Method}
-\subsection{Baseline Model}
-\subsection{Numerical Method and Reproducibility}
-\section{Results and Validation}
-\section{Uncertainty and Sensitivity Analysis}
+At separation, the booster has an altitude of 70 km and a speed of 6000 km/h. Its dry mass is 130000 kg, its height is 65 m, and its diameter is 7.0 m. It uses liquid oxygen and methane. The recovery ship may be placed at a convenient location. The task is to analyze a safe descent and controlled vertical landing, and estimate the fuel required at separation~\cite{problem}.
+\draftnote{Distinguish total propellant from methane fuel. State the initial velocity direction as an explicit assumption or scenario parameter.}
+\section{Assumptions}
+\draftnote{Justify the reference frame, atmosphere, wind, aerodynamic attitude, propulsion model, mass distribution, and ship motion assumptions. Separate given data from chosen parameters; assign validity ranges.}
+\section{Notations}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Symbol & Meaning & Unit \\
+\midrule
+$h,\mathbf r$ & Altitude and position & m \\
+$\mathbf v$ & Velocity & m/s \\
+$m,m_d,m_p$ & Total, dry, and propellant mass & kg \\
+$T,I_{sp}$ & Thrust and specific impulse & N, s \\
+$\rho,C_D,A$ & Air density, drag coefficient, reference area & kg/m$^3$, 1, m$^2$ \\
+$\gamma_0$ & Initial flight-path angle & rad \\
+$q$ & Dynamic pressure & Pa \\
+\bottomrule
+\end{tabular}
+\end{center}
+\section{Model Force Analysis}
+\subsection{Gravitational Force}
+\draftnote{Define altitude-dependent gravity and assess the constant-gravity approximation.}
+\subsection{Aerodynamic Forces}
+\subsubsection{Atmospheric Density and Relative Air Velocity}
+\subsubsection{Drag Coefficient and Reference Area}
+\draftnote{Discuss Mach number and orientation dependence. Use the diameter for axial reference area and account for the 65 m length when assessing attitude effects.}
+\subsection{Engine Thrust and Propellant Consumption}
+\draftnote{Specify thrust limits, throttling, restart assumptions, specific impulse, and mixture ratio with sources.}
+\section{Model Motion Analysis}
+\subsection{Equations of Translational Motion}
+\draftnote{Formulate coupled position, velocity, and mass equations. Clearly define thrust direction and aerodynamic forces.}
+\subsection{Initial Conditions and Landing Constraints}
+\draftnote{Use the given separation altitude and speed. Parameterize the unspecified velocity direction. Define deck-relative touchdown velocity, position, and vertical attitude tolerances.}
+\subsection{Descent Phases and Combined Model}
+\draftnote{Identify coasting, any required entry braking, and terminal landing burn. Determine which phases are necessary rather than imposing all burns in advance.}
+\subsection{Numerical Solution and Primary Results}
+\draftnote{Describe event detection, integration tolerances, feasibility checks, and trajectory outputs. Report altitude, velocity, mass, thrust, and dynamic pressure versus time.}
+\section{Landing Strategy and Propellant Estimation}
+\subsection{Baseline Estimates and Limiting Cases}
+\draftnote{Use ballistic and ideal rocket-equation estimates as checks, identifying gravity and drag losses.}
+\subsection{Burn Timing and Thrust Control}
+\draftnote{Determine ignition and thrust schedules subject to altitude, acceleration, and touchdown constraints.}
+\subsection{Minimum-Propellant Formulation}
+\draftnote{Define decision variables, objective, constraints, numerical method, and feasibility criteria. Treat ship location as a free recovery location where justified.}
+\subsection{Separation Propellant Budget}
+\draftnote{Separate consumed propellant, landing reserve, and any unusable residuals. Convert total oxygen--methane propellant to methane mass only after specifying mixture ratio.}
+\section{Sensitivity and Uncertainty Analysis}
+\subsection{Initial Velocity Direction and Atmospheric Conditions}
+\subsection{Specific Impulse, Thrust, and Aerodynamic Parameters}
+\subsection{Landing Tolerances and Propellant Reserve}
+\draftnote{Report scenario ranges and propagate justified input uncertainty; do not assign unsupported probability distributions.}
 \section{Model Evaluation}
-\subsection{Strengths and Limitations}
-\subsection{Sources of Error}
+\subsection{Overview and Comparison of Model Levels}
+\subsection{Verification and Validation}
+\draftnote{Check mass balance, vacuum limits, numerical convergence, touchdown event accuracy, and independent baseline estimates. Distinguish internal verification from validation against external data.}
+\subsection{Strengths and Weaknesses}
+\subsection{Discussion of Sources of Error}
+\subsubsection{Simplified Physical Forces and Attitude Dynamics}
+\subsubsection{Numerical Computation Error}
+\subsubsection{Parameter and Operational Uncertainty}
 \section{Further Discussion}
-\section{Conclusion}
+\subsection{Attitude Stability and Vertical Touchdown}
+\draftnote{Assess whether translational modeling is sufficient; identify torque, control authority, and rotational dynamics needed to support vertical landing claims.}
+\subsection{Structural Loads and Aerothermal Constraints}
+\subsection{Ship Placement, Wind, and Deck Motion}
+\subsection{Conclusions and Practical Recommendations}
+\draftnote{Answer the separation-fuel question with assumptions, units, uncertainty, and feasibility limits.}
 \section{Report on the Use of AI}
-Record actual assistance and human verification according to the competition requirements.
+AI assistance was used to organize the initial manuscript framework from the supplied problem and reference-paper structure. Update this statement to reflect subsequent work and human verification according to competition requirements.
 \begin{thebibliography}{9}
-\bibitem{problem} UPC 2026 problem statement. User-provided image, \texttt{figure/problem.png}.
+\bibitem{problem} UPC 2026, Problem A: Landing a First-Stage Rocket Booster. User-provided problem image.
 \end{thebibliography}
 \appendix
 \section{Reproducibility and Source Code}
-Pending implementation and validation.
+\draftnote{Document software versions, parameter files, run commands, and scripts generating every reported result.}
+\section{Supplementary Derivations and Results}
+\draftnote{Include dimensional checks, convergence tables, and additional scenario results.}
 \end{document}
