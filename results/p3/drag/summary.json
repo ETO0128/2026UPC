@@ -1,0 +1,335 @@
+{
+  "parameter": "crossflowCd",
+  "scenarioValues": [
+    0.8,
+    1.2,
+    1.6
+  ],
+  "comparison": "Known coefficient, separately selected recovery site for each nominal design",
+  "axialCd": 0.8,
+  "ispS": 330,
+  "minimumUsableReserveKg": 5000,
+  "replayStepsS": [
+    0.005,
+    0.0025
+  ],
+  "interpretation": "Accepted local candidates only; unsuccessful search is not physical infeasibility",
+  "cases": [
+    {
+      "crossflowCd": 0.8,
+      "accepted": false,
+      "attempts": 1,
+      "source": "results/p3/drag/cd-0.8.json",
+      "solverStatus": "Maximum_WallTime_Exceeded",
+      "diagnosticReplay": {
+        "0.005": {
+          "event": "contact",
+          "passes": false,
+          "violations": {
+            "contact": false,
+            "ship": true,
+            "horizontal": true,
+            "vertical": true,
+            "tilt": true,
+            "pitchRate": true,
+            "reserve": false,
+            "ignitions": false
+          },
+          "propellantKg": 28756.73552225856,
+          "methaneKg": 6390.385671613014,
+          "liquidOxygenKg": 22366.349850645547,
+          "consumedKg": 22542.276288561494,
+          "reserveKg": 5000,
+          "residualKg": 0,
+          "extraRemainingKg": 1214.4592336970672,
+          "timeS": 206.09827803206204,
+          "initialState": [
+            0,
+            70000,
+            1609.8763771484794,
+            431.36507517087654,
+            158756.73552225856,
+            0.2617993877991494,
+            0
+          ],
+          "finalState": [
+            278585.4016426851,
+            28.971198158679154,
+            -3.79355272725671,
+            -14.947656217136455,
+            136214.45923369707,
+            2.1595847513694824,
+            -0.41528723741293344
+          ],
+          "shipLocationM": 278732.8108214346,
+          "touchdown": {
+            "shipErrorM": 147.40917874948354,
+            "horizontalMps": 3.79355272725671,
+            "verticalMps": 14.947656217136455,
+            "tiltDeg": 33.73509175428057,
+            "pitchRateDegS": 23.794205989408507,
+            "reserveKg": 6214.459233697067
+          },
+          "clearanceM": -5.6992519592569124e-09,
+          "minimumClearanceM": -5.6992519592569124e-09,
+          "ignitionCount": 1,
+          "phases": [
+            {
+              "name": "coast",
+              "powered": false,
+              "startS": 0,
+              "endS": 179.02869580461817,
+              "startState": [
+                0,
+                70000,
+                1609.8763771484794,
+                431.36507517087654,
+                158756.73552225856,
+                0.2617993877991494,
+                0
+              ],
+              "endState": [
+                272465.0100104736,
+                4334.252992375378,
+                579.3544829694672,
+                -521.1585341072573,
+                158756.73552225856,
+                2.3006650570964067,
+                -0.004223974114468148
+              ],
+              "consumedKg": 0
+            },
+            {
+              "name": "landing burn",
+              "powered": true,
+              "startS": 179.02869580461817,
+              "endS": 206.09827803206204,
+              "startState": [
+                272465.0100104736,
+                4334.252992375378,
+                579.3544829694672,
+                -521.1585341072573,
+                158756.73552225856,
+                2.3006650570964067,
+                -0.004223974114468148
+              ],
+              "endState": [
+                278585.4016426851,
+                28.971198158679154,
+                -3.79355272725671,
+                -14.947656217136455,
+                136214.45923369707,
+                2.1595847513694824,
+                -0.41528723741293344
+              ],
+              "consumedKg": 22542.276288561494
+            }
+          ],
+          "peakQPa": {
+            "value": 304964.6978580248,
+            "timeS": 170.55499999991738,
+            "altitudeM": 9616.466123966293
+          },
+          "peakLoadG": {
+            "value": 8.90080440845796,
+            "timeS": 181.16369580461622,
+            "altitudeM": 3306.975914811442
+          },
+          "maxAltitudeM": 79709.8452886752,
+          "maxMach": 5.866215509736188,
+          "stepS": 0.005,
+          "trace": []
+        },
+        "0.0025": {
+          "event": "contact",
+          "passes": false,
+          "violations": {
+            "contact": false,
+            "ship": true,
+            "horizontal": true,
+            "vertical": true,
+            "tilt": true,
+            "pitchRate": true,
+            "reserve": false,
+            "ignitions": false
+          },
+          "propellantKg": 28756.73552225856,
+          "methaneKg": 6390.385671613014,
+          "liquidOxygenKg": 22366.349850645547,
+          "consumedKg": 22542.272576339252,
+          "reserveKg": 5000,
+          "residualKg": 0,
+          "extraRemainingKg": 1214.4629459193093,
+          "timeS": 206.09827305194494,
+          "initialState": [
+            0,
+            70000,
+            1609.8763771484794,
+            431.36507517087654,
+            158756.73552225856,
+            0.2617993877991494,
+            0
+          ],
+          "finalState": [
+            278585.4016932253,
+            28.97112617047892,
+            -3.79357355107459,
+            -14.947756389686715,
+            136214.4629459193,
+            2.1595895068909323,
+            -0.41528657188035667
+          ],
+          "shipLocationM": 278732.8108214346,
+          "touchdown": {
+            "shipErrorM": 147.40912820928497,
+            "horizontalMps": 3.79357355107459,
+            "verticalMps": 14.947756389686715,
+            "tiltDeg": 33.73536422558904,
+            "pitchRateDegS": 23.79416785720073,
+            "reserveKg": 6214.462945919309
+          },
+          "clearanceM": -2.818066446863554e-09,
+          "minimumClearanceM": -2.818066446863554e-09,
+          "ignitionCount": 1,
+          "phases": [
+            {
+              "name": "coast",
+              "powered": false,
+              "startS": 0,
+              "endS": 179.02869580461817,
+              "startState": [
+                0,
+                70000,
+                1609.8763771484794,
+                431.36507517087654,
+                158756.73552225856,
+                0.2617993877991494,
+                0
+              ],
+              "endState": [
+                272465.0100093403,
+                4334.252994456555,
+                579.354482840164,
+                -521.1585340193137,
+                158756.73552225856,
+                2.300665057013697,
+                -0.00422397307148167
+              ],
+              "consumedKg": 0
+            },
+            {
+              "name": "landing burn",
+              "powered": true,
+              "startS": 179.02869580461817,
+              "endS": 206.09827305194494,
+              "startState": [
+                272465.0100093403,
+                4334.252994456555,
+                579.354482840164,
+                -521.1585340193137,
+                158756.73552225856,
+                2.300665057013697,
+                -0.00422397307148167
+              ],
+              "endState": [
+                278585.4016932253,
+                28.97112617047892,
+                -3.79357355107459,
+                -14.947756389686715,
+                136214.4629459193,
+                2.1595895068909323,
+                -0.41528657188035667
+              ],
+              "consumedKg": 22542.272576339252
+            }
+          ],
+          "peakQPa": {
+            "value": 304964.70182454516,
+            "timeS": 170.55249999988115,
+            "altitudeM": 9618.292876440504
+          },
+          "peakLoadG": {
+            "value": 8.900833423732614,
+            "timeS": 181.16619580461622,
+            "altitudeM": 3305.9098907048465
+          },
+          "maxAltitudeM": 79709.84530924367,
+          "maxMach": 5.866218649505359,
+          "stepS": 0.0025,
+          "trace": []
+        }
+      },
+      "error": null
+    },
+    {
+      "crossflowCd": 1.2,
+      "accepted": true,
+      "attempts": 1,
+      "source": "results/p3/drag/cd-1.2.json",
+      "selectedHistoryIndex": 0,
+      "propellantKg": 26228.111328278872,
+      "consumedKg": 21150.35482212549,
+      "retainedUsableKg": 5077.756506153382,
+      "methaneKg": 5828.469184061972,
+      "liquidOxygenKg": 20399.6421442169,
+      "shipLocationM": 278310.43659683835,
+      "ignitionTimeS": 176.68144701708653,
+      "ignitionAltitudeM": 5876.000261920742,
+      "contactTimeS": 207.47374245406667,
+      "touchdown": {
+        "shipErrorM": 0.0001116838539019227,
+        "horizontalMps": 0.011724487476435891,
+        "verticalMps": 1.5345056823045538,
+        "tiltDeg": 0.00030028487935974306,
+        "pitchRateDegS": 0.062437216886399416,
+        "reserveKg": 5077.756506153382
+      },
+      "peakQPa": {
+        "value": 297334.0395173216,
+        "timeS": 170.8374999998809,
+        "altitudeM": 9693.548441368397
+      },
+      "peakLoadG": {
+        "value": 7.7034718085808915,
+        "timeS": 183.12644701708066,
+        "altitudeM": 2894.6160424335385
+      },
+      "solverStatus": "Solve_Succeeded"
+    },
+    {
+      "crossflowCd": 1.6,
+      "accepted": true,
+      "attempts": 1,
+      "source": "results/p3/drag/cd-1.6.json",
+      "selectedHistoryIndex": 0,
+      "propellantKg": 27129.58947455825,
+      "consumedKg": 22057.20207496779,
+      "retainedUsableKg": 5072.387399590458,
+      "methaneKg": 6028.797661012944,
+      "liquidOxygenKg": 21100.791813545304,
+      "shipLocationM": 278090.40612190997,
+      "ignitionTimeS": 174.13784171394786,
+      "ignitionAltitudeM": 7551.288053221196,
+      "contactTimeS": 208.39771142516676,
+      "touchdown": {
+        "shipErrorM": 0.021339551138225943,
+        "horizontalMps": 0.010712293531035219,
+        "verticalMps": 1.467616536401795,
+        "tiltDeg": 0.00024053527353135517,
+        "pitchRateDegS": 0.05924830587179893,
+        "reserveKg": 5072.387399590458
+      },
+      "peakQPa": {
+        "value": 297067.27993924863,
+        "timeS": 171.10999999988064,
+        "altitudeM": 9646.15511907164
+      },
+      "peakLoadG": {
+        "value": 7.187368111865916,
+        "timeS": 180.8153417139418,
+        "altitudeM": 3924.536738898642
+      },
+      "solverStatus": "Solve_Succeeded"
+    }
+  ]
+}
