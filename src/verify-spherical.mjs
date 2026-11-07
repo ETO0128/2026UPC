@@ -1,0 +1,16 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {rk4,clearance} from './planar.mjs';
+const p=JSON.parse(fs.readFileSync('config/spherical.json','utf8'));
+const vacuum={...p,axialCd:0,crossflowCd:0};
+const R=6356766,mu=9.80665*R*R;
+const initial=[0,70000,1600,430,160000,.2,1600/(R+70000)];
+let y=[...initial];
+const off=()=>({throttle:0,gimbalRad:0});
+for(let t=0;t<100;t+=.02)y=rk4(t,y,.02,vacuum,off);
+const energy=s=>.5*(s[2]**2+s[3]**2)-mu/(R+s[1]);
+const momentum=s=>(R+s[1])*s[2];
+const invariant=s=>s[6]-s[2]/(R+s[1]);
+const checks={energyErrorJkg:Math.abs(energy(y)-energy(initial)),angularMomentumRelativeError:Math.abs(momentum(y)/momentum(initial)-1),inertialRateErrorRadS:Math.abs(invariant(y)-invariant(initial)),inertialAngleErrorRad:Math.abs(y[5]-y[0]/R-initial[5]),uprightContactErrorM:Math.abs(clearance([0,p.lengthM/2,0,0,160000,Math.PI/2,0],p)),horizontalContactErrorM:Math.abs(clearance([0,p.diameterM/2,0,0,160000,0,0],p))};
+assert.ok(checks.energyErrorJkg<1e-4);assert.ok(checks.angularMomentumRelativeError<1e-11);assert.ok(checks.inertialRateErrorRadS<1e-11);assert.ok(checks.inertialAngleErrorRad<1e-10);assert.ok(checks.uprightContactErrorM<1e-8);assert.ok(checks.horizontalContactErrorM<1e-8);
+fs.mkdirSync('results/spherical',{recursive:true});fs.writeFileSync('results/spherical/invariants.json',JSON.stringify(checks,null,2)+'\n');console.log(checks);

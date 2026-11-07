@@ -14,8 +14,7 @@
 \upctitle{Controlled Descent and Propellant Estimation\\for a First-Stage Rocket Booster}
 \renewcommand{\abstractname}{Summary}
 \begin{abstract}
-We analyze booster descent, vertical touchdown, and separation propellant using coupled translation, pitch, and mass-loss equations. Using the stated dry mass and reference propulsion and aerodynamic assumptions, a $15^\circ$ separation trajectory coasts for 176.68 s and then uses a 30.79 s landing burn, with the ship placed 278.31 km downrange. The accepted local candidate carries approximately 26.23 t of combined propellant: 5.83 t methane and 20.40 t liquid oxygen. About 21.15 t is consumed and 5.08 t remains, including the selected 5 t usable reserve. Position, speed, tilt, and pitch rate meet the adopted touchdown conditions in full-flight replay. Known-efficiency cases at 300--360 s specific impulse give inventories of 24.20--28.78 t; a lower-crossflow case remains unresolved. Initial-direction cases also demonstrate that the speed magnitude alone does not determine fuel demand. The nominal trajectory reaches approximately 297 kPa dynamic pressure and $7.70\,g_0$ specific force. Control-slew demands and a 278 km flight expose additional actuator and planar-geometry limitations. Full-flight structural and thermal safety is not established because load allowables and local thermal response are undetermined. The reported inventory is a conditional model result, not a universal or globally minimal fuel requirement.
-\end{abstract}
+We model the controlled descent and vertical landing of a first-stage booster using coupled translation, pitch, aerodynamic forces, and propellant consumption. Earth curvature is retained through radial altitude, surface arc distance, curvature acceleration, and the changing local horizontal. For the stated 130 t dry mass and a selected $15^\circ$ separation direction, the reoptimized spherical-Earth trajectory requires 26.04 t of liquid oxygen and methane at separation. This comprises 5.79 t methane and 20.25 t oxygen, including a selected 5 t usable reserve. Approximately 20.96 t is consumed and 5.08 t remains. A conveniently positioned ship lies 284.16 km downrange in surface arc distance. Contact occurs at 213.02 s with horizontal and downward speeds of approximately 0.005 and 1.515 m/s, and local pitch-rate magnitude 0.027$^\circ$/s. Three replay steps down to 0.00125 s satisfy the adopted position, velocity, attitude, angular-rate, and reserve criteria. Vacuum invariants and symbolic-to-numerical derivative comparisons verify the spherical formulation. The preceding planar design gives 26.23 t and a ship distance of 278.31 km. Planar parameter studies show dependence on engine efficiency, initial direction, and crossflow drag, with one low-crossflow search unresolved. The analysis assumes a rigid booster, a nonrotating Earth, a stationary ship, effective propulsion parameters, and ideal actuators. The inventory is an accepted local design under these assumptions.\end{abstract}
 \clearpage
 \tableofcontents
 \clearpage
@@ -30,7 +29,7 @@ The booster is initially approximated as a rigid circular cylinder. This externa
 
 Aerodynamic moments depend on the offset between the center of pressure and center of mass. A prescribed-axis translational model therefore cannot establish attitude stability or vertical touchdown. Rotational dynamics and control authority must be assessed separately.
 
-Earth rotation is provisionally omitted from the baseline and requires a quantitative sensitivity check. Its omission is not justified by freedom in ship placement: Coriolis acceleration can alter velocity and consequently aerodynamic loading. The initial flight-path angle and all unspecified engine and aerodynamic parameters remain explicit scenario inputs.
+The corrected reference uses a nonrotating spherical Earth. Radial altitude and the moving local horizontal enter the dynamics, atmosphere queries, and contact geometry. Initial direction and the unspecified propulsion and aerodynamic parameters are explicit scenario inputs. The booster is rigid, with structural capacity and material failure excluded from the model scope.
 
 The deck is initially stationary and horizontal. Position denotes the booster center of mass; contact geometry must account for vehicle length and, when specified, landing gear and deck height.
 \input{paper/p0-assumptions.tex}
@@ -53,11 +52,12 @@ $q$ & Dynamic pressure & Pa \\
 \input{paper/p1-model.tex}
 \section{Landing Strategy and Propellant Estimation}
 \input{paper/p2-optimization.tex}
+\input{paper/spherical-results.tex}
 \input{paper/p3-sensitivity.tex}
 \section{Model Evaluation}
 \input{paper/p1-verification.tex}
 \subsection{Strengths and Weaknesses}
-The model accounts for changing mass and pitch motion while locating the first contact of the tilted body with the deck. This makes the landing state and propellant budget mutually consistent. Its principal limitations are assumed propulsion and aerodynamic parameters, ideal actuator response, simplified inertia, and planar motion. Numerical agreement within this model does not establish the accuracy of those physical assumptions. The parameter comparisons in Section~\ref{sec:p3} address some of their effect on the answer, while leaving structural and thermal safety undetermined.
+The model accounts for changing mass and pitch motion while locating the first contact of the tilted body with the deck. This makes the landing state and propellant budget mutually consistent. Its principal limitations are assumed propulsion and aerodynamic parameters, ideal actuator response, simplified inertia, and omission of Earth rotation. Numerical agreement within this model does not establish the accuracy of those physical assumptions. The parameter comparisons in Section~\ref{sec:p3} address some of their effect on the answer, within the rigid-body modeling scope.
 \section{Discussion and Conclusions}
 \subsection{Attitude Stability and Vertical Touchdown}
 The reference trajectory satisfies position, relative speed, tilt, and pitch-rate conditions at the same contact event. Upright attitude alone would not establish a controlled landing. During engine-off coast the model has no active attitude actuator; during the burn, correction is limited by thrust and gimbal authority. These restrictions qualify the nominal touchdown result.
@@ -65,8 +65,9 @@ The reference trajectory satisfies position, relative speed, tilt, and pitch-rat
 \subsection{Ship Placement, Wind, and Deck Motion}
 Downrange placement can avoid a return maneuver. Once the ship is positioned, the guidance must target its location and meet the speed and attitude limits relative to its deck. The present stationary, horizontal deck sets the reference for the fixed-site examples. A moving deck would alter the target position, relative velocity, and contact orientation.
 \subsection{Conclusions and Practical Recommendations}
-For the selected $15^\circ$ reference case, a coast followed by a single landing burn provides a complete trajectory to a conveniently placed ship and an accepted local separation inventory of approximately 26.23 t. With the assumed oxygen-to-methane ratio of 3.5, this is about 5.83 t methane and 20.40 t oxygen, including the chosen 5 t retained-reserve requirement. This conditional budget uses the stated dry mass and the adopted model assumptions. The 278 km downrange solution also requires a spherical-Earth extension before meter-scale physical interception can be claimed. The unresolved aerodynamic search is excluded from feasible fuel ranges. Full-flight structural and thermal safety has not been established; the calculated load peaks identify environmental requirements, not proof that the booster survives them. Consequently, a final inventory satisfying demonstrated structural and thermal limits remains undetermined.
-\clearpage
+For the spherical-Earth reference with a $15^\circ$ separation direction, a coast followed by one landing burn gives an accepted local separation inventory of 26.038 t. At the selected oxygen-to-methane mass ratio of 3.5, this is 5.786 t methane and 20.252 t oxygen. The 5 t usable-reserve requirement is included. The recovery ship is placed at 284.160 km surface arc distance, and the full rigid-body trajectory satisfies the adopted contact constraints.
+
+The corresponding planar design used 26.228 t and a ship distance of 278.310 km. Reoptimization with consistent moving-frame dynamics corrects both the trajectory and its target location. Engine-efficiency, separation-direction, and aerodynamic comparisons from the planar baseline quantify assumption dependence, while a lower-crossflow case remains unresolved. These separate studies do not define a universal inventory for all parameter combinations. The reported solution assumes the reference propulsion and aerodynamics, a nonrotating Earth, a stationary ship, and ideal actuators. Structural capacity is outside the rigid-body study.\clearpage
 \begin{thebibliography}{99}
 \bibitem{be4} Blue Origin. BE-4. Manufacturer webpage, accessed November 7, 2026. \url{https://www.blueorigin.com/es-MX/engines/be-4}.
 \bibitem{cylinder} F. E. Gowen and E. W. Perkins. Drag of Circular Cylinders for a Wide Range of Reynolds Numbers and Mach Numbers. NACA-TN-2960, 1953.
@@ -82,7 +83,9 @@ For the selected $15^\circ$ reference case, a coast followed by a single landing
 \end{thebibliography}
 \appendix
 \section{Reproducibility and Source Code}
-The current parameters and touchdown conventions are in \path{config/reference.json} and \path{config/p0-contract.json}. The selected complete trajectories and inventories are in \path{results/p2-p0-v1/}; solver commands and dependencies are documented in \path{docs/p2-landing-strategy.md} and \path{requirements-p2.txt}.
+The corrected reference parameters are in \path{config/spherical.json}. The planar comparison uses \path{config/reference.json}.
+
+The touchdown conventions are stored in \path{config/p0-contract.json}. Spherical optimization and replay are reproduced with \path{src/spherical-optimize.py} and \path{src/spherical-report.py}. The accepted controls and finer-step replay are archived in \path{results/spherical/selected.json}. The selected complete trajectories and inventories are in \path{results/p2-p0-v1/}; solver commands and dependencies are documented in \path{docs/p2-landing-strategy.md} and \path{requirements-p2.txt}.
 
 The efficiency, crossflow, and nominal-load records are in \path{results/p3/propulsion/}, \path{results/p3/drag/}, and \path{results/p3/safety/}. Their drivers are \path{src/p3-propulsion.py}, \path{src/p3-drag.py}, and \path{src/p3-exposure.mjs}, with reproduction commands in the corresponding documentation. The additional fixed-ship replanning and feedback experiments remain in \path{results/p3/replanned/}, \path{results/p3/wind-estimation.json}, and \path{results/p3/tracking/}. These supplementary experiments are distinct from the nominal design used to answer the propellant question.
 \clearpage

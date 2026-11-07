@@ -16,7 +16,8 @@ export function aero(y,p){
  // Equivalent crossflow strip distribution shifted to represent uncertain CP offset.
  for(let i=0;i<p.strips;i++){
   const s=-p.lengthM/2+(i+.5)*ds+p.cpOffsetM;
-  const local=normal+omega*s;
+  const inertialPitchRate = p.geometryModel === 'spherical' ? omega - vx / (6356766 + h) : omega;
+  const local=normal+inertialPitchRate*s;
   const f=-.5*air.density*p.crossflowCd*p.diameterM*ds*local*Math.abs(local);
   fn+=f;torque+=s*f;
  }
@@ -29,14 +30,35 @@ export function rhs(t,y,p,command){
  const delta=clamp(c.gimbalRad||0,-p.gimbalLimitDeg*rad,p.gimbalLimitDeg*rad);
  // Tail at -L/2 along body axis: positive gimbal generates negative pitch torque.
  const torqueT=-p.lengthM/2*T*Math.sin(delta);
- return [vx,vz,(a.fx+T*Math.cos(theta+delta))/m,-g0*(6356766/(6356766+h))**2+(a.fz+T*Math.sin(theta+delta))/m,-T/(p.ispS*g0),omega,(a.torque+torqueT)/inertia(p)];
+ const forceX = (a.fx + T * Math.cos(theta + delta)) / m;
+ const forceH = (a.fz + T * Math.sin(theta + delta)) / m;
+ const accelerationPitch = (a.torque + torqueT) / inertia(p);
+ if (p.geometryModel === 'spherical') {
+  const radius = 6356766 + h;
+  return [6356766 / radius * vx, vz,
+   forceX - vx * vz / radius,
+   -g0 * (6356766 / radius) ** 2 + forceH + vx * vx / radius,
+   -T / (p.ispS * g0), omega,
+   accelerationPitch + forceX / radius - 2 * vx * vz / (radius * radius)];
+ }
+ return [vx,vz,forceX,-g0*(6356766/(6356766+h))**2+forceH,-T/(p.ispS*g0),omega,accelerationPitch];
 }
 export function rk4(t,y,dt,p,control){
  const add=(k,f)=>y.map((v,i)=>v+f*k[i]);
  const k1=rhs(t,y,p,control),k2=rhs(t+dt/2,add(k1,dt/2),p,control),k3=rhs(t+dt/2,add(k2,dt/2),p,control),k4=rhs(t+dt,add(k3,dt),p,control);
  return y.map((v,i)=>v+dt*(k1[i]+2*k2[i]+2*k3[i]+k4[i])/6);
 }
-export function clearance(y,p){return y[1]-p.deckHeightM-p.lengthM/2*Math.abs(Math.sin(y[5]))-p.diameterM/2*Math.abs(Math.cos(y[5]));}
+export function clearance(y,p){
+ if (p.geometryModel === 'spherical') {
+  const radius = 6356766 + y[1];
+  const sine = Math.sin(y[5]);
+  const cosine = Math.cos(y[5]);
+  const axial = clamp(-radius * sine, -p.lengthM / 2, p.lengthM / 2);
+  const normal = clamp(-radius * cosine, -p.diameterM / 2, p.diameterM / 2);
+  return Math.hypot(axial * cosine - normal * sine, radius + axial * sine + normal * cosine) - 6356766 - p.deckHeightM;
+ }
+ return y[1]-p.deckHeightM-p.lengthM/2*Math.abs(Math.sin(y[5]))-p.diameterM/2*Math.abs(Math.cos(y[5]));
+}
 export function run(p,initial,control,dt=.02,maxTime=500){
  let y=[...initial],t=0,peakQ=0;const samples=[];
  while(t<maxTime){

@@ -26,10 +26,10 @@ latexmk -pdf -outdir=paper/build paper/main.tex
 当前工作稿已编译并检查版面。已完成部分及剩余工作见各交接文档。
 
 ## 当前平面刚体参考模型
-参数见 `config/reference.json`，模型见 `docs/planar-model.md`。运行 `node src/run-planar.mjs` 可重现 P1 演示。全程优化与复算见 P2 交付。
+历史平面参数见 `config/reference.json`，模型见 `docs/planar-model.md`。运行 `node src/run-planar.mjs` 可重现 P1 演示。全程优化与复算见 P2 交付。
 
 ## P0 交接
-当前参数入口为 config/reference.json；场景、预算及约束规范为 config/p0-contract.json。阅读 [P0交接说明](docs/p0-handoff.md) 后开展P2；旧 baseline.json 仅作历史校验。
+P0历史参数入口为 config/reference.json；场景、预算及约束规范为 config/p0-contract.json。阅读 [P0交接说明](docs/p0-handoff.md) 后开展P2；旧 baseline.json 仅作历史校验。
 
 ## P1 交付
 推导与内部验证已完成，见 [P1验证说明](docs/p1-verification.md)。运行 `node src/verify-p1.mjs` 重现检查；`python src/plot-p1.py` 生成三张论文配图（需matplotlib、numpy）。独立P1报告源文件为 paper/p1-report.tex；完整论文通过input复用正文。P1不包含全程轨迹优化或最终燃料答案。
@@ -53,3 +53,6 @@ latexmk -pdf -outdir=paper/build paper/main.tex
 
 ## 整合论文
 英文审阅稿为 output/pdf/758A.pdf，整合入口 paper/main.tex。最后核查和提交材料状态见 docs/p4-final-check.md。运行 node src/p4-requirements.mjs 可复现控制与几何需求检查。技术结论以文中参考模型条件为限，AI完整对话披露尚需队伍补齐。
+
+## 当前名义解已采用球形地球
+当前参数为config/spherical.json，说明见docs/spherical-correction.md。球面重优化得到26.038 t总推进剂、284.160 km地表弧长船位。旧平面结果用于策略和参数比较。结构能力按用户研究范围排除。论文输出仍为output/pdf/758A.pdf。

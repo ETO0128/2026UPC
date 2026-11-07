@@ -1,0 +1,8 @@
+{
+  "energyErrorJkg": 7.450580596923828e-9,
+  "angularMomentumRelativeError": 6.661338147750939e-16,
+  "inertialRateErrorRadS": 8.131516293641283e-19,
+  "inertialAngleErrorRad": 5.828670879282072e-16,
+  "uprightContactErrorM": 0,
+  "horizontalContactErrorM": 0
+}

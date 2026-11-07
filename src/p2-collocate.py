@@ -53,21 +53,29 @@ def p1_rhs(p):
     axial_force = -0.5 * rho * p["axialCd"] * np.pi * diameter**2 / 4 * axial * ca.fabs(axial)
     strip_width = length / p["strips"]
     arm = ca.DM(-length / 2 + (np.arange(p["strips"]) + 0.5) * strip_width + p["cpOffsetM"])
-    local_velocity = normal + omega * arm
+    inertial_pitch_rate = omega - vx / (R + h) if p.get("geometryModel") == "spherical" else omega
+    local_velocity = normal + inertial_pitch_rate * arm
     strip_force = -0.5 * rho * p["crossflowCd"] * diameter * strip_width * local_velocity * ca.fabs(local_velocity)
     normal_force = ca.sum1(strip_force)
     thrust = u[0] * p["maxThrustN"]
     delta = u[1] * np.deg2rad(p["gimbalLimitDeg"])
     dry_inertia = p["dryMassKg"] * (3 * (diameter / 2)**2 + length**2) / 12
+    force_x = (axial_force * cos_theta - normal_force * sin_theta + thrust * ca.cos(theta + delta)) / mass
+    force_h = (axial_force * sin_theta + normal_force * cos_theta + thrust * ca.sin(theta + delta)) / mass
+    angular_acceleration = (ca.dot(arm, strip_force) - length / 2 * thrust * ca.sin(delta)) / dry_inertia
+    horizontal_rate = vx
+    acceleration_x = force_x
+    acceleration_h = -G0 * (R / (R + h))**2 + force_h
+    if p.get("geometryModel") == "spherical":
+        radius = R + h
+        horizontal_rate = R / radius * vx
+        acceleration_x -= vx * vh / radius
+        acceleration_h += vx**2 / radius
+        angular_acceleration += force_x / radius - 2 * vx * vh / radius**2
     return ca.Function("p1_scaled_rhs", [state, u], [ca.vertcat(
-        vx, vh,
-        (axial_force * cos_theta - normal_force * sin_theta + thrust * ca.cos(theta + delta)) / mass,
-        -G0 * (R / (R + h))**2
-        + (axial_force * sin_theta + normal_force * cos_theta + thrust * ca.sin(theta + delta)) / mass,
-        -thrust / (G0 * p["ispS"]), omega,
-        (ca.dot(arm, strip_force) - length / 2 * thrust * ca.sin(delta)) / dry_inertia,
+        horizontal_rate, vh, acceleration_x, acceleration_h,
+        -thrust / (G0 * p["ispS"]), omega, angular_acceleration,
     ) / ca.DM(SCALE)])
-
 
 def seed_knots(seed, phase, fraction, gimbal_limit):
     start = phase["startS"]

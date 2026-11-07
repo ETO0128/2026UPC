@@ -62,7 +62,7 @@ This consumes both oxygen and methane. Pressure dependence and actuator transien
 
 \section{Model Motion Analysis}
 \subsection{Momentum Balance and Pitch Dynamics}
-The state is $\mathbf y=(x,h,v_x,v_h,m,\theta,\omega)$. Accounting for exhaust momentum through thrust, the open-system translational balance is $m\dot{\mathbf v}=m\mathbf g+\mathbf F_D+\mathbf F_T$. One must not add a second $\dot m\mathbf v$ term to this thrust-based equation. The coupled model is
+The state is $\mathbf y=(x,h,v_x,v_h,m,\theta,\omega)$. Accounting for exhaust momentum through thrust, the open-system translational balance is $m\dot{\mathbf v}=m\mathbf g+\mathbf F_D+\mathbf F_T$. One must not add a second $\dot m\mathbf v$ term to this thrust-based equation. The planar baseline used to initialize the corrected calculation is
 \begin{align}\label{eq:dynamics}
  \dot x&=v_x,&\dot h&=v_h,\\
  \dot v_x&=\frac{F_{D,x}+T\cos(\theta+\delta)}m,&
@@ -73,6 +73,7 @@ The state is $\mathbf y=(x,h,v_x,v_h,m,\theta,\omega)$. Accounting for exhaust m
 \end{align}
 The thrust application point is $-(L/2)\mathbf e$, so its cross product with thrust gives the negative sign above. The dry body is modeled as a uniform cylinder. Remaining propellant is idealized as concentrated at the COM with negligible pitch inertia and no additional rotational angular-momentum flux. Hence $I_d$ is constant. A distributed-tank model would require consistent treatment of changing inertia and exhaust angular momentum; the present equation does not claim to describe those effects.
 
+\input{paper/spherical-model.tex}
 \subsection{Initial Conditions and Contact Geometry}
 For each selected initial flight-path angle,
 \begin{equation}
@@ -82,11 +83,11 @@ For each selected initial flight-path angle,
 \end{equation}
 The reference uses $\gamma_0=\theta_0=15^\circ$ and $\omega_0=0$. A trial $m_{p,0}=80000$ kg initializes calculations; it is not a computed minimum.
 
-For a cylindrical body with no landing gear, the vertical support extent below the COM is $(L/2)|\sin\theta|+R_b|\cos\theta|$. First deck contact therefore occurs when
+In the planar comparison, for a cylindrical body with no landing gear, the vertical support extent below the COM is $(L/2)|\sin\theta|+R_b|\cos\theta|$. First deck contact therefore occurs when
 \begin{equation}\label{eq:contact}
  f(\mathbf y)=h-h_{deck}-\frac L2|\sin\theta|-R_b|\cos\theta|=0.
 \end{equation}
-Only an upright body contacts at $h-h_{deck}=L/2$. Speed, attitude, pitch-rate, propellant reserve, and position relative to the chosen ship must be assessed separately. The local diagnostic below checks the former quantities, not fixed-ship position capture.
+The spherical calculation instead locates first contact with Eq.~\eqref{eq:spherecontact}. An upright body contacts at $h-h_{deck}=L/2$. Speed, attitude, pitch-rate, propellant reserve, and position relative to the chosen ship must be assessed separately. The local diagnostic below checks the former quantities, not fixed-ship position capture.
 
 \subsection{Analytic Baselines and Scale Estimates}
 For constant gravity, zero thrust, and zero drag,

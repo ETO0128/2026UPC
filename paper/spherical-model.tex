@@ -1,0 +1,25 @@
+\subsection{Spherical-Earth Correction}
+The adopted correction uses a nonrotating spherical Earth with radius $R_E$. Write $r=R_E+h$ and $s=R_E\phi$, where $s$ is surface arc distance. Velocities $v_x$ and $v_h$ are physical components along the changing local horizontal and radial directions. The state retains the seven-component layout, with $x$ replaced by $s$. Let $a_x=F_x/m$ and $a_h=F_h/m$ denote non-gravitational accelerations. Differentiating the moving basis gives
+\begin{align}\label{eq:sphere}
+ \dot s&=\frac{R_E}{r}v_x,&\dot h&=v_h,\\
+ \dot v_x&=a_x-\frac{v_xv_h}{r},&
+ \dot v_h&=a_h-g(h)+\frac{v_x^2}{r}.
+\end{align}
+Thus surface distance differs from the integral of local horizontal speed, and both acceleration components acquire curvature terms.
+
+We retain $\omega=\dot\theta$ as pitch rate relative to the local horizontal. As that horizontal rotates at $-v_x/r$ in the flight plane, inertial body rate is $\omega_I=\omega-v_x/r$. The strip velocity in Eq.~\eqref{eq:strip} uses $u_n+\omega_I s_i$. The consistent angular equation is
+\begin{equation}\label{eq:spherepitch}
+ \dot\omega=\frac{M_a+M_T}{I_d}+\frac{a_x}{r}-\frac{2v_xv_h}{r^2}.
+\end{equation}
+The last two terms are obtained by differentiating $v_x/r$. This distinction preserves torque-free inertial rotation while allowing the local vertical to change along the trajectory.
+
+For sea-level contact, the cylindrical longitudinal section is a rectangle in the local flight plane. The point nearest the Earth center has body coordinates
+\begin{equation}
+ a_* = \operatorname{clip}(-r\sin\theta,-L/2,L/2),\qquad
+ b_* = \operatorname{clip}(-r\cos\theta,-R_b,R_b).
+\end{equation}
+The event function is
+\begin{equation}\label{eq:spherecontact}
+ f_s=\sqrt{(a_*\cos\theta-b_*\sin\theta)^2+(r+a_*\sin\theta+b_*\cos\theta)^2}-R_E-h_{deck}.
+\end{equation}
+It uses the radial surface and the full cylinder section. Ship position is a fixed surface arc coordinate. The 5 m targeting tolerance keeps the local deck orientation consistent with the touchdown checks to the precision relevant here. Deck motion and Earth rotation remain excluded assumptions.

@@ -1,0 +1,14 @@
+
+\subsection{Recomputed Spherical-Earth Reference}
+The preceding planar solutions provide initialization and comparison. We then optimize the coupled spherical equations with the same dry mass, propulsion assumptions, initial local flight-path angle of $15^\circ$, and touchdown tolerances. The finest accepted local candidate carries 26.038 t of combined propellant, including the selected 5 t reserve. Its methane and oxygen inventories are 5.786 t and 20.252 t. Contact occurs at 213.016 s, with the ship at a surface arc distance of 284.160 km.
+
+The engine ignites at 181.073 s and a radial COM altitude of 6.350 km. Fine replay gives horizontal speed magnitude 0.0051 m/s, downward radial speed 1.5151 m/s, local tilt 0.00014$^\circ$, and local pitch-rate magnitude 0.0272$^\circ$/s. Ship-position error is 0.0033 m. Consumption is 20.962 t and retained usable propellant is 5.076 t. Peak dynamic pressure and specific force are 293.02 kPa and 7.819$\,g_0$.
+
+Optimization meshes of 0.85, 0.55, and 0.40 s give inventories of 26.114, 26.051, and 26.038 t. All three candidates pass 0.005 and 0.0025 s spherical replay. The selected candidate additionally passes at 0.00125 s. The corrected inventory is about 0.190 t below the 26.228 t planar comparator. Both the control and trajectory were recomputed, so this difference measures the change between the accepted local designs.
+
+Vacuum checks conserve spherical specific energy and angular momentum over a 100 s coast to $7.5\times10^{-9}$ J/kg and $6.7\times10^{-16}$ relative error. Torque-free inertial attitude remains constant to $5.9\times10^{-16}$ rad. Thirty-two sampled derivative comparisons between the symbolic optimizer and JavaScript dynamics agree within $4.0\times10^{-16}$ scaled discrepancy. These tests verify the moving-frame signs and implementation. The results retain the adopted engine, aerodynamic, atmosphere, and actuator assumptions.
+\begin{figure}[htbp]\centering
+\includegraphics[width=\linewidth]{figure/spherical-reference.png}
+\caption{Reoptimized nonrotating spherical-Earth trajectory. Downrange position is surface arc distance, altitude is radial, and pitch is relative to the changing local horizontal. Shading indicates the powered phase.}
+\label{fig:spherical}
+\end{figure}
