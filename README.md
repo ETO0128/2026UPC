@@ -1,6 +1,6 @@
 # 2026 UPC
 
-物理建模与英文论文项目，已选择 A 题：一级火箭助推器回收。Team Control Number：758。当前为论文框架阶段，尚无最终数值结论。
+物理建模与英文论文项目，已选择 A 题：一级火箭助推器回收。Team Control Number：758。P0参考设计已冻结，P1已有耦合动力学与局部算例，P2全程优化由其他负责人推进。尚无最终燃料结论。
 
 ## 队内安排
 
@@ -26,3 +26,6 @@ latexmk -pdf -outdir=paper/build paper/main.tex
 
 ## 当前平面刚体参考模型
 参数：config/reference.json；说明：docs/planar-model.md。运行：node src/run-planar.mjs。包含轴向/横流、有动力制动及俯仰；全程可行轨迹仍待优化。
+
+## P0 交接
+当前参数入口为 config/reference.json；场景、预算及约束规范为 config/p0-contract.json。阅读 [P0交接说明](docs/p0-handoff.md) 后开展P2；旧 baseline.json 仅作历史校验。

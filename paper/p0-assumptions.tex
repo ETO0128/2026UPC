@@ -1,0 +1,11 @@
+% P0-v1 reference scenario and mission assumptions.
+\subsection*{Reference Scenario and Mission Conventions}
+The reference flight-path angle and body pitch at separation are both $15^\circ$ above horizontal, with zero initial pitch rate. Alternate flight-path scenarios use $0^\circ$ and $30^\circ$, with initial pitch matched to the respective flight-path angle. Ground-relative planar velocity is used. Wind is zero in the nominal case; deterministic horizontal wind scenarios are $-10$, $0$, and $+10$ m/s. These scenario points are analysis choices, not statistical confidence bounds.
+
+The ship is stationary, the deck is horizontal at sea level, and landing gear is omitted. A nominal ship position may be chosen separately for each nominal scenario. Perturbation tests for an already positioned ship retain that ship location. The selected touchdown tolerances are 5 m horizontal position error, 1 m/s horizontal speed, 2 m/s vertical speed, $2^\circ$ tilt from upright, and $1^\circ$/s pitch rate.
+
+The initial inventory includes a minimum usable touchdown reserve of 5000 kg; unusable residual is assumed zero in the first model. The 80000 kg trial inventory is an initialization, not a fuel requirement. Consumed propellant, reserve, and any surplus are accounted for without double counting. At an oxygen-to-methane mass ratio of 3.5, methane represents $1/4.5$ of total propellant mass.
+
+At most three ignitions are allowed as a reference operational assumption. Ignition delay and minimum on/off durations are zero, and actuator rate limits are omitted. Throttle and gimbal changes are therefore idealized as instantaneous; this is not a manufacturer capability claim. No independent reaction-control system or active aerodynamic fins are assumed. Engine-off attitude motion is passive.
+
+Sensitivity cases vary effective specific impulse over 300, 330, and 360 s; axial coefficient over 0.4, 0.8, and 1.2; crossflow coefficient over 0.8, 1.2, and 1.6; and pressure-center offset over $-0.05L$, 0, and $+0.05L$. These deterministic variations test the reference design assumptions. No verified structural or thermal allowable is available: peak dynamic pressure, load, and heating diagnostics must be reported, and touchdown feasibility alone does not establish structural or thermal safety.

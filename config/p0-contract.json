@@ -1,0 +1,14 @@
+{
+  "version":"P0-v1","team":758,"problem":"A","parameterFile":"config/reference.json",
+  "units":"SI; angles in config are degrees, state angles are radians",
+  "stateOrder":["x","h_com","vx","vh","totalMass","pitch","pitchRate"],
+  "frame":{"x":"downrange positive","h":"geometric COM altitude above mean sea level","pitch":"counterclockwise from +x toward nose; upright=pi/2","wind":"ground-relative horizontal air velocity; positive downrange"},
+  "initialConditions":{"xM":0,"flightPathDeg":15,"pitchDeg":15,"pitchRateRadS":0,"pitchFollowsFlightPathInAngleScans":true},
+  "environment":{"windMps":0,"deckHeightM":0,"deckVelocityMps":[0,0],"shipLocation":"free for each nominal scenario; fixed when testing a prepositioned ship","earthRotation":"omitted in v1; sensitivity validation deferred","atmosphere":"COESA1976 lower layers only; reject out-of-range trajectories"},
+  "budget":{"usableReserveKg":5000,"unusableResidualKg":0,"reserveIsIncludedInInitialInventory":true,"trialInventoryKg":80000,"trialIsAnswer":false,"mixtureRatioAppliesTo":"consumed and reserved propellant","equation":"initial=consumed+usableReserve+unusableResidual+extraUnused"},
+  "operations":{"maximumIgnitions":3,"minimumOnTimeS":0,"minimumOffTimeS":0,"ignitionDelayS":0,"throttleRateLimitPerS":null,"gimbalRateLimitDegS":null,"nullRateMeaning":"instantaneous actuator idealization, not zero rate","coastActuators":"no RCS or active fins; no commanded torque with engine off","status":"design assumptions; operational scheduling constraints must be enforced by P2, existing RHS enforces magnitude limits only"},
+  "geometry":{"landingGear":"omitted","contact":"COM height minus cylindrical vertical support extent equals deck height","inertia":"uniform dry cylinder; propellant concentrated at COM, negligible pitch inertia"},
+  "touchdown":{"horizontalSpeedMaxMps":1,"verticalSpeedMaxMps":2,"tiltMaxDeg":2,"pitchRateMaxDegS":1,"usableReserveMinKg":5000,"shipTargetToleranceM":5,"positionStatus":"P2 must enforce relative to selected ship; current free-location diagnostics do not enforce this"},
+  "sensitivity":{"kind":"deterministic scenario points, not confidence intervals","oneFactorAtATime":true,"flightPathDeg":[0,15,30],"ispS":[300,330,360],"oxygenFuelRatio":[3,3.5,4],"maxThrustMultiplier":[0.8,1,1.2],"minThrottle":[0.3,0.4,0.5],"axialCd":[0.4,0.8,1.2],"crossflowCd":[0.8,1.2,1.6],"cpOffsetOverLength":[-0.05,0,0.05],"gimbalLimitDeg":[5,10,15],"windMps":[-10,0,10],"reserveKg":[0,5000,10000],"pitchOffsetDeg":[-2,0,2],"initialPitchRateDegS":[-1,0,1]},
+  "safety":{"maxDynamicPressurePa":null,"maxLoadFactor":null,"maxHeatFluxWm2":null,"nullMeaning":"report diagnostic peaks; no sourced structural or thermal pass/fail threshold adopted; touchdown feasibility is not full safety certification"}
+}
