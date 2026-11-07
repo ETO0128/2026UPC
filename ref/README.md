@@ -18,3 +18,11 @@
 - 液氧/甲烷发动机海平面和高空比冲、推力、节流与混合比的一手来源。
 - 与本题几何和姿态相适配的阻力、热流和结构载荷资料。
 - 直接配点理论及拟用求解器官方文档。
+
+## P0/P1 新增资料
+- US Standard Atmosphere 1976：https://ntrs.nasa.gov/citations/19770009539 （本次原始 PDF 下载返回 HTTP 403，尚未归档）
+- NASA Rocket Center of Pressure：https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/rocket-center-of-pressure/
+- NASA Generalized Center of Pressure：https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/generalized-center-of-pressure/
+- Coriolis 推导原始论文：https://arxiv.org/abs/2409.14135
+
+以上新增条目当前仅保存链接，未计入下载清单。

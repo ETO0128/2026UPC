@@ -1,0 +1,30 @@
+{
+  "warning": "demonstration parameters; not a calibrated landing solution",
+  "model": "Prescribed upright axis; no rotational dynamics; unpowered impact, NOT landing solution",
+  "geometry": {
+    "endAreaM2": 38.48451000647496,
+    "sideAreaM2": 455
+  },
+  "coriolisInitialUpperBoundMps2": 0.2430705,
+  "coarse": {
+    "dt": 0.5,
+    "timeS": 178.78510459353083,
+    "xM": 181364.8878598293,
+    "comHeightM": 32.5,
+    "vxMps": 25.24540003042049,
+    "vhMps": -240.0902905616206,
+    "massKg": 160000,
+    "safeLanding": false
+  },
+  "fine": {
+    "dt": 0.25,
+    "timeS": 178.78511474772327,
+    "xM": 181364.89263361273,
+    "comHeightM": 32.5,
+    "vxMps": 25.2451810808358,
+    "vhMps": -240.0904550773355,
+    "massKg": 160000,
+    "safeLanding": false
+  },
+  "checks": "Sea-level density, layer continuity, mass flow, coast mass conservation, preliminary time-step comparison passed"
+}

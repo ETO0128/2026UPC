@@ -1,0 +1,6 @@
+{
+  "status": "demonstration parameters; not a calibrated landing solution",
+  "given": {"dryMassKg":130000,"lengthM":65,"diameterM":7,"separationAltitudeM":70000,"separationSpeedMps":1666.6666666666667},
+  "scenario": {"flightPathAngleDeg":0,"propellantKg":30000,"windXMps":0,"axisAngleDeg":90,"cd":0.5,"ispS":330,"thrustN":0},
+  "notes": ["All scenario values are assumptions for software demonstration, not sourced engine/aerodynamic data.","Altitude is center-of-mass geometric altitude; contact at L/2 assumes upright body and zero deck/gear height.","Fixed prescribed axis, scalar projected-area drag; no attitude or lift simulation."]
+}

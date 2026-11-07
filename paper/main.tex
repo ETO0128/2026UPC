@@ -27,7 +27,13 @@ Reusable first-stage boosters require controlled descent and a safe vertical lan
 At separation, the booster has an altitude of 70 km and a speed of 6000 km/h. Its dry mass is 130000 kg, its height is 65 m, and its diameter is 7.0 m. It uses liquid oxygen and methane. The recovery ship may be placed at a convenient location. The task is to analyze a safe descent and controlled vertical landing, and estimate the fuel required at separation~\cite{problem}.
 \draftnote{Distinguish total propellant from methane fuel. State the initial velocity direction as an explicit assumption or scenario parameter.}
 \section{Assumptions}
-\draftnote{Justify the reference frame, atmosphere, wind, aerodynamic attitude, propulsion model, mass distribution, and ship motion assumptions. Separate given data from chosen parameters; assign validity ranges.}
+The booster is initially approximated as a rigid circular cylinder. This external geometry does not establish a uniform internal mass distribution. Atmospheric drag is retained using air-relative velocity and altitude-dependent density. The baseline translational model assumes planar motion and zero wind; steady uniform wind is a subsequent scenario, rather than a justification for neglecting aerodynamic torque.
+
+Aerodynamic moments depend on the offset between the center of pressure and center of mass. A prescribed-axis translational model therefore cannot establish attitude stability or vertical touchdown. Rotational dynamics and control authority must be assessed separately.
+
+Earth rotation is provisionally omitted from the baseline and requires a quantitative sensitivity check. Its omission is not justified by freedom in ship placement: Coriolis acceleration can alter velocity and consequently aerodynamic loading. The initial flight-path angle and all unspecified engine and aerodynamic parameters remain explicit scenario inputs.
+
+The deck is initially stationary and horizontal. Position denotes the booster center of mass; contact geometry must account for vehicle length and, when specified, landing gear and deck height.
 \section{Notations}
 \begin{center}
 \begin{tabular}{lll}
