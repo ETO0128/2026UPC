@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.venv/
+.ipynb_checkpoints/
+paper/build/
+*.synctex.gz
+.DS_Store
+Thumbs.db
