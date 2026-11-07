@@ -1,0 +1,16 @@
+{
+  "interpretation": "Requirements and approximation scales for the nominal local-plane trajectory",
+  "requiredDynamicPressurePa": 297334.0395173216,
+  "requiredSpecificForceG": 7.7034718085808915,
+  "maximumExternalAeroMomentNm": 36369190.581754215,
+  "maximumNetPitchMomentNm": 25272311.549099065,
+  "maximumAvailableThrustMomentNm": 16061588.19330272,
+  "maximumWithinBurnGimbalRateDegS": 35.71932586059165,
+  "maximumWithinBurnThrottleRatePerS": 1.071573011668901,
+  "actuatorNote": "Rates are slopes inside control phases. Ignition discontinuities require separate startup modeling.",
+  "downrangeM": 278310.43659683835,
+  "centralAngleDeg": 2.5085103669762465,
+  "tangentSurfaceOffsetM": 6091.487968502751,
+  "initialCoriolisAccelerationUpperBoundMps2": 0.24307050000000485,
+  "geometryNote": "Offset estimates the scale of curvature relative to a fixed tangent plane. It is not a corrected trajectory or a landing-error prediction."
+}

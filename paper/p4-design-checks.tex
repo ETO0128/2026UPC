@@ -1,0 +1,41 @@
+\subsection{Structural, Thermal, and Actuator Requirements}
+A trajectory supplies demands that can be compared with vehicle capabilities. Let $q_{allow}$ and $n_{allow}$ denote allowable dynamic pressure and specific force. For the nominal candidate, necessary screening conditions are
+\begin{equation}
+ q_{allow}\ge 297.334\ \mathrm{kPa},\qquad n_{allow}\ge7.703.
+\end{equation}
+These inequalities define a conditional capability envelope. They alone do not establish stress or buckling margins. Dynamic pressure must be translated into distributed loading, while gravity, thrust, inertia, internal tank pressure, and support conditions determine the section forces. For a thin circular shell, preliminary axial/bending and hoop checks have the form
+\begin{equation}
+ \sigma_{ax}\simeq\frac{N}{2\pi R_b t}+\frac{|M|}{\pi R_b^2t},\qquad
+ \sigma_{hoop}\simeq\frac{p_{tank}R_b}{t}.
+\end{equation}
+Here $N$ and $M$ are internal section resultants and $t$ is wall thickness. The integrated external aerodynamic moment cannot be substituted directly for $M$. The problem supplies no thickness, internal pressure, stiffness, or temperature-dependent strength, so these checks remain parametric.
+
+The largest external aerodynamic moment is 36.37 MN\,m, whereas maximum thrust-vector moment authority is
+\begin{equation}
+ M_{T,max}=\frac L2T_{max}\sin10^\circ=16.06\ \mathrm{MN\,m}.
+\end{equation}
+The model permits angular acceleration when torque is unbalanced. Consequently the accepted maneuver should not be interpreted as static attitude holding throughout entry. The saved piecewise-linear controls require up to $35.72^\circ$/s gimbal motion and $1.072\ \mathrm{s^{-1}}$ normalized throttle slew within the burn. These slope demands exclude the ignition discontinuity. Real implementation additionally requires startup and actuator dynamics compatible with those demands.
+
+A surface thermal assessment would require a local heat flux $\dot q_w$ and a wall energy balance, for example
+\begin{equation}
+ C_A\frac{dT_w}{dt}=\dot q_w-\epsilon\sigma_{SB}(T_w^4-T_{env}^4)-\dot q_{cond},
+\end{equation}
+where $C_A$ is areal heat capacity and $\dot q_{cond}$ is heat conducted into the underlying structure. The incoming kinetic-energy flux $\rho U^3/2$ supplies an exposure indicator. It does not specify $\dot q_w$. A stagnation-point correlation also requires a suitable local shape and flow regime~\cite{suttonGraves}. The adopted changing-attitude cylinder has no established nose/engine-base thermal boundary or protection system. Thus a wall-temperature history cannot be inferred from the available force model.
+
+\subsection{Earth Geometry and Rotation}
+The downrange distance of 278.31 km corresponds to $s/R_E=0.04378$ rad, or $2.509^\circ$. The scale of departure from a fixed tangent surface is
+\begin{equation}
+ R_E[1-\cos(s/R_E)]\simeq6.09\ \mathrm{km}.
+\end{equation}
+This is a geometric scale, rather than a computed touchdown error. It is large relative to the adopted contact tolerances, so local-plane replay does not establish an Earth-surface interception at that accuracy. A spherical-Earth extension would evolve downrange angle and include curvature accelerations. For local horizontal velocity $v_x$ and vertical velocity $v_h$, representative nonrotating equations are
+\begin{align}
+ \dot\phi&=\frac{v_x}{R_E+h}, &
+ \dot v_x&=\frac{F_x}{m}-\frac{v_xv_h}{R_E+h},\\
+ \dot v_h&=\frac{F_h}{m}-g(h)+\frac{v_x^2}{R_E+h}.
+\end{align}
+The body angle and pitch rate must use a frame convention consistent with the changing local horizontal. These equations identify the required extension. Reported inventories in this paper were computed using the stated planar equations.
+
+In an Earth-fixed formulation, the Coriolis acceleration is
+\begin{equation}
+\mathbf a_{cor}=-2\boldsymbol\Omega\times\mathbf v,\qquad 2\Omega v_0\simeq0.243\ \mathrm{m/s^2}.
+\end{equation} Actual components depend on latitude and heading, which are unspecified. Convenient ship placement removes a prescribed return-site constraint, while terminal velocity, attitude, and air-relative loading remain sensitive to trajectory changes. The geometry and rotation approximations therefore limit the physical precision of the conditional fuel estimate.

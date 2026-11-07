@@ -50,3 +50,6 @@ latexmk -pdf -outdir=paper/build paper/main.tex
 - [分离时重规划](docs/p3-control-revision.md)及[逐情景结果](results/p3/replanned/summary.json)：30 t 共同试算库存、固定船位、准确初态和恒定风已知。
 - [风估计误差扫描](docs/p3-wind-estimation.md)：固定 30 t 计划下的输入误差影响。
 - [持续反馈示例](docs/p3-tracking-control.md)：带调节余量的参考轨迹及五个小风误差点，不能推广为普遍鲁棒结论。
+
+## 整合论文
+英文审阅稿为 output/pdf/758A.pdf，整合入口 paper/main.tex。最后核查和提交材料状态见 docs/p4-final-check.md。运行 node src/p4-requirements.mjs 可复现控制与几何需求检查。技术结论以文中参考模型条件为限，AI完整对话披露尚需队伍补齐。
