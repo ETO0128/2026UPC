@@ -66,7 +66,7 @@ $q$ & Dynamic pressure & Pa \\
 \subsection{Attitude Stability and Vertical Touchdown}
 The local pitch controller brings the body upright under the tested conditions, but the case with an initial pitch-rate error illustrates that attitude recovery can occur alongside a position miss. A full recovery trajectory must satisfy the position, velocity, tilt, and pitch-rate limits at the same contact event. Control authority also depends on gimbal saturation and whether the engine is on.
 \subsection{Structural Loads and Aerothermal Constraints}
-Dynamic pressure $q=\rho\lVert\mathbf u\rVert^2/2$ identifies intervals with high aerodynamic loading potential. Forces also depend on the coefficients and on the orientation of the vehicle relative to the flow. Acceleration and heating require their own diagnostics. Peak values describe exposure under the adopted assumptions. The reference contract has no adopted structural or thermal thresholds against which to judge them.
+Section~\ref{sec:flight-exposure} identifies distinct pre-ignition pressure and flow-energy peaks and a later normal-load peak during the burn. The improved touchdown results do not remove these load requirements. A design with lower allowables would need a different descent trajectory and a revised propellant budget; the present contract does not provide those allowables.
 \subsection{Ship Placement, Wind, and Deck Motion}
 Downrange placement can avoid a return maneuver. Once the ship is positioned, the guidance must target its location and meet the speed and attitude limits relative to its deck. The present stationary, horizontal deck sets the reference for the fixed-site examples. A moving deck would alter the target position, relative velocity, and contact orientation.
 \subsection{Conclusions and Practical Recommendations}
@@ -79,6 +79,9 @@ Downrange placement can avoid a return maneuver. Once the ship is positioned, th
 \bibitem{kelly} M. Kelly. An Introduction to Trajectory Optimization: How to Do Your Own Direct Collocation. SIAM Review 59(4), 849--904, 2017. \url{https://doi.org/10.1137/16M1062569}.
 \bibitem{casadi} J. A. E. Andersson et al. CasADi: A Software Framework for Nonlinear Optimization and Optimal Control. Mathematical Programming Computation 11, 1--36, 2019. \url{https://doi.org/10.1007/s12532-018-0139-4}.
 \bibitem{ipopt} A. W\"achter and L. T. Biegler. On the Implementation of an Interior-Point Filter Line-Search Algorithm for Large-Scale Nonlinear Programming. Mathematical Programming 106, 25--57, 2006. \url{https://doi.org/10.1007/s10107-004-0559-y}.
+\bibitem{dynamicPressure} NASA Glenn Research Center. Dynamic Pressure. Accessed November 7, 2026. \href{https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/dynamic-pressure/}{NASA Glenn webpage.}
+\bibitem{tfawsAero} NASA. Aerothermodynamics Course, Lecture 1: Stagnation Point Heating. Thermal and Fluids Analysis Workshop, 2012, pp. 2, 7--8. \href{https://tfaws.nasa.gov/TFAWS12/Proceedings/Aerothermodynamics%20Course.pdf}{Course slides.}
+\bibitem{suttonGraves} K. Sutton and R. A. Graves, Jr. A General Stagnation-Point Convective-Heating Equation for Arbitrary Gas Mixtures. NASA TR R-376, 1971. \url{https://ntrs.nasa.gov/citations/19720003329}.
 \bibitem{problem} The University Physics Competition. Problem A: Landing a First-Stage Rocket Booster, 2026. \href{https://university-physics-competition.com/2026-competition}{Official problem statement.}
 \end{thebibliography}
 \appendix
@@ -93,11 +96,12 @@ python src/p3-replan.py --replay-all
 \end{verbatim}
 The schedules are stored in \path{results/p3/replanned/}. The planner uses the dependencies in \path{requirements-p2.txt}.
 Run \texttt{python src/p3-tracking.py} to prepare the control-margin reference and regenerate the tracking gains and two-step-size comparison in \path{results/p3/tracking/}.
+Run \texttt{node src/p3-exposure.mjs} followed by \texttt{python src/plot-p3-exposure.py} to generate the full-flight environment records in \path{results/p3/safety/} and their figure. The incoming flow-energy indicator is not a wall-heating calculation.
 \draftnote{Add the full-flight solver and final figure generation commands and versions.}
 \section{Supplementary Derivations and Results}
 \draftnote{Include dimensional checks, convergence tables, and additional scenario results.}
 \section*{Report on the Use of AI}
 \addcontentsline{toc}{section}{Report on the Use of AI}
-AI assistance was used to organize the manuscript, develop the reference dynamics and verification scripts, derive model equations, and generate P1 figures and draft text. It was also used to implement the P2 search, optimization, and replay, generate its figure, and draft the landing-strategy section. OpenAI Codex also assisted with the sensitivity calculations, corrective planning, tracking-controller implementation, and manuscript integration.
+AI assistance was used to organize the manuscript, develop the reference dynamics and verification scripts, derive model equations, and generate P1 figures and draft text. It was also used to implement the P2 search, optimization, and replay, generate its figure, and draft the landing-strategy section. OpenAI Codex also assisted with the sensitivity calculations, corrective planning, tracking-controller implementation, flight-environment analysis and figures, and manuscript integration.
 \draftnote{Complete the disclosure with the tools used, exact prompts, and complete outputs required by the competition rules.}
 \end{document}

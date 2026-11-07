@@ -77,7 +77,7 @@ export function scheduledPhases(schedule) {
   return phases;
 }
 
-export function replay(p, contract, propellant, phases, {step = 0.02, samples = false, ship = null, startState = null} = {}) {
+export function replay(p, contract, propellant, phases, {step = 0.02, samples = false, ship = null, startState = null, onRecord = null} = {}) {
   let y = startState === null ? initialState(p, contract, propellant) : [...startState];
   const initial = [...y];
   let time = 0;
@@ -99,6 +99,7 @@ export function replay(p, contract, propellant, phases, {step = 0.02, samples = 
     const thrust = u.throttle * p.maxThrustN;
     const angle = y[5] + u.gimbalRad;
     const load = Math.hypot(a.fx + thrust * Math.cos(angle), a.fz + thrust * Math.sin(angle)) / (y[4] * g0);
+    if (onRecord) onRecord({timeS: time, state: y, phase: phase.name, powered: phase.powered, aero: a, control: u, loadG: load});
     if (a.q > peakQ.value) peakQ = {value: a.q, timeS: time, altitudeM: y[1]};
     if (load > peakLoad.value) peakLoad = {value: load, timeS: time, altitudeM: y[1]};
     maxMach = Math.max(maxMach, a.mach);

@@ -94,9 +94,11 @@ $+0.10$ & 2.953 & 0.578 & 6.034 \\
 \end{tabular}
 \end{table}
 
-The largest pitch-rate magnitude is approximately $0.740^\circ$/s. Peak commanded throttle and gimbal magnitude are approximately 95.9\% and $9.09^\circ$, within the original capability limits. Holding the same new reference commands fixed passes only the zero-wind case among these five comparisons. The feedback cases consume approximately 23.96 t and retain more than 6.03 t from the common 30 t separation load.
+The largest touchdown pitch-rate magnitude is approximately $0.740^\circ$/s. Peak commanded throttle and gimbal magnitude are approximately 95.9\% and $9.09^\circ$, within the original capability limits. Holding the same new reference commands fixed passes only the zero-wind case among these five comparisons. The feedback cases consume approximately 23.96 t and retain more than 6.03 t from the common 30 t separation load.
 
 These comparisons assume exact state measurements and instantaneous actuator response, with a fixed 20 ms control update period. Measurement noise, additional delay, actuator rate limits, changing wind, combined initial errors, and a broader wind range remain to be assessed. Ignition uses a prescribed nominal time.
+
+\input{paper/p3-safety.tex}
 
 \subsection{Whole-Flight Parameters and Reserve}
 For each complete trajectory, we distinguish a recovery site chosen for that trajectory from an already positioned ship whose location must remain fixed. The full-flight comparison varies flight-path angle, effective specific impulse, thrust, aerodynamic parameters, and reserve using the reference scenario points. Reserve contributes to vehicle mass, so its effect can include a change in burn consumption as well as the extra mass retained. The resulting range describes the scenarios examined.

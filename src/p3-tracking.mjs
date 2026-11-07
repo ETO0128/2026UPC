@@ -1,12 +1,13 @@
 import fs from 'node:fs';
 import { readJSON, replay, scheduledPhases } from './p2-flight.mjs';
 import { clamp, rad, rhs, rk4 } from './planar.mjs';
+import { createExposureRecorder } from './p3-exposure.mjs';
 
 const contract = readJSON('config/p0-contract.json');
 const reference = readJSON(contract.parameterFile);
 const mode = process.argv[2];
 const request = JSON.parse(fs.readFileSync(0, 'utf8'));
-const plan = mode === 'simulate' ? request.reference : request;
+const plan = ['simulate', 'exposure'].includes(mode) ? request.reference : request;
 const [coast, burn] = scheduledPhases(plan.candidate.phases);
 coast.duration += plan.coastTimeS;
 const residualCommand = burn.command;
@@ -127,5 +128,19 @@ function simulate({ controller, stepS }) {
     propellantKg: plan.propellantKg, shipLocationM: plan.shipLocationM, cases };
 }
 
-const result = mode === 'check' ? {passes: selected.passes} : mode === 'linearize' ? linearize() : simulate(request);
+function exposure() {
+  return [-.1, -.05, 0, .05, .1].map(actualWindMps => {
+    const params = {...reference, windMps: actualWindMps};
+    const recorder = createExposureRecorder(params);
+    const result = replay(params, contract, plan.propellantKg, feedbackPhase(request.controller), {
+      step: request.stepS, ship: plan.shipLocationM, onRecord: recorder.record,
+    });
+    return {actualWindMps, event: result.event, passes: result.passes, timeS: result.timeS,
+      ignitionTimeS: result.phases.find(phase => phase.powered).startS,
+      touchdown: result.touchdown, consumedKg: result.consumedKg, ...recorder.finish()};
+  });
+}
+
+const result = mode === 'check' ? {passes: selected.passes} : mode === 'linearize' ? linearize()
+  : mode === 'exposure' ? exposure() : simulate(request);
 console.log(JSON.stringify(result));
