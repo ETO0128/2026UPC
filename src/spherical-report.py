@@ -8,13 +8,23 @@ import matplotlib.pyplot as plt
 import numpy as np
 root=Path.cwd()
 source=json.loads((root/'results/spherical/nominal.json').read_text())
-good=[row for row in source['history'] if row['candidate']['success'] and all(r['passes'] for r in row['replay'].values())]
+# Additional trust-region rounds at the 0.40 s mesh (same parameters) continue the nominal search.
+extra_path=root/'results/spherical/sensitivity/cn-1.2.json'
+extra=json.loads(extra_path.read_text())['history'] if extra_path.exists() else []
+rows=source['history']+extra
+good=[row for row in rows if all(r['passes'] for r in row['replay'].values())]
 row=min(good,key=lambda r:r['candidate']['propellantKg'])
 candidate=row['candidate']
+planar=26228.1
 process=subprocess.run(['node','src/spherical-replay.mjs'],input=json.dumps(dict(candidate=candidate,stepS=.00125,samples=True)),text=True,capture_output=True,check=True)
 r=json.loads(process.stdout)
 assert r['passes'],r['violations']
-result=dict(candidate=candidate,replay=r,gridHistory=[dict(step=x['candidate']['maxIntervalTargetS'],inventoryKg=x['candidate']['propellantKg'],accepted=all(y['passes'] for y in x['replay'].values())) for x in source['history']])
+history=[dict(step=x['candidate']['maxIntervalTargetS'],inventoryKg=x['candidate']['propellantKg'],accepted=all(y['passes'] for y in x['replay'].values())) for x in rows]
+result=dict(candidate=candidate,replay=r,gridHistory=history)
+mesh=', '.join(f"{x['inventoryKg']/1000:.2f}" for x in history[:3])
+rounds=[x for x in history[3:] if x['accepted']]
+refine=(" Three further optimization rounds on the 0.40 s mesh give "+', '.join(f"{x['inventoryKg']/1000:.2f}" for x in rounds)
+        +f" t; we keep the lowest. Their spread of about {(max(x['inventoryKg'] for x in rounds)-min(x['inventoryKg'] for x in rounds))/1000:.2f} t shows how precisely the local optimum is resolved.") if rounds else ''
 (root/'results/spherical/selected.json').write_text(json.dumps(result,indent=2)+'\n')
 t=np.array([x['t'] for x in r['trace']]);y=np.array([x['state'] for x in r['trace']])
 fig,axes=plt.subplots(2,3,figsize=(11,6),layout='constrained')
@@ -32,17 +42,19 @@ for ax in axes.flat:
 fig.savefig(root/'figure/spherical-reference.png',dpi=200);plt.close(fig)
 q=r['peakQPa']['value']/1000;g=r['peakLoadG']['value']
 text=rf'''
-\subsection{{Recomputed Spherical-Earth Reference}}
-The preceding planar solutions provide initialization and comparison. We then optimize the coupled spherical equations with the same dry mass, propulsion assumptions, initial local flight-path angle of $15^\circ$, and touchdown tolerances. The finest accepted local candidate carries {r['propellantKg']/1000:.3f} t of combined propellant, including the selected 5 t reserve. Its methane and oxygen inventories are {r['methaneKg']/1000:.3f} t and {r['liquidOxygenKg']/1000:.3f} t. Contact occurs at {r['timeS']:.3f} s, with the ship at a surface arc distance of {r['shipLocationM']/1000:.3f} km.
+\subsection{{Spherical-Earth Reference Solution}}
+\label{{sec:spherical-results}}
+Starting from the planar solution, we optimize the spherical equations with the same dry mass, propulsion model, touchdown limits, and $15^\circ$ flight-path angle at separation. The best solution we found needs {r['propellantKg']/1000:.2f} t of propellant at separation, {r['methaneKg']/1000:.2f} t of methane and {r['liquidOxygenKg']/1000:.2f} t of liquid oxygen, including the 5 t reserve. The booster coasts until {ignition['startS']:.1f} s, lights its engine at {ignition['startState'][1]/1000:.1f} km altitude, and touches down at {r['timeS']:.2f} s on a ship {r['shipLocationM']/1000:.2f} km downrange along the surface.
 
-The engine ignites at {ignition['startS']:.3f} s and a radial COM altitude of {ignition['startState'][1]/1000:.3f} km. Fine replay gives horizontal speed magnitude {r['touchdown']['horizontalMps']:.4f} m/s, downward radial speed {r['touchdown']['verticalMps']:.4f} m/s, local tilt {r['touchdown']['tiltDeg']:.5f}$^\circ$, and local pitch-rate magnitude {r['touchdown']['pitchRateDegS']:.4f}$^\circ$/s. Ship-position error is {r['touchdown']['shipErrorM']:.4f} m. Consumption is {r['consumedKg']/1000:.3f} t and retained usable propellant is {r['touchdown']['reserveKg']/1000:.3f} t. Peak dynamic pressure and specific force are {q:.2f} kPa and {g:.3f}$\,g_0$.
+In the replay at a 0.00125 s step, the booster lands {r['touchdown']['shipErrorM']*1000:.1f} mm from the target, moving {r['touchdown']['horizontalMps']:.4f} m/s sideways and {r['touchdown']['verticalMps']:.3f} m/s downward, tilted {r['touchdown']['tiltDeg']:.5f}$^\circ$ from vertical and rotating at {r['touchdown']['pitchRateDegS']:.4f}$^\circ$/s. It burns {r['consumedKg']/1000:.2f} t and keeps {r['touchdown']['reserveKg']/1000:.2f} t. Dynamic pressure peaks at {q:.1f} kPa and specific force at {g:.2f}$\,g_0$.
 
-Optimization meshes of 0.85, 0.55, and 0.40 s give inventories of 26.114, 26.051, and 26.038 t. All three candidates pass 0.005 and 0.0025 s spherical replay. The selected candidate additionally passes at 0.00125 s. The corrected inventory is about 0.190 t below the 26.228 t planar comparator. Both the control and trajectory were recomputed, so this difference measures the change between the accepted local designs.
+Optimization meshes of 0.85, 0.55, and 0.40 s give {mesh} t, respectively.{refine} Every reported solution passes the replay at 0.005 and 0.0025 s, and the selected one also at 0.00125 s. The spherical result is {(planar-r['propellantKg'])/1000:.2f} t lighter than the 26.23 t planar design. Both the trajectory and the controls were reoptimized, so this is the difference between two designs, not a correction applied to one.
 
-Vacuum checks conserve spherical specific energy and angular momentum over a 100 s coast to $7.5\times10^{{-9}}$ J/kg and $6.7\times10^{{-16}}$ relative error. Torque-free inertial attitude remains constant to $5.9\times10^{{-16}}$ rad. Thirty-two sampled derivative comparisons between the symbolic optimizer and JavaScript dynamics agree within $4.0\times10^{{-16}}$ scaled discrepancy. These tests verify the moving-frame signs and implementation. The results retain the adopted engine, aerodynamic, atmosphere, and actuator assumptions.
+Over a 100 s vacuum coast, the integrator conserves specific energy to $7.5\times10^{{-9}}$ J/kg and angular momentum to a relative error of $6.7\times10^{{-16}}$. Without torque, the inertial attitude stays constant to $5.9\times10^{{-16}}$ rad. At 32 sampled states, the derivatives used by the optimizer agree with those of the replay code to within $4.0\times10^{{-16}}$ after scaling. These tests confirm the signs of the moving-frame terms and the consistency of the two implementations.
+
 \begin{{figure}}[htbp]\centering
 \includegraphics[width=\linewidth]{{figure/spherical-reference.png}}
-\caption{{Reoptimized nonrotating spherical-Earth trajectory. Downrange position is surface arc distance, altitude is radial, and pitch is relative to the changing local horizontal. Shading indicates the powered phase.}}
+\caption{{Spherical-Earth reference trajectory. Downrange position is distance along the surface, altitude is radial, and pitch is measured from the local horizontal. Shading marks the landing burn.}}
 \label{{fig:spherical}}
 \end{{figure}}
 '''

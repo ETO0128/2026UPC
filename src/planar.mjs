@@ -8,7 +8,7 @@ export function inertia(p){
 export function aero(y,p){
  const [x,h,vx,vz,m,theta,omega]=y;
  const e=[Math.cos(theta),Math.sin(theta)],n=[-e[1],e[0]];
- const air=atmosphere(h),u=[vx-p.windMps,vz];
+ const air=atmosphere(h,p.upperAtmosphere==='isothermal'),u=[vx-p.windMps,vz];
  const axial=u[0]*e[0]+u[1]*e[1],normal=u[0]*n[0]+u[1]*n[1];
  const fa=-.5*air.density*p.axialCd*Math.PI*p.diameterM**2/4*axial*Math.abs(axial);
  let fn=0,torque=0;

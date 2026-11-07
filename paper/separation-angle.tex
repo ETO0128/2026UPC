@@ -1,0 +1,9 @@
+\subsection{Dependence on the Separation Direction}
+\label{sec:separation-direction}
+The problem gives the speed at separation but not its direction. That direction is set by the ascent, not by the recovery plan, so it is an input to the landing design and not a variable to optimize. A first stage normally separates while the vehicle is still climbing, so we take $15^\circ$ above horizontal as the reference and compare it with $0^\circ$ and $30^\circ$. This choice is our assumption. In each case the body axis starts aligned with the velocity, the propulsion model, touchdown limits, and 5 t reserve are unchanged, and the ship is placed separately.
+
+The tabulated standard atmosphere ends at 84.852 km geopotential altitude. The earlier planar study stopped any trajectory that climbed higher, which forced its $30^\circ$ design to brake during the ascent. Here we continue the atmosphere above that altitude at a constant 186.95 K. The density is $7\times10^{-6}\,\mathrm{kg/m^3}$ at the junction and about $1.5\times10^{-7}\,\mathrm{kg/m^3}$ at 108 km, so drag up there is negligible. The real upper atmosphere is not isothermal, but at these densities the difference has little effect on the trajectory. The $15^\circ$ reference reaches only 80.1 km and is unaffected.
+
+\input{paper/angle-table.tex}
+
+All three spherical designs coast to a single landing burn. The $0^\circ$ design never climbs, lands closest, and needs 1.65 t less than the reference. At $30^\circ$ the booster coasts up to 107.7 km and starts its landing burn at 25.9 km. It needs 32.46 t, about half of the 67.00 t planar value, because without the artificial altitude limit there is no need to brake on the way up. Over the range of separation directions considered, the inventory changes by about 8 t, more than for any engine or aerodynamic parameter in Section~\ref{sec:p3}.

@@ -1,19 +1,4 @@
 \subsubsection{Crossflow Drag}
-Changing the crossflow coefficient affects aerodynamic braking, pitching moment, and rotational damping together. With the axial coefficient fixed at 0.8, we compare crossflow coefficients of 0.8, 1.2, and 1.6 using the same local optimization method and touchdown requirements.
+The crossflow coefficient affects aerodynamic braking, the pitching moment, and rotational damping at the same time. With the axial coefficient fixed at 0.8, Table~\ref{tab:p3-drag} compares $C_n=0.8$, 1.0, 1.2, and 1.6 using the same optimization and touchdown limits. The $C_n=0.8$ case did not converge when started directly from the reference, so we started it from the $C_n=1.0$ solution.
 
-\begin{table}[htbp]
-\centering
-\caption{Crossflow comparison. Inventories are assigned only to accepted candidates. The unresolved row is a search limitation, not proof that landing is physically impossible.}
-\label{tab:p3-drag}
-\begin{tabular}{@{}llrr@{}}
-\toprule
-$C_n$ & Outcome & Inventory (t) & Retained (t) \\
-\midrule
-0.8 & No accepted candidate & -- & -- \\
-1.2 & Nominal reference & 26.228 & 5.078 \\
-1.6 & Accepted local candidate & 27.130 & 5.072 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-At $C_n=1.6$, inventory increases by 0.901 t (3.44\%), while peak specific force decreases from approximately $7.703\,g_0$ to $7.187\,g_0$. This local result trades greater inventory for a lower peak load; larger crossflow drag does not automatically imply lower fuel demand. At $C_n=0.8$, the local solve reaches its 140 s limit without an accepted trajectory. We assign no fuel requirement to its failed candidate and do not infer a feasible propellant range across the full coefficient interval.
+Between $C_n=0.8$ and 1.2 the inventory changes by less than 0.03 t, which is smaller than the 0.05 t spread between repeated optimizations of one case. At $C_n=1.6$ it is 0.47 t lower, and the peak specific force falls from $7.84\,g_0$ to $7.32\,g_0$ because more of the braking is done by the air. Over this range, crossflow drag has little effect on the propellant answer. The earlier planar study gave 27.13 t at $C_n=1.6$ and found no solution at 0.8; those runs used fewer optimization rounds and a 140 s solver time limit, and the spherical results replace them.

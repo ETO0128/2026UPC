@@ -55,4 +55,8 @@ P0历史参数入口为 config/reference.json；场景、预算及约束规范�
 英文审阅稿为 output/pdf/758A.pdf，整合入口 paper/main.tex。最后核查和提交材料状态见 docs/p4-final-check.md。运行 node src/p4-requirements.mjs 可复现控制与几何需求检查。技术结论以文中参考模型条件为限，AI完整对话披露尚需队伍补齐。
 
 ## 当前名义解已采用球形地球
-当前参数为config/spherical.json，说明见docs/spherical-correction.md。球面重优化得到26.038 t总推进剂、284.160 km地表弧长船位。旧平面结果用于策略和参数比较。结构能力按用户研究范围排除。论文输出仍为output/pdf/758A.pdf。
+当前参数为config/spherical.json，说明见docs/spherical-correction.md。球面重优化并补跑0.40 s网格后得到25.967 t总推进剂、284.120 km地表弧长船位。结构能力按用户研究范围排除。
+
+## P5 修订（任务书 docs/p5-task-list.md，收尾说明与仍存问题见 docs/p5-closeout.md）
+分离角、比冲、横流系数和动压上限都已在球面模型上重算，汇总见 results/spherical/summary.json。大气在84.852 km以上可选等温外推（upperAtmosphere: isothermal），30°情景因此不再被迫上升段制动。output/pdf/758A.pdf 已按最新源文件重新编译。本机可运行 python src/build-paper.py（使用 .tools 里的便携 TinyTeX），其他机器用 latexmk -pdf -outdir=paper/build paper/main.tex。
+

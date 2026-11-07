@@ -1,0 +1,381 @@
+{
+  "note": "Collect accepted spherical-Earth cases into results/spherical/summary.json.\n\nA case is accepted when its candidate passes every touchdown check in both the 0.005 s and\n0.0025 s spherical replays (and, for dynamic-pressure caps, stays within the cap). The lowest\naccepted inventory in each result file is reported; it is a local solution, not a global minimum.",
+  "nominal": {
+    "source": "results/spherical/selected.json",
+    "propellantKg": 25967.27533355629,
+    "shipLocationM": 284120.42430122977,
+    "peakQPa": 292892.4154299501
+  },
+  "sensitivity": {
+    "cn-0.8": {
+      "source": "results/spherical/sensitivity/cn-0.8.json",
+      "accepted": true,
+      "attempts": 7,
+      "propellantKg": 25939.754362733423,
+      "methaneKg": 5764.389858385205,
+      "liquidOxygenKg": 20175.364504348217,
+      "consumedKg": 20863.004620318825,
+      "retainedKg": 5076.749742414599,
+      "shipLocationM": 283955.8102905266,
+      "contactTimeS": 212.12693449350044,
+      "maxAltitudeM": 80135.9830238477,
+      "peakQPa": 295547.8617484839,
+      "peakLoadG": 8.699891438391626,
+      "ignitions": 1,
+      "burns": [
+        {
+          "name": "landing burn",
+          "startS": 180.30710947399098,
+          "endS": 212.12693449350044,
+          "consumedKg": 20863.004620318825,
+          "startAltitudeM": 6622.89490475156
+        }
+      ],
+      "touchdown": {
+        "shipErrorM": 0.002935383119620383,
+        "horizontalMps": 0.007514870799442857,
+        "verticalMps": 1.521943247819258,
+        "tiltDeg": 0.00017001077350349772,
+        "pitchRateDegS": 0.039632870340525414,
+        "reserveKg": 5076.749742414599
+      },
+      "solverStatus": "Solve_Succeeded",
+      "meshS": 0.4
+    },
+    "cn-1.0": {
+      "source": "results/spherical/sensitivity/cn-1.0.json",
+      "accepted": true,
+      "attempts": 5,
+      "propellantKg": 25955.731092132366,
+      "methaneKg": 5767.940242696081,
+      "liquidOxygenKg": 20187.790849436285,
+      "consumedKg": 20880.45611204233,
+      "retainedKg": 5075.274980090035,
+      "shipLocationM": 284280.7378301814,
+      "contactTimeS": 213.10644991878465,
+      "maxAltitudeM": 80136.22604852,
+      "peakQPa": 293706.9301751834,
+      "peakLoadG": 8.207125783630275,
+      "ignitions": 1,
+      "burns": [
+        {
+          "name": "landing burn",
+          "startS": 181.4334388702283,
+          "endS": 213.10644991878465,
+          "consumedKg": 20880.45611204233,
+          "startAltitudeM": 6068.652005483725
+        }
+      ],
+      "touchdown": {
+        "shipErrorM": 0.0012190400739200413,
+        "horizontalMps": 0.0011889472997375862,
+        "verticalMps": 1.5034441929661673,
+        "tiltDeg": 4.876234918611387e-05,
+        "pitchRateDegS": 0.006240979947399311,
+        "reserveKg": 5075.274980090035
+      },
+      "solverStatus": "Solve_Succeeded",
+      "meshS": 0.4
+    },
+    "cn-1.2": {
+      "source": "results/spherical/sensitivity/cn-1.2.json",
+      "accepted": true,
+      "attempts": 3,
+      "propellantKg": 25967.27533355629,
+      "methaneKg": 5770.505629679175,
+      "liquidOxygenKg": 20196.769703877115,
+      "consumedKg": 20891.56067707634,
+      "retainedKg": 5075.714656479948,
+      "shipLocationM": 284120.42430122977,
+      "contactTimeS": 213.24975661932615,
+      "maxAltitudeM": 80136.47182746894,
+      "peakQPa": 292892.41528421995,
+      "peakLoadG": 7.83680404249283,
+      "ignitions": 1,
+      "burns": [
+        {
+          "name": "landing burn",
+          "startS": 181.31543270306895,
+          "endS": 213.24975661932615,
+          "consumedKg": 20891.56067707634,
+          "startAltitudeM": 6211.233024194889
+        }
+      ],
+      "touchdown": {
+        "shipErrorM": 0.0028854982228949666,
+        "horizontalMps": 0.003393657583689291,
+        "verticalMps": 1.5092158304280872,
+        "tiltDeg": 0.0003810081074045254,
+        "pitchRateDegS": 0.016116659875390623,
+        "reserveKg": 5075.714656479948
+      },
+      "solverStatus": "Solve_Succeeded",
+      "meshS": 0.4
+    },
+    "cn-1.6": {
+      "source": "results/spherical/sensitivity/cn-1.6.json",
+      "accepted": true,
+      "attempts": 7,
+      "propellantKg": 25494.75911154045,
+      "methaneKg": 5665.502024786767,
+      "liquidOxygenKg": 19829.257086753685,
+      "consumedKg": 20419.257625347207,
+      "retainedKg": 5075.501486193243,
+      "shipLocationM": 283761.98498510127,
+      "contactTimeS": 212.66999085184267,
+      "maxAltitudeM": 80136.96739577127,
+      "peakQPa": 290204.8118078745,
+      "peakLoadG": 7.322751140896723,
+      "ignitions": 1,
+      "burns": [
+        {
+          "name": "landing burn",
+          "startS": 185.0186328136808,
+          "endS": 212.66999085184267,
+          "consumedKg": 20419.257625347207,
+          "startAltitudeM": 4343.522809926611
+        }
+      ],
+      "touchdown": {
+        "shipErrorM": 0.0023901264648884535,
+        "horizontalMps": 0.0019310200970120853,
+        "verticalMps": 1.5061076776703821,
+        "tiltDeg": 0.00017421340976229115,
+        "pitchRateDegS": 0.01139181995293731,
+        "reserveKg": 5075.501486193243
+      },
+      "solverStatus": "Solve_Succeeded",
+      "meshS": 0.4
+    },
+    "isp-300": {
+      "source": "results/spherical/sensitivity/isp-300.json",
+      "accepted": true,
+      "attempts": 5,
+      "propellantKg": 28483.030964476202,
+      "methaneKg": 6329.562436550267,
+      "liquidOxygenKg": 22153.468527925936,
+      "consumedKg": 23406.941517428408,
+      "retainedKg": 5076.089447047794,
+      "shipLocationM": 284290.7760710785,
+      "contactTimeS": 213.14795861247404,
+      "maxAltitudeM": 80136.50285471817,
+      "peakQPa": 297470.0836178031,
+      "peakLoadG": 7.956919293943991,
+      "ignitions": 1,
+      "burns": [
+        {
+          "name": "landing burn",
+          "startS": 180.9650949100273,
+          "endS": 213.14795861247404,
+          "consumedKg": 23406.941517428408,
+          "startAltitudeM": 6341.888887318942
+        }
+      ],
+      "touchdown": {
+        "shipErrorM": 0.002860010485164821,
+        "horizontalMps": 0.004024727611736711,
+        "verticalMps": 1.5122477941539347,
+        "tiltDeg": 8.235178124921719e-05,
+        "pitchRateDegS": 0.022458063379726764,
+        "reserveKg": 5076.089447047794
+      },
+      "solverStatus": "Solve_Succeeded",
+      "meshS": 0.4
+    },
+    "isp-360": {
+      "source": "results/spherical/sensitivity/isp-360.json",
+      "accepted": true,
+      "attempts": 5,
+      "propellantKg": 23977.91357377221,
+      "methaneKg": 5328.425238616047,
+      "liquidOxygenKg": 18649.488335156162,
+      "consumedKg": 18903.636248977855,
+      "retainedKg": 5074.277324794355,
+      "shipLocationM": 284013.13898445707,
+      "contactTimeS": 213.17958083973147,
+      "maxAltitudeM": 80136.44657462009,
+      "peakQPa": 289263.329818036,
+      "peakLoadG": 7.911748224214055,
+      "ignitions": 1,
+      "burns": [
+        {
+          "name": "landing burn",
+          "startS": 181.26563371587534,
+          "endS": 213.17958083973147,
+          "consumedKg": 18903.636248977855,
+          "startAltitudeM": 6300.432514155304
+        }
+      ],
+      "touchdown": {
+        "shipErrorM": 0.0005131099605932832,
+        "horizontalMps": 0.0033606559452774966,
+        "verticalMps": 1.4901176117404302,
+        "tiltDeg": 4.4821835873282824e-05,
+        "pitchRateDegS": 0.017879095757961698,
+        "reserveKg": 5074.277324794355
+      },
+      "solverStatus": "Solve_Succeeded",
+      "meshS": 0.4
+    }
+  },
+  "angle": {
+    "angle-0": {
+      "source": "results/spherical/angle/angle-0.json",
+      "accepted": true,
+      "attempts": 6,
+      "propellantKg": 24316.325405021955,
+      "methaneKg": 5403.627867782657,
+      "liquidOxygenKg": 18912.6975372393,
+      "consumedKg": 19238.820625263208,
+      "retainedKg": 5077.504779758747,
+      "shipLocationM": 199257.17462776465,
+      "contactTimeS": 160.59109069160692,
+      "maxAltitudeM": 70000,
+      "peakQPa": 230197.530762818,
+      "peakLoadG": 7.23831786062079,
+      "ignitions": 1,
+      "burns": [
+        {
+          "name": "landing burn",
+          "startS": 132.1392213355966,
+          "endS": 160.59109069160692,
+          "consumedKg": 19238.820625263208,
+          "startAltitudeM": 4648.455908172684
+        }
+      ],
+      "touchdown": {
+        "shipErrorM": 0.014220739773008972,
+        "horizontalMps": 0.010452069842780121,
+        "verticalMps": 1.531178806735365,
+        "tiltDeg": 9.197007994443561e-05,
+        "pitchRateDegS": 0.05674425467827441,
+        "reserveKg": 5077.504779758747
+      },
+      "solverStatus": "Solve_Succeeded",
+      "meshS": 0.4
+    },
+    "angle-30": {
+      "source": "results/spherical/angle/angle-30.json",
+      "accepted": true,
+      "attempts": 6,
+      "propellantKg": 32459.63902026473,
+      "methaneKg": 7213.253115614385,
+      "liquidOxygenKg": 25246.385904650346,
+      "consumedKg": 27385.617998234753,
+      "retainedKg": 5074.021022029978,
+      "shipLocationM": 348984.1563247959,
+      "contactTimeS": 277.1259474802813,
+      "maxAltitudeM": 107665.2565740294,
+      "peakQPa": 297227.5203048424,
+      "peakLoadG": 8.13433942635986,
+      "ignitions": 1,
+      "burns": [
+        {
+          "name": "landing burn",
+          "startS": 226.36331137207804,
+          "endS": 277.1259474802813,
+          "consumedKg": 27385.617998234753,
+          "startAltitudeM": 23968.70233778199
+        }
+      ],
+      "touchdown": {
+        "shipErrorM": 0.0047802344197407365,
+        "horizontalMps": 0.0042361609705683905,
+        "verticalMps": 1.4877825425177582,
+        "tiltDeg": 7.19697867581583e-05,
+        "pitchRateDegS": 0.022179886087346258,
+        "reserveKg": 5074.021022029978
+      },
+      "solverStatus": "Solve_Succeeded",
+      "meshS": 0.4
+    }
+  },
+  "qcap": {
+    "qcap-150": {
+      "source": "results/spherical/qcap/qcap-150.json",
+      "accepted": true,
+      "attempts": 7,
+      "propellantKg": 50169.45728057739,
+      "methaneKg": 11148.768284572754,
+      "liquidOxygenKg": 39020.68899600464,
+      "consumedKg": 45120.49364486264,
+      "retainedKg": 5048.963635714754,
+      "shipLocationM": 280986.5527573436,
+      "contactTimeS": 224.29596040894378,
+      "maxAltitudeM": 80136.73439526353,
+      "peakQPa": 148703.19151253128,
+      "peakLoadG": 7.414084357419137,
+      "ignitions": 2,
+      "burns": [
+        {
+          "name": "entry burn",
+          "startS": 108.84356924727221,
+          "endS": 185.81240664707408,
+          "consumedKg": 27075.471652505075,
+          "startAltitudeM": 62685.84148814181
+        },
+        {
+          "name": "landing burn",
+          "startS": 200.73917543328747,
+          "endS": 224.29596040894378,
+          "consumedKg": 18045.021992357564,
+          "startAltitudeM": 2814.940849856298
+        }
+      ],
+      "touchdown": {
+        "shipErrorM": 0.08960824081441388,
+        "horizontalMps": 0.1082071110769205,
+        "verticalMps": 1.1759716996011762,
+        "tiltDeg": 0.008919664116572416,
+        "pitchRateDegS": 0.5901241989572968,
+        "reserveKg": 5048.963635714754
+      },
+      "solverStatus": "Solve_Succeeded",
+      "meshS": 0.85,
+      "qCapPa": 150000.0
+    },
+    "qcap-200": {
+      "source": "results/spherical/qcap/qcap-200.json",
+      "accepted": true,
+      "attempts": 7,
+      "propellantKg": 37301.571868436586,
+      "methaneKg": 8289.238192985908,
+      "liquidOxygenKg": 29012.333675450678,
+      "consumedKg": 32227.795958241564,
+      "retainedKg": 5073.775910195021,
+      "shipLocationM": 281061.82899427763,
+      "contactTimeS": 216.4857971066589,
+      "maxAltitudeM": 80136.6042484311,
+      "peakQPa": 198018.5918182146,
+      "peakLoadG": 7.589128535852524,
+      "ignitions": 2,
+      "burns": [
+        {
+          "name": "entry burn",
+          "startS": 137.3449727114936,
+          "endS": 175.73610797328183,
+          "consumedKg": 13504.949117564684,
+          "startAltitudeM": 43206.17682307793
+        },
+        {
+          "name": "landing burn",
+          "startS": 186.24681287697274,
+          "endS": 216.4857971066589,
+          "consumedKg": 18722.84684067688,
+          "startAltitudeM": 5948.783032586739
+        }
+      ],
+      "touchdown": {
+        "shipErrorM": 0.0023187821498140693,
+        "horizontalMps": 0.005213399218128109,
+        "verticalMps": 1.4847013272705787,
+        "tiltDeg": 6.768091235450961e-05,
+        "pitchRateDegS": 0.027739135992520127,
+        "reserveKg": 5073.775910195021
+      },
+      "solverStatus": "Solve_Succeeded",
+      "meshS": 0.4,
+      "qCapPa": 200000.0
+    }
+  }
+}

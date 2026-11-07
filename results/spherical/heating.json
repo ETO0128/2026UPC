@@ -1,0 +1,22 @@
+{
+  "source": "results/spherical/selected.json replay trace",
+  "correlation": "Sutton-Graves, k=1.7415e-4 SI",
+  "cases": [
+    {
+      "noseRadiusM": 1,
+      "peakFluxWm2": 249436.25146528624,
+      "peakTimeS": 168.67249999986473,
+      "peakAltitudeM": 15492.880550655924,
+      "peakSpeedMps": 1499.786441608181,
+      "heatLoadJm2": 8580270.571619203
+    },
+    {
+      "noseRadiusM": 3.5,
+      "peakFluxWm2": 133329.2846891844,
+      "peakTimeS": 168.67249999986473,
+      "peakAltitudeM": 15492.880550655924,
+      "peakSpeedMps": 1499.786441608181,
+      "heatLoadJm2": 4586347.537831149
+    }
+  ]
+}

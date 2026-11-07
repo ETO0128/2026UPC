@@ -22,11 +22,8 @@ def load(path):
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
-def p1_rhs(p):
-    """Symbolic transcription of planar.mjs and atmosphere.mjs for derivatives."""
-    state = ca.SX.sym("y", 7)
-    u = ca.SX.sym("u", 2)
-    _, h, vx, vh, mass, theta, omega = ca.vertsplit(state)
+def density(h, p):
+    """Symbolic transcription of atmosphere.mjs."""
     geopotential = R * h / (R + h)
     temperature, pressure = 288.15, 101325.0
     rho = 0
@@ -45,6 +42,27 @@ def p1_rhs(p):
         pressure *= ((upper / temperature) ** (-G0 / (R_AIR * lapse)) if lapse
                      else np.exp(-G0 * width / (R_AIR * temperature)))
         temperature = upper
+    if p.get("upperAtmosphere") == "isothermal":
+        # Matches atmosphere.mjs: isothermal continuation above the last COESA layer.
+        upper_rho = pressure * ca.exp(-G0 * (geopotential - LAYERS[-1]) / (R_AIR * temperature)) / (R_AIR * temperature)
+        rho = ca.if_else(geopotential >= LAYERS[-1], upper_rho, rho)
+    return rho
+
+
+def dynamic_pressure(p):
+    """Air-relative dynamic pressure of a scaled state, for optional path constraints."""
+    state = ca.SX.sym("y", 7)
+    physical = ca.DM(SCALE) * state
+    q = 0.5 * density(physical[1], p) * ((physical[2] - p["windMps"])**2 + physical[3]**2)
+    return ca.Function("dynamic_pressure", [state], [q])
+
+
+def p1_rhs(p):
+    """Symbolic transcription of planar.mjs and atmosphere.mjs for derivatives."""
+    state = ca.SX.sym("y", 7)
+    u = ca.SX.sym("u", 2)
+    _, h, vx, vh, mass, theta, omega = ca.vertsplit(state)
+    rho = density(h, p)
 
     length, diameter = p["lengthM"], p["diameterM"]
     cos_theta, sin_theta = ca.cos(theta), ca.sin(theta)
@@ -112,7 +130,7 @@ def rk_interval(rhs, substeps):
 
 def optimize(p, contract, seed, step, max_iter, *, shooting=False, altitude_buffer=0, substeps=8,
              fixed_initial_mass=False, fixed_ship=None, throttle_ceiling=1, gimbal_fraction=1,
-             control_smoothing=0, touchdown_vertical_speed=-1.5):
+             control_smoothing=0, touchdown_vertical_speed=-1.5, max_q=None, max_wall_time=140):
     if not p["minThrottle"] <= throttle_ceiling <= 1 or not 0 < gimbal_fraction <= 1 or control_smoothing < 0:
         raise ValueError("Planning limits must fit inside the reference actuator limits")
     nlp = ca.Opti()
@@ -121,12 +139,16 @@ def optimize(p, contract, seed, step, max_iter, *, shooting=False, altitude_buff
     scale = ca.repmat(ca.DM(SCALE), 1, 1)
     gimbal_limit = np.deg2rad(p["gimbalLimitDeg"])
     floor = p["dryMassKg"] + contract["budget"]["unusableResidualKg"] + contract["touchdown"]["usableReserveMinKg"]
-    altitude_limit = R * LAYERS[-1] / (R - LAYERS[-1]) - altitude_buffer
+    top = 200_000 if p.get("upperAtmosphere") == "isothermal" else LAYERS[-1]
+    altitude_limit = R * top / (R - top) - altitude_buffer
     stages = []
+    q_function = dynamic_pressure(p) if max_q is not None else None
 
     def bounds(states, clearance=False):
         nlp.subject_to(nlp.bounded(p["deckHeightM"] / SCALE[1], states[1, :], altitude_limit / SCALE[1]))
         nlp.subject_to(states[4, :] >= floor / SCALE[4])
+        if q_function is not None:
+            nlp.subject_to(q_function.map(states.shape[1])(states) / 1e5 <= max_q / 1e5)
         if clearance:
             theta = states[5, :] * SCALE[5]
             extent = p["lengthM"] / 2 * ca.fabs(ca.sin(theta)) + p["diameterM"] / 2 * ca.fabs(ca.cos(theta))
@@ -190,7 +212,7 @@ def optimize(p, contract, seed, step, max_iter, *, shooting=False, altitude_buff
         objective += control_smoothing * sum(ca.sumsqr(stage[3][:, 1:] - stage[3][:, :-1]) for stage in stages if stage[0]["powered"])
     nlp.minimize(objective)
     nlp.solver("ipopt", {"print_time": False}, {"print_level": 0, "max_iter": max_iter,
-               "max_wall_time": 140, "tol": 1e-8, "acceptable_tol": 2e-6,
+               "max_wall_time": max_wall_time, "tol": 1e-8, "acceptable_tol": 2e-6,
                "acceptable_iter": 10, "bound_relax_factor": 0})
 
     solution = nlp.solve_limited()

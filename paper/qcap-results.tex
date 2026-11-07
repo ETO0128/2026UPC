@@ -1,0 +1,16 @@
+\begin{table}[htbp]
+\centering
+\caption{Dynamic-pressure caps for the $15^\circ$ spherical case. Each row is the best accepted solution for that limit. Masses in tonnes.}
+\label{tab:qcap}
+\begin{tabular}{@{}lllrrrr@{}}
+\toprule
+Cap (kPa) & Status & Burns & Inventory & Entry burn & Landing burn & Peak $q$ (kPa) \\
+\midrule
+none & optimized & 1 & 25.97 & -- & 20.89 & 292.9 \\
+200 & optimized & 2 & 37.30 & 13.50 & 18.72 & 198.0 \\
+150 & optimized & 2 & 50.17 & 27.08 & 18.05 & 148.7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A 200 kPa cap raises the separation inventory from 25.97 t to 37.30 t. The added propellant goes into a 38 s entry burn starting at 43.2 km altitude, while the landing burn still uses about 19 t. A 150 kPa cap needs 50.17 t, with a 77 s entry burn starting at 62.7 km altitude. Lowering the limit from 200 to 150 kPa costs another 12.9 t. These solutions pass the same replay checks as the reference. They were still improving when the optimization was stopped, so they are upper estimates of the minimum.

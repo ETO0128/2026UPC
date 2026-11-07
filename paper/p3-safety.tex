@@ -1,22 +1,36 @@
 \subsection{Loads Along the Nominal Descent}
 \label{sec:flight-exposure}
-Safe descent requires considering the flight before touchdown. We use the same 26.228 t nominal trajectory as the fuel calculation, so the load discussion and budget describe one design. Dynamic pressure is $q=\rho U^2/2$, with air-relative speed $U$~\cite{dynamicPressure}. The non-gravitational specific-force magnitude is $\lVert\mathbf F_a+\mathbf T\rVert/(m g_0)$; it differs from ground-relative acceleration, which includes gravity.
+A safe descent depends on the loads during the whole flight, not only at touchdown. Table~\ref{tab:flight-exposure} uses the same 25.97 t spherical trajectory as the propellant answer, so loads and budget refer to one design. Dynamic pressure is $q=\rho U^2/2$, where $U$ is the speed relative to the air~\cite{dynamicPressure}. The specific force $\lVert\mathbf F_a+\mathbf T\rVert/(m g_0)$ is the non-gravitational acceleration that the structure actually carries.
 
 \begin{table}[htbp]
 \centering
-\caption{Nominal-trajectory load peaks, extracted at a 0.0025 s replay step. Height denotes centre-of-mass altitude.}
+\caption{Peak loads on the spherical reference trajectory, from the replay at a 0.0025 s step. Height is the radial altitude of the center of mass. The planar design gave 297.3 kPa, $7.70\,g_0$, and 9.62 MN.}
 \label{tab:flight-exposure}
 \begin{tabular}{@{}lrrl@{}}
 \toprule
 Quantity & Time (s) & Height (km) & Peak \\
 \midrule
-Dynamic pressure & 170.837 & 9.694 & 297.334 kPa \\
-Specific-force magnitude & 183.126 & 2.895 & $7.703\,g_0$ \\
-Normal aerodynamic force & 183.221 & 2.861 & 9.615 MN \\
+Dynamic pressure & 175.725 & 9.834 & 292.9 kPa \\
+Specific-force magnitude & 187.413 & 3.343 & $7.84\,g_0$ \\
+Normal aerodynamic force & 187.523 & 3.302 & 9.98 MN \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Maximum dynamic pressure precedes ignition at 176.68 s, whereas the largest specific force occurs during the burn. Near the force peak, the body axis makes an acute angle of about $20^\circ$ with the air-relative velocity line, producing substantial normal loading. Thus attitude matters as well as speed and density. Reducing a pre-ignition load peak requires changing the preceding descent or adding earlier braking; a later correction alone cannot remove it. Such a change would also alter the propellant budget.
+Dynamic pressure peaks before the engine lights at 181.32 s, while the specific force peaks during the burn. Near that second peak the body axis is about $20^\circ$ from the direction of the oncoming air, which produces a large side force. The attitude therefore matters as much as the speed and the air density. Because structural and thermal capacity are not modeled, the table states what a booster flying this trajectory would have to withstand; it does not show that it can.
 
-The table describes the preceding planar baseline. The corrected spherical trajectory has peak dynamic pressure 293.021 kPa and peak non-gravitational specific force $7.819\,g_0$. These quantities characterize the rigid-body flight environment. Structural capacity and thermal-protection sizing are outside the adopted scope.
+\subsection{Aerodynamic Heating Estimate}
+\label{sec:heating}
+To gauge the heating, we apply the Sutton--Graves correlation for the convective heat flux at a stagnation point in air~\cite{suttonGraves},
+\begin{equation}\label{eq:sutton}
+ \dot q_s=k\sqrt{\frac{\rho}{R_n}}\,U^3,\qquad k=1.7415\times10^{-4}\ \mathrm{kg^{1/2}\,m^{-1}},
+\end{equation}
+along the reference trajectory, where $R_n$ is the effective nose radius of the windward surface. The booster changes attitude during the descent and meets the air partly tail first, so $R_n$ is uncertain. We bracket it between 1 m, for a rounded edge, and the 3.5 m body radius. The peak occurs at 168.7 s, at 15.5 km altitude and 1500 m/s, before the dynamic-pressure peak. It is 249 kW/m$^2$ for $R_n=1$ m and 133 kW/m$^2$ for $R_n=3.5$ m, and the heat absorbed per unit area over the whole flight is 8.6 and 4.6 MJ/m$^2$. Equation~\eqref{eq:sutton} is intended for blunt bodies at hypersonic speed, and the separation speed is only about Mach 5, so these values indicate the order of magnitude. They are the design heating that a thermal protection system would have to handle; sizing that system is outside this study.
+
+\subsection{Cost of Limiting Dynamic Pressure}
+\label{sec:qcap}
+The 293 kPa peak occurs while the engine is off, so a later correction cannot reduce it. To see what a lower structural limit would cost, we add the constraint $q\le q_{max}$ to the spherical optimization at every mesh point, with a 1\% margin. Starting trajectories come from the feedback search with one extra braking burn high in the descent, followed by a second coast and the landing burn. A solution is accepted only if both replays meet every touchdown limit and the replayed peak stays at or below $q_{max}$. We have no sourced load limit for this vehicle, so the 200 and 150 kPa caps are examples.
+
+\input{paper/qcap-results.tex}
+
+At the masses involved, the 2.846 MN engine decelerates the booster at roughly $1.5$--$2\,g_0$, far less than aerodynamic drag near peak dynamic pressure. Lowering $q$ therefore takes a long burn while the booster is still fast, and all the propellant burned early has to be carried from separation. If a structural limit near or below 200 kPa applied, it rather than the landing burn would set the propellant requirement.

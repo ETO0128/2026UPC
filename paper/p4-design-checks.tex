@@ -1,7 +1,7 @@
-\subsection{Load Diagnostics and Scope}
-The booster is treated as a rigid body. Material failure, structural sizing, and thermal-protection design are outside the adopted task scope. Dynamic pressure, aerodynamic moments, and non-gravitational specific force remain trajectory diagnostics. The terminal requirements concern contact position, relative velocity, attitude, angular rate, and propellant reserve. Engine amplitude limits are enforced, while actuator response remains idealized.
+\subsection{Loads and Scope}
+The booster is treated as a rigid body. Material failure, structural sizing, and thermal protection are outside this study, so the dynamic pressure, aerodynamic moments, specific force, and heating in Sections~\ref{sec:flight-exposure}--\ref{sec:heating} are requirements that a real vehicle would have to meet, not pass-or-fail results. The touchdown limits concern position, relative velocity, attitude, rotation rate, and propellant reserve. The engine's thrust and gimbal ranges are enforced, but their rates of change are not.
 
-\subsection{Earth Geometry and Rotation}
-The nominal solution is recomputed with Eqs.~\eqref{eq:sphere}--\eqref{eq:spherecontact}. Surface arc distance, changing local vertical, curvature acceleration, and inertial body rotation are coupled during optimization and replay. The earlier 6.09 km tangent-surface offset served as a reason to replace the geometry. It is not applied as an additive correction to a planar landing point.
+\subsection{Earth Curvature and Rotation}
+Over the 278 km range of the flat-Earth design, the flat ground plane departs from the sea surface by about 6.1 km, far more than the 5 m landing tolerance. We therefore solve the spherical equations, Eqs.~\eqref{eq:sphere}--\eqref{eq:spherecontact}, in both the optimization and the replay, rather than correcting the planar landing point afterwards. The two optimal ship positions differ by 5.8 km.
 
-Earth is assumed nonrotating in the corrected reference design. Latitude and heading are unspecified. Earth-fixed Coriolis terms would require those inputs and a corresponding three-dimensional trajectory. The present calculation consistently uses the nonrotating spherical model and a stationary recovery site.
+Earth rotation is neglected. Its effect depends on the latitude and heading of the flight, which the problem does not give, and including it would require a three-dimensional trajectory.

@@ -1,10 +1,10 @@
 \section{Model Force Analysis}
 \subsection{Gravity and Standard Atmosphere}
-We use a local downrange--vertical plane. Position refers to the center of mass (COM), and the pitch angle points from the tail toward the nose. Gravity acts through the COM and has magnitude
+We first write the model in a flat downrange--vertical plane; Section~\ref{sec:sphere} then adds Earth curvature for the reference calculation. Position refers to the center of mass (COM), and the pitch angle $\theta$ is the angle of the body axis, from tail to nose, above the horizontal. Gravity acts at the COM with magnitude
 \begin{equation}
  g(h)=g_0\left(\frac{R_E}{R_E+h}\right)^2,\qquad g_0=9.80665\ \mathrm{m/s^2},\quad R_E=6356766\ \mathrm m.
 \end{equation}
-At 70 km this gives $g=9.5942\ \mathrm{m/s^2}$, about 2.17\% below $g_0$. This is a spherical, nonrotating reference approximation, not a latitude-resolved gravity model.
+At 70 km this gives $g=9.5942\ \mathrm{m/s^2}$, about 2.17\% below $g_0$.
 
 Atmospheric properties follow the lower layers of the 1976 standard atmosphere~\cite{atmosphere}. Geometric altitude $h$ is converted to geopotential altitude $H=R_Eh/(R_E+h)$. In a layer with base $(H_b,T_b,p_b)$ and temperature gradient $\lambda$,
 \begin{align}
@@ -12,7 +12,7 @@ Atmospheric properties follow the lower layers of the 1976 standard atmosphere~\
  p_a&=\begin{cases}p_b(T_a/T_b)^{-g_0/(R_a\lambda)},&\lambda\ne0,\\p_b\exp[-g_0(H-H_b)/(R_aT_b)],&\lambda=0,\end{cases}\\
  \rho&=\frac{p_a}{R_aT_a},\qquad R_a=287.05287\ \mathrm{J/(kg\,K)}.
 \end{align}
-These expressions follow from hydrostatic balance $dp_a/dH=-\rho g_0$ and the ideal-gas law. The implemented range ends at $H=84.852$ km; trajectories outside that range are rejected rather than assigned extrapolated density.
+These expressions follow from hydrostatic balance, $dp_a/dH=-\rho g_0$, and the ideal-gas law. The tabulated layers end at $H=84.852$ km. Above that altitude we continue the last layer isothermally, which matters only for the steep separation case of Section~\ref{sec:separation-direction}.
 
 \subsection{Axial and Crossflow Aerodynamics}
 The cylindrical approximation gives $A_{end}=\pi D^2/4=38.4845\ \mathrm{m^2}$ and side area $DL=455\ \mathrm{m^2}$. Define body directions
@@ -20,49 +20,50 @@ The cylindrical approximation gives $A_{end}=\pi D^2/4=38.4845\ \mathrm{m^2}$ an
  \mathbf e=(\cos\theta,\sin\theta),\quad \mathbf n=(-\sin\theta,\cos\theta),\quad
  \mathbf u=\mathbf v-\mathbf w,\quad u_a=\mathbf u\cdot\mathbf e,\quad u_n=\mathbf u\cdot\mathbf n.
 \end{equation}
-Instead of applying one coefficient to a changing projected area, we separate axial and crossflow contributions. Cylinder research motivates treating crossflow as a distinct aerodynamic regime~\cite{cylinder}; our constant coefficients are low-order engineering assumptions, not a fit to that report.
+We split the aerodynamic force into axial and crossflow parts instead of applying one coefficient to a changing projected area, because flow across a cylinder behaves differently from flow along it~\cite{cylinder}. The constant coefficients are engineering estimates and are not fitted to that report.
 
 The axial force is
 \begin{equation}
  F_a=-\tfrac12\rho C_a A_{end}u_a|u_a|.
 \end{equation}
-For an equivalent crossflow strip at signed axial arm $s$, rotation adds the local normal velocity $\omega s$. Thus
+For an equivalent crossflow strip at signed axial distance $\xi$ from the COM, rotation adds the local normal velocity $\omega\xi$. Thus
 \begin{equation}
- dF_n=-\tfrac12\rho C_nD(u_n+\omega s)|u_n+\omega s|\,ds.
+ dF_n=-\tfrac12\rho C_nD(u_n+\omega\xi)|u_n+\omega\xi|\,d\xi.
 \end{equation}
-With $N$ midpoint strips of length $\Delta s=L/N$ and $s_i=-L/2+(i-1/2)\Delta s+\Delta l$,
+With $N$ midpoint strips of length $\Delta\xi=L/N$ and $\xi_i=-L/2+(i-1/2)\Delta\xi+\Delta l$,
 \begin{equation}\label{eq:strip}
- \mathbf F_D=F_a\mathbf e+\sum_iF_{n,i}\mathbf n,\qquad M_a=\sum_i s_i F_{n,i}.
+ \mathbf F_D=F_a\mathbf e+\sum_iF_{n,i}\mathbf n,\qquad M_a=\sum_i \xi_i F_{n,i}.
 \end{equation}
-The shifted equivalent distribution represents an uncertain pressure-center offset $\Delta l$; it is not a physical surface mesh. We evaluate density at the COM and neglect its variation across the 65 m body. Axial force acts along the centerline. Figure~\ref{fig:forces} defines the forces and signs.
+Shifting the strips by $\Delta l$ represents the uncertain position of the center of pressure. Density is evaluated at the COM, and its variation along the 65 m body is neglected. The axial force acts along the centerline. Figure~\ref{fig:forces} defines the forces and signs.
 
-For zero rotation, $M_a=\Delta l F_n$. Consequently, even spatially uniform wind can generate a moment when $\Delta l\ne0$. For a centered distribution and pure rotation, direct integration gives
+Without rotation, $M_a=\Delta l F_n$, so even a uniform wind produces a moment when $\Delta l\ne0$. For a centered distribution in pure rotation, direct integration gives
 \begin{equation}\label{eq:rotation}
  M_a=-\frac{\rho C_nD L^4}{64}\omega|\omega|.
 \end{equation}
-This opposes rotation. More generally, the mechanical power transferred by the modeled air-relative forces satisfies
+which always opposes the rotation. More generally, the power delivered by the air-relative forces satisfies
 \begin{equation}
  \mathbf F_D\cdot\mathbf u+M_a\omega
- =-\tfrac12\rho C_aA_{end}|u_a|^3-\tfrac12\rho C_nD\sum_i\Delta s|u_n+\omega s_i|^3\le0.
+ =-\tfrac12\rho C_aA_{end}|u_a|^3-\tfrac12\rho C_nD\sum_i\Delta\xi\,|u_n+\omega\xi_i|^3\le0.
 \end{equation}
-This identity provides a useful sign and implementation check. It concerns motion relative to air, not ground-frame energy in moving wind.
+The aerodynamic forces therefore always remove energy from the motion relative to the air, which gives a useful check on signs and implementation. In a wind, the energy measured in the ground frame can still increase.
 \begin{figure}[htbp]\centering
 \includegraphics[width=.88\linewidth]{figure/p1-forces.png}
-\caption{Planar reference geometry and force conventions. The pressure-center displacement is exaggerated. Positive gimbal angle at the tail produces a negative pitch moment.}\label{fig:forces}
+\caption{Geometry and force conventions. The pressure-center offset is exaggerated. A positive gimbal angle at the tail produces a negative pitch moment.}\label{fig:forces}
 \end{figure}
 
 \subsection{Reference Propulsion Parameters}
-The maximum landing thrust is set to 2.846 MN by analogy with the published BE-4 thrust scale~\cite{be4}. We select effective $I_{sp}=330$ s, oxygen-to-methane mass ratio 3.5, minimum throttle 0.4, and gimbal limit $10^\circ$ as reference-design assumptions. The mixture-ratio choice is informed by a methane/oxygen mission study~\cite{methaneStudy}; that study's vacuum specific impulse is not assigned to this landing engine. We set $C_a=0.8$, $C_n=1.2$, and $\Delta l=0.05L$. The P0 reference contract records exploratory scenario points. We report selected efficiency and crossflow comparisons and retain explicit limitations for unexamined assumptions.
+We set the maximum thrust to 2.846 MN, the published thrust of one BE-4 methane--oxygen engine~\cite{be4}, and treat it as a representative single landing engine; the problem does not specify the engine. The effective specific impulse of 330 s, the 40\% minimum throttle, and the $10^\circ$ gimbal limit are design assumptions. The oxygen-to-methane mass ratio of 3.5 follows a methane--oxygen mission study~\cite{methaneStudy}; we do not use that study's vacuum specific impulse, because the landing burn takes place low in the atmosphere. The aerodynamic reference values are $C_a=0.8$, $C_n=1.2$, and $\Delta l=0.05L$.
 
 The standard effective-exhaust-velocity definition gives $c=I_{sp}g_0$ and
 \begin{equation}
  \dot m=-T/c,\qquad T=0\quad\hbox{or}\quad0.4T_{max}\le T\le T_{max}.
 \end{equation}
-This consumes both oxygen and methane. Pressure dependence and actuator transients are represented only through the effective parameter assumptions at this stage.
+The flow consumes oxygen and methane in the fixed mixture ratio. The variation of thrust with ambient pressure and the engine transients are absorbed into the effective parameters.
 
 \section{Model Motion Analysis}
+\label{sec:motion}
 \subsection{Momentum Balance and Pitch Dynamics}
-The state is $\mathbf y=(x,h,v_x,v_h,m,\theta,\omega)$. Accounting for exhaust momentum through thrust, the open-system translational balance is $m\dot{\mathbf v}=m\mathbf g+\mathbf F_D+\mathbf F_T$. One must not add a second $\dot m\mathbf v$ term to this thrust-based equation. The planar baseline used to initialize the corrected calculation is
+The state is $\mathbf y=(x,h,v_x,v_h,m,\theta,\omega)$. Because the thrust already accounts for the momentum carried away by the exhaust, the translational balance is $m\dot{\mathbf v}=m\mathbf g+\mathbf F_D+\mathbf F_T$, with no separate $\dot m\mathbf v$ term. In the flat-Earth model the equations are
 \begin{align}\label{eq:dynamics}
  \dot x&=v_x,&\dot h&=v_h,\\
  \dot v_x&=\frac{F_{D,x}+T\cos(\theta+\delta)}m,&
@@ -71,7 +72,7 @@ The state is $\mathbf y=(x,h,v_x,v_h,m,\theta,\omega)$. Accounting for exhaust m
  I_d\dot\omega&=M_a-\frac L2T\sin\delta,&
  I_d&=\frac{m_d(3R_b^2+L^2)}{12}.
 \end{align}
-The thrust application point is $-(L/2)\mathbf e$, so its cross product with thrust gives the negative sign above. The dry body is modeled as a uniform cylinder. Remaining propellant is idealized as concentrated at the COM with negligible pitch inertia and no additional rotational angular-momentum flux. Hence $I_d$ is constant. A distributed-tank model would require consistent treatment of changing inertia and exhaust angular momentum; the present equation does not claim to describe those effects.
+Thrust acts at the tail, $-(L/2)\mathbf e$, which gives the negative sign in the torque. The dry body is a uniform cylinder, and the remaining propellant is a point mass at the COM, so it adds no pitch inertia and $I_d$ is constant. Propellant spread through real tanks would make the inertia change during the burn and add exhaust angular-momentum terms; both are neglected.
 
 \input{paper/spherical-model.tex}
 \subsection{Initial Conditions and Contact Geometry}
@@ -81,20 +82,20 @@ For each selected initial flight-path angle,
  (v_{x,0},v_{h,0})=\frac{6000}{3.6}(\cos\gamma_0,\sin\gamma_0),\quad
  m_0=m_d+m_{p,0}.
 \end{equation}
-The reference uses $\gamma_0=\theta_0=15^\circ$ and $\omega_0=0$. A trial $m_{p,0}=80000$ kg initializes calculations; it is not a computed minimum.
+The reference uses $\gamma_0=\theta_0=15^\circ$ and $\omega_0=0$. The separation propellant $m_{p,0}$ is an unknown found by the optimization of Section~\ref{sec:strategy}.
 
-In the planar comparison, for a cylindrical body with no landing gear, the vertical support extent below the COM is $(L/2)|\sin\theta|+R_b|\cos\theta|$. First deck contact therefore occurs when
+In the flat-Earth model, a cylinder without landing gear reaches $(L/2)|\sin\theta|+R_b|\cos\theta|$ below its COM, so first contact with the deck occurs when
 \begin{equation}\label{eq:contact}
  f(\mathbf y)=h-h_{deck}-\frac L2|\sin\theta|-R_b|\cos\theta|=0.
 \end{equation}
-The spherical calculation instead locates first contact with Eq.~\eqref{eq:spherecontact}. An upright body contacts at $h-h_{deck}=L/2$. Speed, attitude, pitch-rate, propellant reserve, and position relative to the chosen ship must be assessed separately. The local diagnostic below checks the former quantities, not fixed-ship position capture.
+The spherical model uses Eq.~\eqref{eq:spherecontact} instead. An upright booster touches the deck when $h-h_{deck}=L/2$. The contact condition only fixes the moment of touchdown; speed, attitude, rotation rate, reserve, and position relative to the ship are checked at that moment.
 
 \subsection{Analytic Baselines and Scale Estimates}
 For constant gravity, zero thrust, and zero drag,
 \begin{equation}
  h(t)=h_0+v_{h,0}t-\tfrac12g_0t^2,\qquad x(t)=v_{x,0}t.
 \end{equation}
-At $15^\circ$, $(v_{x,0},v_{h,0})=(1609.88,431.37)$ m/s. The constant-$g_0$ apex estimate is 79.49 km after 43.99 s. This is an analytic scale estimate, not the integrated reference trajectory. In the variable-gravity vertical vacuum limit, the conserved specific energy is
+At $15^\circ$, $(v_{x,0},v_{h,0})=(1609.88,431.37)$ m/s. The constant-$g_0$ apex estimate is 79.49 km after 43.99 s. The integrated spherical trajectory, with drag and variable gravity, reaches 80.1 km. In the variable-gravity vertical vacuum limit, the conserved specific energy is
 \begin{equation}
  E=\tfrac12v_h^2-\frac{g_0R_E^2}{R_E+h}.
 \end{equation}
@@ -103,30 +104,30 @@ Without opposing external acceleration in the thrust direction, integrating $dv=
 \begin{equation}\label{eq:rocket}
  \Delta v=c\ln(m_0/m_f).
 \end{equation}
-For 210 t initially and 135 t finally, this gives 1429.86 m/s. It is ideal propulsive capability, not a required landing velocity increment or proof of feasibility. Atmospheric drag may remove speed while gravity and steering alter the propulsion requirement.
+For 210 t initially and 135 t finally, this gives 1429.86 m/s. This is the ideal velocity change the propellant can provide. The velocity change actually needed differs, because drag removes speed for free while gravity and steering add to the requirement.
 
 With mass frozen, no drag, and vertical maximum thrust, a useful stopping-distance estimate is
 \begin{equation}
  d_{stop}\simeq\frac{v_h^2}{2(T_{max}/m-g_0)},\qquad T_{max}>mg_0.
 \end{equation}
-For 180 t and a 90 m/s descent, it is 674.5 m. Mass loss and drag are omitted from this estimate. The maximum-thrust weight ratio is 1.382 at 210 t and 2.232 at dry mass, showing why instantaneous mass must enter the dynamics.
+For 180 t and a 90 m/s descent it gives 674.5 m, ignoring mass loss and drag. The thrust-to-weight ratio at full thrust grows from 1.382 at 210 t to 2.232 at dry mass, so the changing mass must be part of the dynamics.
 
 \subsection{Numerical Integration and Local Powered-Braking Check}
-A fixed-step fourth-order Runge--Kutta integrator advances the coupled equations. Step size is reduced near the deck, and contact is located by linear interpolation across a sign change of Eq.~\eqref{eq:contact}. This does not imply fourth-order event accuracy. A conservative propellant guard stops before a step could cross dry mass; it prevents negative inventory but does not return the exact depletion time.
+A fixed-step fourth-order Runge--Kutta integrator advances the coupled equations. The step shrinks near the deck, and contact is located by linear interpolation across the sign change of Eq.~\eqref{eq:contact}, so the event time is less accurate than the integration itself. A propellant guard stops the run before a step would take the mass below the dry mass; it prevents negative propellant but does not find the exact depletion time.
 
-To test the powered and rotational implementation independently of whole-flight optimization, we start a local case at $h=1200$ m, $v_h=-90$ m/s, $v_x=0$, and $m=180000$ kg. Define height above upright contact $z=h-L/2$ and a descent-speed reference
+To test the powered and rotational parts of the model on their own, we start a local case at $h=1200$ m, $v_h=-90$ m/s, $v_x=0$, and $m=180000$ kg. Define height above upright contact $z=h-L/2$ and a descent-speed reference
 \begin{equation}
  v_d=-\min\{90,\sqrt{2k_z\max(z,0.01)+v_c^2}\},\quad k_z=1.5\ \mathrm{m/s^2},\quad v_c=1\ \mathrm{m/s}.
 \end{equation}
-A vertical acceleration command $a_c=k_v(v_d-v_h)$, $k_v=4\ \mathrm{s^{-1}}$, supplies the throttle request $[m(g_0+a_c)-F_{D,h}]/T_{max}$, clipped to the permitted operating range. This vertical-axis test controller uses $g_0$ as an approximation and does not provide general two-dimensional guidance. Pitch control requests
+A vertical acceleration command $a_c=k_v(v_d-v_h)$, $k_v=4\ \mathrm{s^{-1}}$, supplies the throttle request $[m(g_0+a_c)-F_{D,h}]/T_{max}$, clipped to the permitted operating range. This test controller acts only along the vertical and uses $g_0$ for gravity. Pitch control requests
 \begin{equation}
  M_{req}=I_d[k_p(\pi/2-\theta)-k_d\omega]-M_a,\quad
  \delta=\arcsin\!\left[\operatorname{clip}\left(-\frac{M_{req}}{(L/2)T},-1,1\right)\right],
 \end{equation}
-where $k_p=0.5\ \mathrm{s^{-2}}$, $k_d=1.2\ \mathrm{s^{-1}}$, followed by gimbal clipping. With no saturation, this gives the stable error equation $\ddot e+k_d\dot e+k_pe=0$. Saturation and engine-off motion invalidate that linear closed-loop conclusion and must be checked in the full trajectory.
+where $k_p=0.5\ \mathrm{s^{-2}}$, $k_d=1.2\ \mathrm{s^{-1}}$, followed by gimbal clipping. Without saturation this gives the stable error equation $\ddot e+k_d\dot e+k_pe=0$. Saturation and engine-off flight break this linear argument, which is why the full trajectory is checked separately.
 
-At a 0.005 s step the nominal case contacts after 35.97505 s with $v_h=-1.50291$ m/s and consumes 22679.12 kg. A separate test with initial pitch $89^\circ$ and initial rate 0.005 rad/s ends with approximately zero pitch error and $v_x=0.4671$ m/s. Its horizontal drift is 16.56 m, exceeding the 5 m fixed-ship position tolerance if the ship remains at $x=0$. Thus attitude recovery is demonstrated locally, but fixed-ship capture is not. Figure~\ref{fig:terminal} shows these implementation checks; they do not estimate separation fuel demand.
+At a 0.005 s step the nominal case contacts after 35.97505 s with $v_h=-1.50291$ m/s and consumes 22679.12 kg. A separate test with initial pitch $89^\circ$ and initial rate 0.005 rad/s ends with approximately zero pitch error and $v_x=0.4671$ m/s. Its horizontal drift is 16.56 m, exceeding the 5 m fixed-ship position tolerance if the ship remains at $x=0$. The attitude recovers, but the booster misses a fixed ship; reaching the ship is the task of the full-flight optimization in Section~\ref{sec:strategy}. Figure~\ref{fig:terminal} shows both runs.
 \begin{figure}[htbp]\centering
 \includegraphics[width=\linewidth]{figure/p1-terminal.png}
-\caption{Local powered-braking verification, not a separation-to-landing solution. The disturbed case starts at $89^\circ$ pitch with 0.005 rad/s pitch rate. The 5 m line highlights that position capture is not guaranteed by attitude recovery.}\label{fig:terminal}
+\caption{Local powered-braking test. The disturbed case starts at $89^\circ$ pitch with a 0.005 rad/s pitch rate. The 5 m line shows that recovering the attitude does not by itself bring the booster to the ship.}\label{fig:terminal}
 \end{figure}

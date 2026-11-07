@@ -1,6 +1,6 @@
-\section{Sensitivity and Flight Diagnostics}
+\section{Sensitivity and Flight Loads}
 \label{sec:p3}
-The parameter comparisons in this section were computed for the planar baseline, before the spherical correction. They retain their role as separate assumption studies. A spherical sensitivity envelope would require replanning each case with the corrected dynamics. The propellant estimate depends on quantities not fully specified by the problem. We examine effective engine efficiency and crossflow drag while retaining the reference initial direction and 5 t planned reserve. Each known-parameter design selects a convenient recovery site, as permitted by the problem, and holds that site fixed during replay. These separate designs do not establish recovery from unknown parameter errors at one prepositioned ship. The larger influence of the unspecified separation direction is reported in Section~\ref{sec:separation-direction}.
+Several quantities that set the propellant requirement are not given in the problem. The separation direction was treated in Section~\ref{sec:separation-direction}. Here we vary the effective specific impulse and the crossflow drag coefficient on the spherical model, keeping the $15^\circ$ separation and the 5 t reserve. Each case is a separate design: the parameter is assumed known in advance, and the ship is placed for that case. Whether a booster could recover from an unexpected parameter error with the ship already in position is a different question, touched on in Section~\ref{sec:guidance}.
 
 \subsection{Dependence of the Propellant Budget on Assumptions}
 \input{paper/p3-propulsion.tex}
@@ -9,6 +9,7 @@ The parameter comparisons in this section were computed for the planar baseline,
 \input{paper/p3-safety.tex}
 
 \subsection{A Limited Guidance Extension}
-Holding the nominal commands fixed does not generally preserve touchdown under wind or initial-attitude errors. An illustrative 30 t feedback design recovered five tested steady-wind errors, $-0.1$, $-0.05$, 0, $+0.05$, and $+0.1$ m/s, at the same ship under exact state information and instantaneous actuator response. Its nominal peak specific force was approximately $8.13\,g_0$, above the reference value. This supplementary calculation demonstrates local corrective action, not a general recovery envelope. The trial inventory is not a replacement for the nominal propellant estimate. Detailed replanning, wind-error sweeps, and controller settings are retained in the repository's supplementary calculation records.
+\label{sec:guidance}
+If the precomputed commands are flown unchanged, wind or an error in the initial attitude generally makes the booster miss the ship. To test in-flight correction, we built a 30 t feedback design on the planar model. With exact knowledge of the state and instantaneous actuators, it recovered steady-wind errors of $-0.1$, $-0.05$, 0, $+0.05$, and $+0.1$ m/s and landed on the same ship. Its nominal peak specific force was about $8.13\,g_0$, higher than in the reference. This shows that feedback can absorb small errors in these five cases. It has not been repeated on the spherical model, and its 30 t trial inventory is unrelated to the propellant estimate. The replanning runs, wind-error sweeps, and controller settings are kept in the repository.
 
 \input{paper/p3-conclusions.tex}

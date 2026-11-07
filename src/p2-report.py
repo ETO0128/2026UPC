@@ -79,7 +79,7 @@ def plot(result, trace):
     pressure.set(ylabel="Dynamic pressure (kPa)")
     pressure_twin = pressure.twinx()
     pressure_twin.plot(time, load_g, lw=0.8, color="#aa501d")
-    pressure_twin.set_ylabel("Proper acceleration (g)", color="#aa501d")
+    pressure_twin.set_ylabel("Specific force ($g_0$)", color="#aa501d")
     dry_mass = result["initialState"][4] - result["propellantKg"]
     mass.plot(time, (state[:, 4] - dry_mass) / 1000, color="#126b76")
     mass.set(ylabel="Propellant remaining (t)")

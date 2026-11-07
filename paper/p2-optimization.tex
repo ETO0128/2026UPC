@@ -1,32 +1,32 @@
-The planar model is used first to construct feasible seeds and compare strategies. The following planar tables document that baseline. The spherical-Earth result in the final subsection supplies the corrected reference fuel and ship position.
+We solve the flat-Earth model first. It is cheaper, it gives starting points for the spherical calculation, and it is enough to compare landing strategies. Section~\ref{sec:spherical-results} then gives the spherical-Earth reference result.
 
-\subsection{Search and minimum-propellant formulation}
-We first propagated the P1 equations with altitude-triggered ignition and a feedback law. During the burn, the pitch target blends a biased retrograde direction into an upright target with lateral-velocity feedback. The throttle follows a decreasing vertical-speed profile and the gimbal supplies a pitch-tracking moment. A search over ignition altitude, propellant inventory, pitch bias, and the vertical-speed profile furnished feasible seeds for one and two ignitions.
+\subsection{Search and Minimum-Propellant Formulation}
+We first propagated the equations of motion of Section~\ref{sec:motion} with altitude-triggered ignition and a feedback law. During the burn, the pitch target blends a biased retrograde direction into an upright target with lateral-velocity feedback. The throttle follows a decreasing vertical-speed profile and the gimbal supplies a pitch-tracking moment. Searching over ignition altitude, inventory, pitch bias, and the vertical-speed profile gave feasible starting trajectories with one and with two ignitions.
 
-We then minimized $m(0)-m_d$ over the phase durations, throttle and gimbal commands, and trajectory states. The phase interfaces share all seven P1 states. Coast phases have zero thrust. Each powered phase obeys $0.4\leq u_T\leq1$ and $|\delta|\leq10^\circ$. The separation state follows P0, with initial mass free. The endpoint uses cylindrical contact geometry, P0's deck-relative velocity and attitude tolerances, and a minimum 5 t usable reserve. The nominal ship position is a free downrange coordinate and is fixed at the selected position during replay. Interior target values of $v_x=0$, $v_h=-1.5\,\mathrm{m/s}$, upright pitch and zero pitch rate, and a numerical reserve margin of 75 kg left room for discretization error.
+We then minimized $m(0)-m_d$ over the phase durations, throttle and gimbal commands, and trajectory states. All seven states are continuous across phase boundaries, and coast phases have zero thrust. Each powered phase obeys $0.4\leq u_T\leq1$ and $|\delta|\leq10^\circ$. The separation state follows Section~\ref{sec:assumptions}, with initial mass free. The endpoint uses cylindrical contact geometry, the deck-relative velocity and attitude tolerances of Section~\ref{sec:assumptions}, and a minimum 5 t usable reserve. The ship position is a free variable in the optimization and is then held fixed in the replay. The optimizer targets $v_x=0$, $v_h=-1.5\,\mathrm{m/s}$, an upright attitude, and zero pitch rate, well inside the limits, and keeps 75 kg above the reserve, so that the replay can differ slightly from the optimizer's own integration and still pass.
 
-We initialized Hermite--Simpson direct collocation from the feedback solutions~\cite{kelly}. We refined the candidates using RK4 multiple shooting with eight substeps per control interval and a local trust region in phase duration and pitch. CasADi supplied derivatives to IPOPT~\cite{casadi,ipopt}. We accepted a candidate only if replay with the original P1 code located the first deck contact and passed the full P0 touchdown checks at both 0.01 s and 0.005 s. Throttle and gimbal were interpolated separately within each phase. The calculation used the specified instantaneous actuator model.
+We initialized Hermite--Simpson direct collocation from the feedback solutions~\cite{kelly}. We refined the candidates using RK4 multiple shooting with eight substeps per control interval and a local trust region in phase duration and pitch. CasADi supplied derivatives to IPOPT~\cite{casadi,ipopt}. We accepted a candidate only if an independent replay with the event-locating integrator found the first deck contact and passed all touchdown checks at both 0.01 s and 0.005 s. Throttle and gimbal are interpolated linearly within each phase and respond instantaneously.
 
-\subsection{Nominal strategy and separation budget}
+\subsection{Nominal Strategy and Propellant Budget}
 For the $15^\circ$ reference separation in still air, the selected trajectory uses one ignition. The booster coasts for 176.68 s and ignites at a center-of-mass altitude of 5.876 km, while moving downrange at 669 m/s and descending at 580 m/s. The landing burn lasts 30.79 s and reduces both velocity components while bringing the body upright. First deck contact occurs at 207.47 s, with the stationary ship placed 278.310 km downrange.
 
-With that ship position held fixed in the replay, the contact point is within 1 mm of the target. The deck-relative horizontal and vertical velocities are $-0.011$ and $-1.533\,\mathrm{m/s}$, with magnitudes below the 1 and 2 m/s limits. The body is within $0.001^\circ$ of upright and the pitch-rate magnitude is $0.059^\circ/\mathrm{s}$, below the respective limits of $2^\circ$ and $1^\circ/\mathrm{s}$. The usable propellant remaining is 5.078 t, above the 5 t requirement. Together, these results establish touchdown feasibility for the reference case under the P0 criteria.
+With that ship position held fixed in the replay, the contact point is within 1 mm of the target. The deck-relative horizontal and vertical velocities are $-0.011$ and $-1.533\,\mathrm{m/s}$, with magnitudes below the 1 and 2 m/s limits. The body is within $0.001^\circ$ of upright and the pitch-rate magnitude is $0.059^\circ/\mathrm{s}$, below the respective limits of $2^\circ$ and $1^\circ/\mathrm{s}$. The usable propellant remaining is 5.078 t, above the 5 t requirement. The planar reference therefore meets every touchdown limit.
 
-The separation inventory follows from the mass balance
+The inventory follows from the mass balance
 \begin{equation}\label{eq:p2-propellant-budget}
  m_{p,0}=m_{\mathrm{burned}}+m_{\mathrm{reserve}}+m_{\mathrm{residual}}+m_{\mathrm{surplus}}.
 \end{equation}
-The planned usable reserve is 5 t, the unusable residual is set to zero, and surplus is usable propellant remaining above the planned reserve. In the one-ignition case, the coast consumes no propellant. The 21.1505 t burned during landing and the 5.0776 t retained at contact give a separation load of 26.2281 t. The 5 t reserve is already included in that load. With the assumed oxygen-to-methane mass ratio of 3.5, methane accounts for $1/4.5$ of the load, or 5.828 t. Liquid oxygen accounts for the remaining 20.400 t.
+The planned usable reserve is 5 t, the unusable residual is set to zero, and surplus is usable propellant remaining above the planned reserve. In the one-ignition case, the coast consumes no propellant. The 21.1505 t burned during landing and the 5.0776 t retained at contact give an inventory of 26.2281 t, which already contains the 5 t reserve. With the assumed oxygen-to-methane mass ratio of 3.5, methane is $1/4.5$ of this, or 5.828 t, and liquid oxygen the remaining 20.400 t.
 
 \begin{table}[htbp]
 \centering
-\caption{Nominal $15^\circ$ strategies that satisfy the P0 touchdown criteria in P1 replay. Each strategy uses its own selected ship position. Masses are in metric tonnes and rounded independently.}
+\caption{Nominal $15^\circ$ strategies that satisfy the touchdown criteria in independent replay. Each strategy uses its own selected ship position. Masses are in metric tonnes and rounded independently.}
 \label{tab:p2-nominal-budget}
 \begin{tabular}{lrr}
 \toprule
 Quantity & One ignition & Two ignitions \\
 \midrule
-Separation propellant & 26.228 & 27.607 \\
+Inventory & 26.228 & 27.607 \\
 Consumed propellant & 21.151 & 22.516 \\
 Planned usable reserve & 5.000 & 5.000 \\
 Unusable residual & 0.000 & 0.000 \\
@@ -34,43 +34,20 @@ Usable surplus at contact & 0.078 & 0.091 \\
 Methane at separation & 5.828 & 6.135 \\
 Liquid oxygen at separation & 20.400 & 21.472 \\
 Peak dynamic pressure (kPa) & 297.3 & 295.7 \\
-Peak proper acceleration ($g_0$) & 7.70 & 7.70 \\
+Peak specific force ($g_0$) & 7.70 & 7.70 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The accepted two-ignition solution in Table~\ref{tab:p2-nominal-budget} carries 1.38 t more than the one-ignition solution. Its first pulse lasts approximately 0.001 s, at the numerical duration floor, and burns only 0.36 kg. A separate feedback candidate with a 1.5 s entry burn also satisfies the touchdown criteria and requires 38.65 t. The one-ignition strategy therefore gives the lowest accepted inventory among the schedules found for the reference case. This comparison is limited to the candidates returned by the search and the assumed actuator model.
+The accepted two-ignition solution in Table~\ref{tab:p2-nominal-budget} carries 1.38 t more than the one-ignition solution. Its first pulse lasts about 0.001 s, the shortest duration allowed, and burns only 0.36 kg; the optimizer has in effect removed the extra burn. A feedback trajectory with a genuine 1.5 s entry burn also lands but needs 38.65 t. Among the strategies we found, a single landing burn is the cheapest.
 
-Rerunning the optimization with a nominal shooting interval of 0.55 s instead of 0.85 s reduces the selected inventory by about 70 kg. For the selected schedule held fixed, reducing the replay step from 0.01 s to 0.005 s changes the consumed mass by 0.72 kg. A further reduction to 0.0025 s changes it by 0.15 kg and preserves touchdown feasibility. The replay comparisons isolate the effect of integrating the same controls at different time steps.
+Rerunning the optimization with a nominal shooting interval of 0.55 s instead of 0.85 s reduces the selected inventory by about 70 kg. For the selected schedule held fixed, reducing the replay step from 0.01 s to 0.005 s changes the consumed mass by 0.72 kg. A further reduction to 0.0025 s changes it by 0.15 kg and preserves touchdown feasibility. These replays integrate the same controls at different time steps, so they measure integration error alone.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{figure/p2-reference.png}
-\caption{Selected one-ignition trajectory at $15^\circ$. The dot and shaded interval mark ignition and the landing burn, respectively. Dynamic pressure peaks before ignition, while proper acceleration peaks during the burn.}
+\caption{Selected one-ignition trajectory at $15^\circ$. The dot and shaded interval mark ignition and the landing burn, respectively. Dynamic pressure peaks before ignition, while specific force peaks during the burn.}
 \label{fig:p2-reference}
 \end{figure}
 
-For the selected trajectory, dynamic pressure reaches 297.3 kPa at 9.69 km altitude, before ignition. Proper acceleration reaches $7.70g_0$ at 2.89 km during the burn. These peaks describe the modeled flight environment. Assessing vehicle feasibility also requires structural limits, a heating model with thermal limits, and a model of actuator response during the large pitch excursions.
-
-\subsection{Dependence on the separation direction}
-\label{sec:separation-direction}
-The problem specifies the speed at separation but leaves its direction open. We compare initial flight-path angles of $0^\circ$, $15^\circ$, and $30^\circ$ above horizontal, with the body pitch initially aligned with the flight path in each case. We use the same propulsion assumptions, touchdown criteria, and 5 t usable reserve requirement. For each angle we select a recovery site and hold that site fixed when replaying the candidate. Table~\ref{tab:p2-separation-angle} reports the lowest inventory found to satisfy the touchdown criteria for each case.
-
-\begin{table}[htbp]
-\centering
-\caption{Accepted strategies for the three separation angles. Ship position is measured downrange from the separation point. The separation load includes the planned 5 t reserve.}
-\label{tab:p2-separation-angle}
-\begin{tabular}{@{}llrr@{}}
-\toprule
-Angle & Powered phases & Ship position (km) & Separation load (t) \\
-\midrule
-$0^\circ$  & Landing burn & 196.00 & 24.71 \\
-$15^\circ$ & Landing burn & 278.31 & 26.23 \\
-$30^\circ$ & Ascent braking and landing burn & 260.00 & 67.00 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-The $0^\circ$ and $15^\circ$ solutions both coast to a single landing burn. The $15^\circ$ trajectory first climbs to 79.71 km and ignites about 49.40 s later than the $0^\circ$ trajectory. Its selected ship position is 82.31 km farther downrange, and its separation load is 1.52 t higher. These differences describe the two optimized trajectories with individually selected ship positions.
-
-At $30^\circ$, the coast-first trial reaches the upper boundary of the implemented atmosphere about 22 s after separation, while the booster is still climbing. The accepted feedback trajectory starts a braking burn at separation. The burn lasts about 32.13 s, limiting the subsequent apex to 85.90 km. Of the 67.00 t loaded at separation, approximately 28.25 t is burned during ascent braking, 33.41 t during the landing burn, and 5.34 t remains at contact. The 67.00 t load gives a feasible upper bound for this case within the adopted model. Lower-inventory candidates failed the replay checks for atmospheric coverage or touchdown, so the available runs establish feasibility at 67.00 t and leave the minimum unresolved.
+For the selected planar trajectory, dynamic pressure reaches 297.3 kPa at 9.69 km altitude, before ignition. Specific force reaches $7.70g_0$ at 2.89 km during the burn. Section~\ref{sec:flight-exposure} reports the corresponding spherical values.

@@ -1,0 +1,30 @@
+\begin{table}[htbp]
+\centering
+\caption{Effective-$I_{sp}$ comparison on the spherical model. Each design reoptimizes the inventory, controls, and ship position. Masses in tonnes, rounded independently. The last column is the earlier planar result.}
+\label{tab:p3-isp-budget}
+\begin{tabular}{@{}rrrrrrr@{}}
+\toprule
+$I_{sp}$ (s) & Inventory & Consumed & Retained & Methane & Oxygen & Planar \\
+\midrule
+300 & 28.48 & 23.41 & 5.08 & 6.33 & 22.15 & 28.78 \\
+330 & 25.97 & 20.89 & 5.08 & 5.77 & 20.20 & 26.23 \\
+360 & 23.98 & 18.90 & 5.07 & 5.33 & 18.65 & 24.20 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Crossflow-coefficient comparison on the spherical model, axial coefficient fixed at 0.8. The last column is the earlier planar result; a dash marks a case without a planar solution.}
+\label{tab:p3-drag}
+\begin{tabular}{@{}rrrrr@{}}
+\toprule
+$C_n$ & Inventory (t) & Peak $q$ (kPa) & Peak specific force ($g_0$) & Planar (t) \\
+\midrule
+0.8 & 25.94 & 295.5 & 8.70 & -- \\
+1.0 & 25.96 & 293.7 & 8.21 & -- \\
+1.2 & 25.97 & 292.9 & 7.84 & 26.23 \\
+1.6 & 25.49 & 290.2 & 7.32 & 27.13 \\
+\bottomrule
+\end{tabular}
+\end{table}
