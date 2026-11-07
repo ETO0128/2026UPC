@@ -10,7 +10,7 @@
 \upctitle{Controlled Descent and Propellant Estimation\\for a First-Stage Rocket Booster}
 \renewcommand{\abstractname}{Summary}
 \begin{abstract}
-\draftnote{Write last. Summarize the descent model, landing strategy, separation propellant requirement, uncertainty range, and safety constraints. No numerical findings have yet been established.}
+\draftnote{Write last. Summarize the descent model, verified landing strategy, separation propellant estimate, scenario dependence, and remaining safety checks.}
 \end{abstract}
 \clearpage
 \tableofcontents
@@ -48,14 +48,7 @@ $q$ & Dynamic pressure & Pa \\
 \end{center}
 \input{paper/p1-model.tex}
 \section{Landing Strategy and Propellant Estimation}
-\subsection{Baseline Estimates and Limiting Cases}
-\draftnote{Use ballistic and ideal rocket-equation estimates as checks, identifying gravity and drag losses.}
-\subsection{Burn Timing and Thrust Control}
-\draftnote{Determine ignition and thrust schedules subject to altitude, acceleration, and touchdown constraints.}
-\subsection{Minimum-Propellant Formulation}
-\draftnote{Define decision variables, objective, constraints, numerical method, and feasibility criteria. Treat ship location as a free recovery location where justified.}
-\subsection{Separation Propellant Budget}
-\draftnote{Separate consumed propellant, landing reserve, and any unusable residuals. Convert total oxygen--methane propellant to methane mass only after specifying mixture ratio.}
+\input{paper/p2-optimization.tex}
 \section{Sensitivity and Uncertainty Analysis}
 \subsection{Initial Velocity Direction and Atmospheric Conditions}
 \subsection{Specific Impulse, Thrust, and Aerodynamic Parameters}
@@ -78,12 +71,15 @@ $q$ & Dynamic pressure & Pa \\
 \subsection{Conclusions and Practical Recommendations}
 \draftnote{Answer the separation-fuel question with assumptions, units, uncertainty, and feasibility limits.}
 \section{Report on the Use of AI}
-AI assistance was used to organize the manuscript, develop the reference dynamics and verification scripts, derive model equations, and generate P1 figures and draft text. The team must review the derivations, assumptions, code, and numerical results, and retain the required interaction records before submission.
+AI assistance was used to organize the manuscript, develop the reference dynamics and verification scripts, derive model equations, and generate P1 figures and draft text. It was also used to implement the P2 search, optimization, and replay, generate its figure, and draft the landing-strategy section. The team must review the derivations, assumptions, code, and numerical results, and retain the required interaction records before submission.
 \begin{thebibliography}{9}
 \bibitem{be4} Blue Origin. BE-4. Manufacturer webpage, accessed November 7, 2026. \url{https://www.blueorigin.com/es-MX/engines/be-4}.
 \bibitem{cylinder} F. E. Gowen and E. W. Perkins. Drag of Circular Cylinders for a Wide Range of Reynolds Numbers and Mach Numbers. NACA-TN-2960, 1953.
 \bibitem{atmosphere} NOAA, NASA, and USAF. U.S. Standard Atmosphere, 1976. NASA-TM-X-74335, 1976.
 \bibitem{methaneStudy} Mars Sample Return Mission Utilizing In-Situ Propellant Production. NASA NTRS record 19950021840. Methane/oxygen performance discussion, Fig. 2.
+\bibitem{kelly} M. Kelly. An Introduction to Trajectory Optimization: How to Do Your Own Direct Collocation. SIAM Review 59(4), 849--904, 2017. \url{https://doi.org/10.1137/16M1062569}.
+\bibitem{casadi} J. A. E. Andersson et al. CasADi: A Software Framework for Nonlinear Optimization and Optimal Control. Mathematical Programming Computation 11, 1--36, 2019. \url{https://doi.org/10.1007/s12532-018-0139-4}.
+\bibitem{ipopt} A. W\"achter and L. T. Biegler. On the Implementation of an Interior-Point Filter Line-Search Algorithm for Large-Scale Nonlinear Programming. Mathematical Programming 106, 25--57, 2006. \url{https://doi.org/10.1007/s10107-004-0559-y}.
 \bibitem{problem} UPC 2026, Problem A: Landing a First-Stage Rocket Booster. User-provided problem image.
 \end{thebibliography}
 \appendix

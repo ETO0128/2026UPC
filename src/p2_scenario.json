@@ -1,0 +1,20 @@
+{
+  "separation_altitude_m": 70000.0,
+  "separation_speed_m_s": 1666.6666666666667,
+  "dry_mass_kg": 130000.0,
+  "flight_path_angle_deg": -20.0,
+  "effective_drag_area_m2": 35.0,
+  "specific_impulse_s": 335.0,
+  "min_thrust_n": 1200000.0,
+  "max_thrust_n": 6000000.0,
+  "max_thrust_tilt_deg": 75.0,
+  "touchdown_thrust_tilt_deg": 5.0,
+  "max_powered_tilt_rate_deg_s": 10.0,
+  "touchdown_altitude_m": 30.0,
+  "touchdown_vertical_speed_m_s": -2.0,
+  "reserve_kg": 5000.0,
+  "unusable_kg": 1000.0,
+  "oxidizer_to_fuel_ratio": 3.6,
+  "dynamic_pressure_limit_pa": 160000.0,
+  "proper_acceleration_limit_g": 4.0
+}

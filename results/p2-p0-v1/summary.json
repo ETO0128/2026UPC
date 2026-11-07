@@ -1,0 +1,896 @@
+{
+  "contractVersion": "P0-v1",
+  "strategies": {
+    "single": {
+      "event": "contact",
+      "passes": true,
+      "violations": {
+        "contact": false,
+        "ship": false,
+        "horizontal": false,
+        "vertical": false,
+        "tilt": false,
+        "pitchRate": false,
+        "reserve": false,
+        "ignitions": false
+      },
+      "propellantKg": 26228.111328278872,
+      "methaneKg": 5828.469184061972,
+      "liquidOxygenKg": 20399.6421442169,
+      "consumedKg": 21150.506273217587,
+      "reserveKg": 5000,
+      "residualKg": 0,
+      "extraRemainingKg": 77.60505506128538,
+      "timeS": 207.473914787635,
+      "initialState": [
+        0,
+        70000,
+        1609.8763771484794,
+        431.36507517087654,
+        156228.11132827887,
+        0.2617993877991494,
+        0
+      ],
+      "finalState": [
+        278310.4366010965,
+        32.500018702033145,
+        -0.011084218938196468,
+        -1.532589908666378,
+        135077.60505506129,
+        1.5708016704360148,
+        -0.0010296973801513579
+      ],
+      "shipLocationM": 278310.43659683835,
+      "touchdown": {
+        "shipErrorM": 4.258123226463795e-06,
+        "horizontalMps": 0.011084218938196468,
+        "verticalMps": 1.532589908666378,
+        "tiltDeg": 0.00030616808330889873,
+        "pitchRateDegS": 0.05899731405835071,
+        "reserveKg": 5077.605055061285
+      },
+      "clearanceM": -2.4675553466233717e-10,
+      "minimumClearanceM": -2.4675553466233717e-10,
+      "ignitionCount": 1,
+      "phases": [
+        {
+          "name": "coast",
+          "powered": false,
+          "startS": 0,
+          "endS": 176.68144701708653,
+          "startState": [
+            0,
+            70000,
+            1609.8763771484794,
+            431.36507517087654,
+            156228.11132827887,
+            0.2617993877991494,
+            0
+          ],
+          "endState": [
+            270402.567017613,
+            5876.000265185401,
+            668.8006574085398,
+            -580.1295584159108,
+            156228.11132827887,
+            2.46311661946284,
+            0.05532095873790081
+          ],
+          "consumedKg": 0
+        },
+        {
+          "name": "landing burn",
+          "powered": true,
+          "startS": 176.68144701708653,
+          "endS": 207.473914787635,
+          "startState": [
+            270402.567017613,
+            5876.000265185401,
+            668.8006574085398,
+            -580.1295584159108,
+            156228.11132827887,
+            2.46311661946284,
+            0.05532095873790081
+          ],
+          "endState": [
+            278310.4366010965,
+            32.500018702033145,
+            -0.011084218938196468,
+            -1.532589908666378,
+            135077.60505506129,
+            1.5708016704360148,
+            -0.0010296973801513579
+          ],
+          "consumedKg": 21150.506273217587
+        }
+      ],
+      "peakQPa": {
+        "value": 297334.035229561,
+        "timeS": 170.83999999991713,
+        "altitudeM": 9691.716667401704
+      },
+      "peakLoadG": {
+        "value": 7.703470046052025,
+        "timeS": 183.12644701708066,
+        "altitudeM": 2894.616042783817
+      },
+      "maxAltitudeM": 79710.28282208735,
+      "maxMach": 5.80670819510002,
+      "stepS": 0.005,
+      "verified": true,
+      "method": "RK4 multiple shooting",
+      "source": "single-collocation.json history[4]",
+      "stepComparison": {
+        "coarserStepS": 0.01,
+        "coarserTimeS": 207.4730953411905,
+        "coarserFinalState": [
+          278310.4363909282,
+          32.50001936780473,
+          -0.014125155901187132,
+          -1.541684302455214,
+          135078.3255010034,
+          1.5708018607044274,
+          -0.0013145484680564404
+        ],
+        "coarserConsumedKg": 21149.785827275482
+      },
+      "policyTrials": 2858,
+      "optimizationTrials": [
+        {
+          "index": 0,
+          "method": "Hermite-Simpson collocation",
+          "gridTargetS": 1.5,
+          "status": "Solve_Succeeded",
+          "propellantKg": 26504.023540485767,
+          "verified": false,
+          "failedChecks": [
+            "ship",
+            "horizontal",
+            "vertical",
+            "tilt",
+            "pitchRate"
+          ]
+        },
+        {
+          "index": 1,
+          "method": "Hermite-Simpson collocation",
+          "gridTargetS": 0.6,
+          "status": "Solve_Succeeded",
+          "propellantKg": 27743.71892306549,
+          "verified": false,
+          "failedChecks": [
+            "contact",
+            "horizontal",
+            "vertical",
+            "tilt",
+            "pitchRate",
+            "reserve"
+          ]
+        },
+        {
+          "index": 2,
+          "method": "Hermite-Simpson collocation",
+          "gridTargetS": 0.25,
+          "status": "Solve_Succeeded",
+          "propellantKg": 50764.63452123801,
+          "verified": false,
+          "failedChecks": [
+            "contact",
+            "ship",
+            "horizontal",
+            "vertical",
+            "tilt",
+            "pitchRate",
+            "reserve"
+          ]
+        },
+        {
+          "index": 3,
+          "method": "RK4 multiple shooting",
+          "gridTargetS": 0.85,
+          "status": "Solve_Succeeded",
+          "propellantKg": 26298.279446909844,
+          "verified": true,
+          "failedChecks": []
+        },
+        {
+          "index": 4,
+          "method": "RK4 multiple shooting",
+          "gridTargetS": 0.55,
+          "status": "Solve_Succeeded",
+          "propellantKg": 26228.111328278872,
+          "verified": true,
+          "failedChecks": []
+        }
+      ]
+    },
+    "double": {
+      "event": "contact",
+      "passes": true,
+      "violations": {
+        "contact": false,
+        "ship": false,
+        "horizontal": false,
+        "vertical": false,
+        "tilt": false,
+        "pitchRate": false,
+        "reserve": false,
+        "ignitions": false
+      },
+      "propellantKg": 27606.75318728242,
+      "methaneKg": 6134.8340416183155,
+      "liquidOxygenKg": 21471.919145664102,
+      "consumedKg": 22515.613756019913,
+      "reserveKg": 5000,
+      "residualKg": 0,
+      "extraRemainingKg": 91.13943126250524,
+      "timeS": 207.6825937058363,
+      "initialState": [
+        0,
+        70000,
+        1609.8763771484794,
+        431.36507517087654,
+        157606.75318728242,
+        0.2617993877991494,
+        0
+      ],
+      "finalState": [
+        278500.82377821824,
+        32.500169155073166,
+        -0.06658481284403504,
+        -1.7004110370895744,
+        135091.1394312625,
+        1.5708446677936518,
+        -0.006385641892137445
+      ],
+      "shipLocationM": 278500.86870359164,
+      "touchdown": {
+        "shipErrorM": 0.04492537339683622,
+        "horizontalMps": 0.06658481284403504,
+        "verticalMps": 1.7004110370895744,
+        "tiltDeg": 0.0027697352061247533,
+        "pitchRateDegS": 0.36587032990140883,
+        "reserveKg": 5091.139431262505
+      },
+      "clearanceM": -4.4856291180365646e-10,
+      "minimumClearanceM": -4.4856291180365646e-10,
+      "ignitionCount": 2,
+      "phases": [
+        {
+          "name": "pre-entry coast",
+          "powered": false,
+          "startS": 0,
+          "endS": 155.7534389948086,
+          "startState": [
+            0,
+            70000,
+            1609.8763771484794,
+            431.36507517087654,
+            157606.75318728242,
+            0.2617993877991494,
+            0
+          ],
+          "endState": [
+            247610.38737750903,
+            22852.186097876005,
+            1410.608790477089,
+            -932.8797000971012,
+            157606.75318728242,
+            2.257109724784047,
+            -0.12398281364857068
+          ],
+          "consumedKg": 0
+        },
+        {
+          "name": "entry burn",
+          "powered": true,
+          "startS": 155.7534389948086,
+          "endS": 155.754440696923,
+          "startState": [
+            247610.38737750903,
+            22852.186097876005,
+            1410.608790477089,
+            -932.8797000971012,
+            157606.75318728242,
+            2.257109724784047,
+            -0.12398281364857068
+          ],
+          "endState": [
+            247611.80037145785,
+            22851.251626412934,
+            1410.5771232891789,
+            -932.8874782132009,
+            157606.39677956692,
+            2.2569857430303704,
+            -0.12355931948713701
+          ],
+          "consumedKg": 0.3564077155024279
+        },
+        {
+          "name": "coast",
+          "powered": false,
+          "startS": 155.754440696923,
+          "endS": 169.10636558047798,
+          "startState": [
+            247611.80037145785,
+            22851.251626412934,
+            1410.5771232891789,
+            -932.8874782132009,
+            157606.39677956692,
+            2.2569857430303704,
+            -0.12355931948713701
+          ],
+          "endState": [
+            264157.6900771166,
+            10973.19209963189,
+            1000.9728527486685,
+            -781.3897486049547,
+            157606.39677956692,
+            2.4233391037811023,
+            0.1065282109353405
+          ],
+          "consumedKg": 0
+        },
+        {
+          "name": "landing burn",
+          "powered": true,
+          "startS": 169.10636558047798,
+          "endS": 207.6825937058363,
+          "startState": [
+            264157.6900771166,
+            10973.19209963189,
+            1000.9728527486685,
+            -781.3897486049547,
+            157606.39677956692,
+            2.4233391037811023,
+            0.1065282109353405
+          ],
+          "endState": [
+            278500.82377821824,
+            32.500169155073166,
+            -0.06658481284403504,
+            -1.7004110370895744,
+            135091.1394312625,
+            1.5708446677936518,
+            -0.006385641892137445
+          ],
+          "consumedKg": 22515.25734830441
+        }
+      ],
+      "peakQPa": {
+        "value": 295748.403188234,
+        "timeS": 169.72136558047742,
+        "altitudeM": 10498.61480832661
+      },
+      "peakLoadG": {
+        "value": 7.698339525344331,
+        "timeS": 170.81136558047643,
+        "altitudeM": 9690.516994414482
+      },
+      "maxAltitudeM": 79710.29763280453,
+      "maxMach": 5.810098789620849,
+      "stepS": 0.005,
+      "verified": true,
+      "method": "RK4 multiple shooting",
+      "source": "double-collocation.json history[4]",
+      "stepComparison": {
+        "coarserStepS": 0.01,
+        "coarserTimeS": 207.68044647503234,
+        "coarserFinalState": [
+          278500.82419812033,
+          32.50024318899609,
+          -0.07494224521648521,
+          -1.7242477976133441,
+          135093.03277227705,
+          1.570865832040152,
+          -0.007132377990458923
+        ],
+        "coarserConsumedKg": 22513.720415005373
+      },
+      "policyTrials": 2484,
+      "optimizationTrials": [
+        {
+          "index": 0,
+          "method": "Hermite-Simpson collocation",
+          "gridTargetS": 1.5,
+          "status": "Maximum_Iterations_Exceeded",
+          "propellantKg": 299881.4346399123,
+          "verified": false,
+          "failedChecks": [
+            "ship",
+            "horizontal",
+            "vertical",
+            "tilt",
+            "pitchRate"
+          ]
+        },
+        {
+          "index": 1,
+          "method": "Hermite-Simpson collocation",
+          "gridTargetS": 0.6,
+          "status": "Solve_Succeeded",
+          "propellantKg": 27800.319478632882,
+          "verified": false,
+          "failedChecks": [
+            "horizontal",
+            "vertical",
+            "tilt",
+            "pitchRate"
+          ]
+        },
+        {
+          "index": 2,
+          "method": "Hermite-Simpson collocation",
+          "gridTargetS": 0.25,
+          "status": "Maximum_Iterations_Exceeded",
+          "propellantKg": 27827.95123163535,
+          "verified": false,
+          "failedChecks": [
+            "contact",
+            "horizontal",
+            "vertical",
+            "tilt",
+            "pitchRate",
+            "reserve"
+          ]
+        },
+        {
+          "index": 3,
+          "method": "RK4 multiple shooting",
+          "gridTargetS": 0.85,
+          "status": "Solve_Succeeded",
+          "propellantKg": 27642.442940351815,
+          "verified": true,
+          "failedChecks": []
+        },
+        {
+          "index": 4,
+          "method": "RK4 multiple shooting",
+          "gridTargetS": 0.55,
+          "status": "Solve_Succeeded",
+          "propellantKg": 27606.75318728242,
+          "verified": true,
+          "failedChecks": []
+        }
+      ]
+    },
+    "level": {
+      "event": "contact",
+      "passes": true,
+      "violations": {
+        "contact": false,
+        "ship": false,
+        "horizontal": false,
+        "vertical": false,
+        "tilt": false,
+        "pitchRate": false,
+        "reserve": false,
+        "ignitions": false
+      },
+      "propellantKg": 24709.523202439566,
+      "methaneKg": 5491.005156097682,
+      "liquidOxygenKg": 19218.518046341884,
+      "consumedKg": 19634.709858606628,
+      "reserveKg": 5000,
+      "residualKg": 0,
+      "extraRemainingKg": 74.8133438329387,
+      "timeS": 157.44478266049586,
+      "initialState": [
+        0,
+        70000,
+        1666.6666666667,
+        0,
+        154709.52320243957,
+        0,
+        0
+      ],
+      "finalState": [
+        195999.41399602048,
+        32.50000611601224,
+        0.0006069080264443395,
+        -1.4977055778103718,
+        135074.81334383294,
+        1.570798074246716,
+        7.418190895404028e-05
+      ],
+      "shipLocationM": 195999.3748366781,
+      "touchdown": {
+        "shipErrorM": 0.03915934238466434,
+        "horizontalMps": 0.0006069080264443395,
+        "verticalMps": 1.4977055778103718,
+        "tiltDeg": 0.00010012161415792242,
+        "pitchRateDegS": 0.004250310299290239,
+        "reserveKg": 5074.813343832939
+      },
+      "clearanceM": -1.95136175665898e-11,
+      "minimumClearanceM": -1.95136175665898e-11,
+      "ignitionCount": 1,
+      "phases": [
+        {
+          "name": "coast",
+          "powered": false,
+          "startS": 0,
+          "endS": 127.28595008216226,
+          "startState": [
+            0,
+            70000,
+            1666.6666666667,
+            0,
+            154709.52320243957,
+            0,
+            0
+          ],
+          "endState": [
+            189003.5966207851,
+            5529.996456107013,
+            577.5712697843193,
+            -502.9324659410455,
+            154709.52320243957,
+            2.342765457669406,
+            0.006226990229232339
+          ],
+          "consumedKg": 0
+        },
+        {
+          "name": "landing burn",
+          "powered": true,
+          "startS": 127.28595008216226,
+          "endS": 157.44478266049586,
+          "startState": [
+            189003.5966207851,
+            5529.996456107013,
+            577.5712697843193,
+            -502.9324659410455,
+            154709.52320243957,
+            2.342765457669406,
+            0.006226990229232339
+          ],
+          "endState": [
+            195999.41399602048,
+            32.50000611601224,
+            0.0006069080264443395,
+            -1.4977055778103718,
+            135074.81334383294,
+            1.570798074246716,
+            7.418190895404028e-05
+          ],
+          "consumedKg": 19634.709858606628
+        }
+      ],
+      "peakQPa": {
+        "value": 235099.18756682298,
+        "timeS": 119.87499999996346,
+        "altitudeM": 9754.153893731915
+      },
+      "peakLoadG": {
+        "value": 5.441729707889307,
+        "timeS": 129.70595008216006,
+        "altitudeM": 4380.532889846257
+      },
+      "maxAltitudeM": 70000,
+      "maxMach": 5.610513690088302,
+      "stepS": 0.005,
+      "verified": true,
+      "method": "RK4 multiple shooting",
+      "source": "level-collocation.json history[4]",
+      "stepComparison": {
+        "coarserStepS": 0.01,
+        "coarserTimeS": 157.4447211368806,
+        "coarserFinalState": [
+          195999.41394151206,
+          32.50000918439417,
+          0.0003419007413061059,
+          -1.4983912032990485,
+          135074.86746944554,
+          1.5707989510595752,
+          5.287136382507848e-05
+        ],
+        "coarserConsumedKg": 19634.655732994026
+      },
+      "policyTrials": 2913,
+      "optimizationTrials": [
+        {
+          "index": 0,
+          "method": "Hermite-Simpson collocation",
+          "gridTargetS": 1.5,
+          "status": "Solve_Succeeded",
+          "propellantKg": 25500.277591892896,
+          "verified": false,
+          "failedChecks": [
+            "ship",
+            "horizontal",
+            "vertical",
+            "tilt",
+            "pitchRate"
+          ]
+        },
+        {
+          "index": 1,
+          "method": "Hermite-Simpson collocation",
+          "gridTargetS": 0.6,
+          "status": "Maximum_Iterations_Exceeded",
+          "propellantKg": 279237.95770130405,
+          "verified": false,
+          "failedChecks": [
+            "ship",
+            "horizontal",
+            "vertical",
+            "tilt",
+            "pitchRate"
+          ]
+        },
+        {
+          "index": 2,
+          "method": "Hermite-Simpson collocation",
+          "gridTargetS": 0.25,
+          "status": "Maximum_Iterations_Exceeded",
+          "propellantKg": 24946.660060124006,
+          "verified": false,
+          "failedChecks": [
+            "vertical",
+            "pitchRate"
+          ]
+        },
+        {
+          "index": 3,
+          "method": "RK4 multiple shooting",
+          "gridTargetS": 0.85,
+          "status": "Solve_Succeeded",
+          "propellantKg": 25014.849738020857,
+          "verified": false,
+          "failedChecks": [
+            "vertical",
+            "pitchRate"
+          ]
+        },
+        {
+          "index": 4,
+          "method": "RK4 multiple shooting",
+          "gridTargetS": 0.55,
+          "status": "Solve_Succeeded",
+          "propellantKg": 24709.523202439566,
+          "verified": true,
+          "failedChecks": []
+        }
+      ]
+    },
+    "steep": {
+      "event": "contact",
+      "passes": true,
+      "violations": {
+        "contact": false,
+        "ship": false,
+        "horizontal": false,
+        "vertical": false,
+        "tilt": false,
+        "pitchRate": false,
+        "reserve": false,
+        "ignitions": false
+      },
+      "propellantKg": 67000,
+      "methaneKg": 14888.888888888889,
+      "liquidOxygenKg": 52111.11111111111,
+      "consumedKg": 61661.69155726224,
+      "reserveKg": 5000,
+      "residualKg": 0,
+      "extraRemainingKg": 338.30844273776165,
+      "timeS": 212.1010407345283,
+      "initialState": [
+        0,
+        70000,
+        1443.3756729740933,
+        833.3333333333499,
+        197000,
+        0.5235987755982988,
+        0
+      ],
+      "finalState": [
+        260000.7830595055,
+        32.565024974746144,
+        -0.14773825698399637,
+        -1.3344660812932803,
+        135338.30844273776,
+        -4.691850559911819,
+        -0.016099270997115764
+      ],
+      "shipLocationM": 260000.7699382673,
+      "touchdown": {
+        "shipErrorM": 0.013121238211169839,
+        "horizontalMps": 0.14773825698399637,
+        "verticalMps": 1.3344660812932803,
+        "tiltDeg": 1.1767648109606017,
+        "pitchRateDegS": 0.9224202813721057,
+        "reserveKg": 5338.308442737762
+      },
+      "clearanceM": -4.3876083322125226e-11,
+      "minimumClearanceM": -4.3876083322125226e-11,
+      "ignitionCount": 2,
+      "phases": [
+        {
+          "name": "ascent arrest",
+          "powered": true,
+          "startS": 0,
+          "endS": 32.12499999999798,
+          "startState": [
+            0,
+            70000,
+            1443.3756729740933,
+            833.3333333333499,
+            197000,
+            0.5235987755982988,
+            0
+          ],
+          "endState": [
+            47851.8183539182,
+            85590.58535048158,
+            1491.942611303514,
+            76.95320532217218,
+            168748.37606330766,
+            -1.5707963316088613,
+            1.1246620059614775e-08
+          ],
+          "consumedKg": 28251.62393669234
+        },
+        {
+          "name": "coast",
+          "powered": false,
+          "startS": 32.12499999999798,
+          "endS": 171.33408772966874,
+          "startState": [
+            47851.8183539182,
+            85590.58535048158,
+            1491.942611303514,
+            76.95320532217218,
+            168748.37606330766,
+            -1.5707963316088613,
+            1.1246620059614775e-08
+          ],
+          "endState": [
+            249277.58062944323,
+            7799.9999999815755,
+            852.5335365557033,
+            -754.3903377340591,
+            168748.37606330766,
+            -3.8964439573540193,
+            0.06399492627795082
+          ],
+          "consumedKg": 0
+        },
+        {
+          "name": "landing burn",
+          "powered": true,
+          "startS": 171.33408772966874,
+          "endS": 212.1010407345283,
+          "startState": [
+            249277.58062944323,
+            7799.9999999815755,
+            852.5335365557033,
+            -754.3903377340591,
+            168748.37606330766,
+            -3.8964439573540193,
+            0.06399492627795082
+          ],
+          "endState": [
+            260000.7830595055,
+            32.565024974746144,
+            -0.14773825698399637,
+            -1.3344660812932803,
+            135338.30844273776,
+            -4.691850559911819,
+            -0.016099270997115764
+          ],
+          "consumedKg": 33410.0676205699
+        }
+      ],
+      "peakQPa": {
+        "value": 351672.7536688616,
+        "timeS": 170.00499999991789,
+        "altitudeM": 8830.975069512719
+      },
+      "peakLoadG": {
+        "value": 9.307309334000704,
+        "timeS": 173.1390877296671,
+        "altitudeM": 6515.54392035604
+      },
+      "maxAltitudeM": 85900.71452373282,
+      "maxMach": 5.87612656806032,
+      "stepS": 0.005,
+      "verified": true,
+      "method": "feedback policy search",
+      "source": "policy-search.json",
+      "stepComparison": {
+        "coarserStepS": 0.01,
+        "coarserTimeS": 212.10140002126457,
+        "coarserFinalState": [
+          260000.7699382673,
+          32.56500830185874,
+          -0.14777868101975059,
+          -1.3344581129707154,
+          135338.15934370115,
+          -4.69185644740879,
+          -0.016096287560743043
+        ],
+        "coarserConsumedKg": 61661.84065629885
+      },
+      "policyTrials": 772,
+      "optimizationTrials": [
+        {
+          "index": 0,
+          "method": "Hermite-Simpson collocation",
+          "gridTargetS": 1.2,
+          "status": "Solve_Succeeded",
+          "propellantKg": 49211.68255372849,
+          "verified": false,
+          "failedChecks": [
+            "contact",
+            "ship",
+            "horizontal",
+            "vertical",
+            "tilt"
+          ]
+        },
+        {
+          "index": 1,
+          "method": "RK4 multiple shooting",
+          "gridTargetS": 0.85,
+          "status": "Solve_Succeeded",
+          "propellantKg": 48826.94255333618,
+          "verified": false,
+          "failedChecks": [
+            "contact",
+            "ship",
+            "horizontal",
+            "vertical",
+            "tilt"
+          ]
+        },
+        {
+          "index": 2,
+          "method": "RK4 multiple shooting",
+          "gridTargetS": 0.55,
+          "status": "Solve_Succeeded",
+          "propellantKg": 48396.3615946878,
+          "verified": false,
+          "failedChecks": [
+            "contact",
+            "ship",
+            "horizontal",
+            "vertical",
+            "tilt",
+            "pitchRate",
+            "reserve"
+          ]
+        },
+        {
+          "index": 3,
+          "method": "RK4 multiple shooting",
+          "gridTargetS": 0.4,
+          "status": "Solve_Succeeded",
+          "propellantKg": 47630.35589828412,
+          "verified": false,
+          "failedChecks": [
+            "ship",
+            "horizontal",
+            "vertical",
+            "tilt",
+            "pitchRate"
+          ]
+        }
+      ]
+    }
+  },
+  "steepCoastScreen": {
+    "event": "atmosphere_out_of_range",
+    "timeS": 21.974999999999913,
+    "finalState": [
+      31716.033477771463,
+      85998.90676278781,
+      1443.2343927040658,
+      622.9747389752025,
+      169400,
+      0.5241296407182544,
+      6.718720722343609e-05
+    ]
+  },
+  "nominalSelected": "single"
+}

@@ -1,6 +1,6 @@
 # 2026 UPC
 
-物理建模与英文论文项目，已选择 A 题：一级火箭助推器回收。Team Control Number：758。P0参考设计已冻结，P1已有耦合动力学与局部算例，P2全程优化由其他负责人推进。尚无最终燃料结论。
+物理建模与英文论文项目，已选择 A 题：一级火箭助推器回收。Team Control Number：758。P0 参考设计已冻结，P1 已验证耦合动力学，P2 已找到并复算全程触舰轨迹。P2 装载量对应参考设计和已搜索的策略。
 
 ## 队内安排
 
@@ -12,8 +12,9 @@
 - `ref/UPC.pdf`：用户提供的去年银奖参考论文，仅参考组织结构。
 - `docs/problems.md`：题意、已知量与建模入口。
 - `paper/main.tex`：英文论文骨架，按参考论文的摘要、假设、符号、物理模型、计算、评价、参考文献和附录组织。
-- `src/`：后续求解代码。
-- `results/`：后续可复现计算结果。
+- `src/`：P1 动力学、P2 策略搜索和优化代码。
+- `results/p2-p0-v1/`：基于 P0 冻结参数和 P1 动力学的 P2 预算、控制与复算轨迹。
+- [`docs/p2-landing-strategy.md`](docs/p2-landing-strategy.md)：P2 复现命令、优化结果和模型边界。
 
 ## 论文编译
 安装含 latexmk 的 TeX 发行版，在项目根目录运行：
@@ -25,7 +26,7 @@ latexmk -pdf -outdir=paper/build paper/main.tex
 当前只提交源文件；尚未验证 PDF 编译和排版。模板不代表赛事官方格式，提交前需核对当届要求。
 
 ## 当前平面刚体参考模型
-参数：config/reference.json；说明：docs/planar-model.md。运行：node src/run-planar.mjs。包含轴向/横流、有动力制动及俯仰；全程可行轨迹仍待优化。
+参数见 `config/reference.json`，模型见 `docs/planar-model.md`。运行 `node src/run-planar.mjs` 可重现 P1 演示。全程优化与复算见 P2 交付。
 
 ## P0 交接
 当前参数入口为 config/reference.json；场景、预算及约束规范为 config/p0-contract.json。阅读 [P0交接说明](docs/p0-handoff.md) 后开展P2；旧 baseline.json 仅作历史校验。

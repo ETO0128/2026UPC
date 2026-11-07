@@ -1,0 +1,41 @@
+\subsection{Search and minimum-propellant formulation}
+We first propagated the P1 equations with altitude-triggered ignition and a feedback law. During the burn, the pitch target blends a biased retrograde direction into an upright target with lateral-velocity feedback. The throttle follows a decreasing vertical-speed profile and the gimbal supplies a pitch-tracking moment. A search over ignition altitude, propellant inventory, pitch bias, and the vertical-speed profile furnished feasible seeds for one and two ignitions.
+
+We then minimized $m(0)-m_d$ over the phase durations, throttle and gimbal commands, and trajectory states. The phase interfaces share all seven P1 states. Coast phases have zero thrust. Each powered phase obeys $0.4\leq u_T\leq1$ and $|\delta|\leq10^\circ$. The separation state follows P0, with initial mass free. The endpoint uses cylindrical contact geometry, P0's deck-relative velocity and attitude tolerances, and a minimum 5 t usable reserve. The nominal ship position is a free downrange coordinate and is fixed at the selected position during replay. Interior target values of $v_x=0$, $v_h=-1.5\,\mathrm{m/s}$, upright pitch and zero pitch rate, and a numerical reserve margin of 75 kg left room for discretization error.
+
+We initialized Hermite--Simpson direct collocation from the feedback solutions~\cite{kelly}. We refined the candidates using RK4 multiple shooting with eight substeps per control interval and a local trust region in phase duration and pitch. CasADi supplied derivatives to IPOPT~\cite{casadi,ipopt}. We accepted a candidate only if replay with the original P1 code located the first deck contact and passed the full P0 touchdown checks at both 0.01 s and 0.005 s. Throttle and gimbal were interpolated separately within each phase. The calculation used the specified instantaneous actuator model.
+
+\subsection{Nominal strategy and separation budget}
+The selected $15^\circ$ trajectory coasts for 176.68 s, then ignites at a center-of-mass altitude of 5.876 km and burns for 30.79 s. Deck contact occurs at 207.47 s at a ship position of 278.310 km downrange. The horizontal and vertical velocities at contact are $-0.011$ and $-1.533\,\mathrm{m/s}$, respectively. The body is within $0.001^\circ$ of upright and its pitch-rate magnitude is $0.059^\circ/\mathrm{s}$.
+
+\begin{table}[htbp]
+\centering
+\caption{Nominal $15^\circ$ strategies passing P1 replay. Masses are in metric tonnes.}
+\begin{tabular}{lrr}
+\toprule
+Quantity & One ignition & Two ignitions \\
+\midrule
+Separation propellant & 26.228 & 27.607 \\
+Consumed propellant & 21.151 & 22.516 \\
+Usable propellant at contact & 5.078 & 5.091 \\
+Methane at separation & 5.828 & 6.135 \\
+Liquid oxygen at separation & 20.400 & 21.472 \\
+Peak dynamic pressure (kPa) & 297.3 & 295.7 \\
+Peak proper acceleration ($g_0$) & 7.70 & 7.70 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The one-ignition inventory includes 5 t of planned reserve and about 0.078 t of excess reserve. We used the P0 oxygen-to-methane mass ratio of 3.5 for the full inventory. The optimized two-ignition branch used a first pulse at the numerical duration floor of 0.001 s and required more propellant. A feedback candidate with a distinct 1.5 s entry burn also passed the touchdown checks. The one-ignition result is the lowest verified inventory found in this search. The mesh refinement from a nominal shooting interval of 0.85 s to 0.55 s reduced its inventory by about 70 kg. At the selected mesh, halving the P1 replay step changed consumption by 0.72 kg.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{figure/p2-reference.png}
+\caption{Selected one-ignition trajectory at $15^\circ$. The dot marks ignition. Shading marks the powered phase.}
+\label{fig:p2-reference}
+\end{figure}
+
+The peaks in the table are flight-environment diagnostics. Assessing structural and thermal feasibility requires corresponding limits and models, as well as further checks on the large pitch excursions and actuator demands.
+
+\subsection{Dependence on the separation direction}
+At $0^\circ$, the verified shooting solution used 24.710 t with one ignition. At $30^\circ$, coasting through the ascent exceeds the implemented atmosphere near 22 s. A verified feedback trajectory uses a 32.13 s burn beginning at separation to arrest the ascent, followed by a coast and a landing burn. This candidate stays below 85.91 km and gives a feasible inventory of 67.00 t. Lower-mass numerical candidates at $30^\circ$ failed the atmosphere or touchdown checks during P1 replay. Each nominal angle has its own ship position.

@@ -1,0 +1,388 @@
+{
+  "parameters": {
+    "separation_altitude_m": 70000.0,
+    "separation_speed_m_s": 1666.6666666666667,
+    "dry_mass_kg": 130000.0,
+    "flight_path_angle_deg": -20.0,
+    "effective_drag_area_m2": 35.0,
+    "specific_impulse_s": 335.0,
+    "min_thrust_n": 1200000.0,
+    "max_thrust_n": 6000000.0,
+    "max_thrust_tilt_deg": 75.0,
+    "touchdown_thrust_tilt_deg": 5.0,
+    "max_powered_tilt_rate_deg_s": 10.0,
+    "touchdown_altitude_m": 30.0,
+    "touchdown_vertical_speed_m_s": -2.0,
+    "reserve_kg": 5000.0,
+    "unusable_kg": 1000.0,
+    "oxidizer_to_fuel_ratio": 3.6,
+    "dynamic_pressure_limit_pa": 160000.0,
+    "proper_acceleration_limit_g": 4.0
+  },
+  "python": "3.12.8",
+  "numpy": "2.4.4",
+  "scipy": "1.17.1",
+  "strategies": {
+    "reference": {
+      "passes_replay": true,
+      "separation_mass_kg": 233693.53956839957,
+      "separation_propellant_kg": 103693.53956839957,
+      "separation_methane_kg": 22542.0738192173,
+      "separation_lox_kg": 81151.46574918227,
+      "consumed_kg": 97643.55223668975,
+      "remaining_propellant_kg": 6049.9873317098245,
+      "planned_reserve_kg": 5000.0,
+      "unusable_kg": 1000.0,
+      "extra_remaining_kg": 49.9873317098245,
+      "mass_balance_error_kg": -6.417394615709782e-09,
+      "touchdown_x_m": 107628.3630252658,
+      "touchdown_altitude_m": 30.003541478287097,
+      "touchdown_vx_m_s": 0.0005485113371101232,
+      "touchdown_vz_m_s": -1.9996035549709212,
+      "touchdown_thrust_tilt_deg": 0.0,
+      "terminal_residual": [
+        0.003541478287097277,
+        0.0005485113371101232,
+        0.00039644502907876245
+      ],
+      "peak_dynamic_pressure_pa": 111537.8151555711,
+      "peak_proper_acceleration_g": 3.981056640198948,
+      "min_altitude_m": 30.003541478287097,
+      "max_altitude_m": 70000.0,
+      "phases": [
+        {
+          "phase": "coast",
+          "start_s": 0.0,
+          "duration_s": 11.746849323792178,
+          "consumed_kg": 0.0
+        },
+        {
+          "phase": "landing",
+          "start_s": 11.746849323792178,
+          "duration_s": 113.78901099367701,
+          "consumed_kg": 97643.55223668975
+        }
+      ],
+      "trajectory_file": "reference_trajectory.csv",
+      "control_file": "reference_controls.csv"
+    },
+    "single_burn": {
+      "passes_replay": true,
+      "separation_mass_kg": 192281.03298176732,
+      "separation_propellant_kg": 62281.03298176732,
+      "separation_methane_kg": 13539.354996036374,
+      "separation_lox_kg": 48741.677985730945,
+      "consumed_kg": 56281.032981678116,
+      "remaining_propellant_kg": 6000.000000089203,
+      "planned_reserve_kg": 5000.0,
+      "unusable_kg": 1000.0,
+      "extra_remaining_kg": 8.92032403498888e-08,
+      "mass_balance_error_kg": 2.5538611225783825e-09,
+      "touchdown_x_m": 120662.46119757862,
+      "touchdown_altitude_m": 29.94987606704592,
+      "touchdown_vx_m_s": 0.0012391768115100898,
+      "touchdown_vz_m_s": -2.0013967761583595,
+      "touchdown_thrust_tilt_deg": 5.0,
+      "terminal_residual": [
+        -0.050123932954079464,
+        0.0012391768115100898,
+        -0.0013967761583595362
+      ],
+      "peak_dynamic_pressure_pa": 159780.6927434142,
+      "peak_proper_acceleration_g": 3.9841007565833757,
+      "min_altitude_m": 29.94987606704592,
+      "max_altitude_m": 70000.0,
+      "phases": [
+        {
+          "phase": "coast",
+          "start_s": 0.0,
+          "duration_s": 30.973180466834794,
+          "consumed_kg": 0.0
+        },
+        {
+          "phase": "landing",
+          "start_s": 30.973180466834794,
+          "duration_s": 83.74252102327965,
+          "consumed_kg": 56281.032981678116
+        }
+      ],
+      "solver": {
+        "success": true,
+        "iterations": 107,
+        "message": "Optimization terminated successfully",
+        "scaled_equality_error": 1.221810279616875e-10,
+        "scaled_inequality_violation": 1.0479057725720775e-11,
+        "intervals": [
+          32,
+          40
+        ]
+      },
+      "solver_history": [
+        {
+          "initial_guess": "reference",
+          "solver": {
+            "success": true,
+            "iterations": 76,
+            "message": "Optimization terminated successfully",
+            "scaled_equality_error": 1.0506553849154443e-10,
+            "scaled_inequality_violation": 8.464296971655294e-13,
+            "intervals": [
+              12,
+              12
+            ]
+          },
+          "separation_propellant_kg": 65439.11333379496,
+          "terminal_residual": [
+            -5.398011829899552,
+            -0.036470276870641666,
+            -0.12201757463957907
+          ],
+          "peak_dynamic_pressure_pa": 161851.84200243972,
+          "peak_proper_acceleration_g": 3.9857129198431243,
+          "passes_replay": false
+        },
+        {
+          "initial_guess": "delayed ignition",
+          "solver": {
+            "success": true,
+            "iterations": 79,
+            "message": "Optimization terminated successfully",
+            "scaled_equality_error": 9.135671774629373e-11,
+            "scaled_inequality_violation": 3.2962087920251903e-13,
+            "intervals": [
+              12,
+              12
+            ]
+          },
+          "separation_propellant_kg": 63203.53674903966,
+          "terminal_residual": [
+            -2.2616988971957603,
+            0.015890979627633695,
+            -0.05651538028796654
+          ],
+          "peak_dynamic_pressure_pa": 161475.45526671372,
+          "peak_proper_acceleration_g": 3.9930523439954673,
+          "passes_replay": false
+        },
+        {
+          "initial_guess": "previous grid",
+          "solver": {
+            "success": true,
+            "iterations": 97,
+            "message": "Optimization terminated successfully",
+            "scaled_equality_error": 3.773622125891052e-11,
+            "scaled_inequality_violation": 1.5726265775728443e-12,
+            "intervals": [
+              20,
+              24
+            ]
+          },
+          "separation_propellant_kg": 62305.725054066366,
+          "terminal_residual": [
+            0.41080303000530805,
+            0.00864367873364058,
+            -0.015442074006581485
+          ],
+          "peak_dynamic_pressure_pa": 160446.68928000945,
+          "peak_proper_acceleration_g": 3.995037045848642,
+          "passes_replay": false
+        },
+        {
+          "initial_guess": "previous grid",
+          "solver": {
+            "success": true,
+            "iterations": 107,
+            "message": "Optimization terminated successfully",
+            "scaled_equality_error": 1.221810279616875e-10,
+            "scaled_inequality_violation": 1.0479057725720775e-11,
+            "intervals": [
+              32,
+              40
+            ]
+          },
+          "separation_propellant_kg": 62281.03298176732,
+          "terminal_residual": [
+            -0.050123932954079464,
+            0.0012391768115100898,
+            -0.0013967761583595362
+          ],
+          "peak_dynamic_pressure_pa": 159780.6927434142,
+          "peak_proper_acceleration_g": 3.9841007565833757,
+          "passes_replay": true
+        }
+      ],
+      "trajectory_file": "single_burn_trajectory.csv",
+      "control_file": "single_burn_controls.csv"
+    },
+    "entry_and_landing": {
+      "passes_replay": true,
+      "separation_mass_kg": 192016.8375917847,
+      "separation_propellant_kg": 62016.837591784686,
+      "separation_methane_kg": 13481.921215605367,
+      "separation_lox_kg": 48534.91637617932,
+      "consumed_kg": 56016.83759177814,
+      "remaining_propellant_kg": 6000.000000006548,
+      "planned_reserve_kg": 5000.0,
+      "unusable_kg": 1000.0,
+      "extra_remaining_kg": 6.548361852765083e-09,
+      "mass_balance_error_kg": 2.4811015464365482e-09,
+      "touchdown_x_m": 120783.78981308588,
+      "touchdown_altitude_m": 30.145320982551606,
+      "touchdown_vx_m_s": 0.0008842188921152072,
+      "touchdown_vz_m_s": -2.0023157596011814,
+      "touchdown_thrust_tilt_deg": 5.0,
+      "terminal_residual": [
+        0.1453209825516062,
+        0.0008842188921152072,
+        -0.0023157596011813553
+      ],
+      "peak_dynamic_pressure_pa": 159801.34233362763,
+      "peak_proper_acceleration_g": 3.9832112269811732,
+      "min_altitude_m": 30.145320982551606,
+      "max_altitude_m": 70000.0,
+      "phases": [
+        {
+          "phase": "coast",
+          "start_s": 0.0,
+          "duration_s": 34.463362052819754,
+          "consumed_kg": 0.0
+        },
+        {
+          "phase": "entry",
+          "start_s": 34.463362052819754,
+          "duration_s": 1.0000000000000007,
+          "consumed_kg": 365.27147927571787
+        },
+        {
+          "phase": "coast",
+          "start_s": 35.463362052819754,
+          "duration_s": 1.0,
+          "consumed_kg": 0.0
+        },
+        {
+          "phase": "landing",
+          "start_s": 36.463362052819754,
+          "duration_s": 78.38586224823968,
+          "consumed_kg": 55651.56611250242
+        }
+      ],
+      "solver": {
+        "success": true,
+        "iterations": 121,
+        "message": "Optimization terminated successfully",
+        "scaled_equality_error": 1.3967830625460919e-10,
+        "scaled_inequality_violation": 9.155116768855276e-12,
+        "intervals": [
+          12,
+          12,
+          22,
+          40
+        ]
+      },
+      "solver_history": [
+        {
+          "initial_guess": "early entry",
+          "solver": {
+            "success": true,
+            "iterations": 167,
+            "message": "Optimization terminated successfully",
+            "scaled_equality_error": 4.905832517998476e-11,
+            "scaled_inequality_violation": 1.6496760554818302e-12,
+            "intervals": [
+              5,
+              5,
+              8,
+              12
+            ]
+          },
+          "separation_propellant_kg": 63257.7084713497,
+          "terminal_residual": [
+            -2.3029172840831826,
+            0.01618758125683939,
+            -0.05600581232878277
+          ],
+          "peak_dynamic_pressure_pa": 161460.33523701428,
+          "peak_proper_acceleration_g": 3.992948989004812,
+          "passes_replay": false
+        },
+        {
+          "initial_guess": "later entry",
+          "solver": {
+            "success": true,
+            "iterations": 152,
+            "message": "Optimization terminated successfully",
+            "scaled_equality_error": 2.1722521559297548e-10,
+            "scaled_inequality_violation": 1.2813634701902554e-11,
+            "intervals": [
+              5,
+              5,
+              8,
+              12
+            ]
+          },
+          "separation_propellant_kg": 62598.04268263065,
+          "terminal_residual": [
+            1.097537760356257,
+            0.0491534787537969,
+            -0.0689093705780568
+          ],
+          "peak_dynamic_pressure_pa": 162075.10213431963,
+          "peak_proper_acceleration_g": 4.042973137468854,
+          "passes_replay": false
+        },
+        {
+          "initial_guess": "previous grid",
+          "solver": {
+            "success": true,
+            "iterations": 138,
+            "message": "Optimization terminated successfully",
+            "scaled_equality_error": 1.1118301301848988e-10,
+            "scaled_inequality_violation": 5.305529453270008e-12,
+            "intervals": [
+              8,
+              8,
+              14,
+              24
+            ]
+          },
+          "separation_propellant_kg": 62040.309848225734,
+          "terminal_residual": [
+            0.38719880358759085,
+            0.008534794327706291,
+            -0.013350668014994405
+          ],
+          "peak_dynamic_pressure_pa": 160435.41792719194,
+          "peak_proper_acceleration_g": 3.9961138703439625,
+          "passes_replay": false
+        },
+        {
+          "initial_guess": "previous grid",
+          "solver": {
+            "success": true,
+            "iterations": 121,
+            "message": "Optimization terminated successfully",
+            "scaled_equality_error": 1.3967830625460919e-10,
+            "scaled_inequality_violation": 9.155116768855276e-12,
+            "intervals": [
+              12,
+              12,
+              22,
+              40
+            ]
+          },
+          "separation_propellant_kg": 62016.837591784686,
+          "terminal_residual": [
+            0.1453209825516062,
+            0.0008842188921152072,
+            -0.0023157596011813553
+          ],
+          "peak_dynamic_pressure_pa": 159801.34233362763,
+          "peak_proper_acceleration_g": 3.9832112269811732,
+          "passes_replay": true
+        }
+      ],
+      "trajectory_file": "entry_and_landing_trajectory.csv",
+      "control_file": "entry_and_landing_controls.csv"
+    }
+  }
+}
