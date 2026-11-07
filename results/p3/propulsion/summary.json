@@ -1,0 +1,139 @@
+{
+  "parameter": "ispS",
+  "scenarioValues": [
+    300,
+    330,
+    360
+  ],
+  "comparison": "Known effective Isp; recovery site selected separately for each design, fixed during replay",
+  "minimumUsableReserveKg": 5000,
+  "oxygenFuelRatio": 3.5,
+  "maximumThrustN": 2846000,
+  "interpretation": "Lowest accepted local candidate per scenario; no structural or thermal limits imposed",
+  "replayStepsS": [
+    0.005,
+    0.0025
+  ],
+  "cases": [
+    {
+      "ispS": 300,
+      "accepted": true,
+      "attempts": 1,
+      "source": "results/p3/propulsion/isp-300.json",
+      "selectedHistoryIndex": 0,
+      "propellantKg": 28780.585722316144,
+      "consumedKg": 23701.165765708167,
+      "retainedUsableKg": 5079.419956607977,
+      "methaneKg": 6395.685716070254,
+      "liquidOxygenKg": 22384.90000624589,
+      "shipLocationM": 278454.52465082146,
+      "ignitionTimeS": 176.27460653086396,
+      "ignitionAltitudeM": 6037.4186130062735,
+      "contactTimeS": 207.30737155856738,
+      "burnDurationS": 31.03276502770342,
+      "touchdown": {
+        "shipErrorM": 0.009032963949721307,
+        "horizontalMps": 0.016773185409347035,
+        "verticalMps": 1.5500473107578554,
+        "tiltDeg": 0.00024127467616148315,
+        "pitchRateDegS": 0.09104384934334651,
+        "reserveKg": 5079.419956607977
+      },
+      "peakQPa": {
+        "value": 302061.83742224093,
+        "timeS": 170.87999999988085,
+        "altitudeM": 9600.738235266632
+      },
+      "peakLoadG": {
+        "value": 7.835288774844809,
+        "timeS": 182.64460653085817,
+        "altitudeM": 3013.4186859087354
+      },
+      "solverStatus": "Solve_Succeeded",
+      "stepTargetS": 0.55,
+      "loadDifferenceFromReferenceKg": 2552.474394037272,
+      "loadChangePercent": 9.73182690163901,
+      "fixedReferenceImpulseInventoryKg": 28343.14681049142
+    },
+    {
+      "ispS": 330,
+      "accepted": true,
+      "attempts": 1,
+      "source": "results/p3/propulsion/isp-330.json",
+      "selectedHistoryIndex": 0,
+      "propellantKg": 26228.111328278872,
+      "consumedKg": 21150.35482212549,
+      "retainedUsableKg": 5077.756506153382,
+      "methaneKg": 5828.469184061972,
+      "liquidOxygenKg": 20399.6421442169,
+      "shipLocationM": 278310.43659683835,
+      "ignitionTimeS": 176.68144701708653,
+      "ignitionAltitudeM": 5876.000261920742,
+      "contactTimeS": 207.47374245406667,
+      "burnDurationS": 30.79229543698014,
+      "touchdown": {
+        "shipErrorM": 0.0001116838539019227,
+        "horizontalMps": 0.011724487476435891,
+        "verticalMps": 1.5345056823045538,
+        "tiltDeg": 0.00030028487935974306,
+        "pitchRateDegS": 0.062437216886399416,
+        "reserveKg": 5077.756506153382
+      },
+      "peakQPa": {
+        "value": 297334.0395173216,
+        "timeS": 170.8374999998809,
+        "altitudeM": 9693.548441368397
+      },
+      "peakLoadG": {
+        "value": 7.7034718085808915,
+        "timeS": 183.12644701708066,
+        "altitudeM": 2894.6160424335385
+      },
+      "solverStatus": "Solve_Succeeded",
+      "stepTargetS": 0.55,
+      "loadDifferenceFromReferenceKg": 0.0,
+      "loadChangePercent": 0.0,
+      "fixedReferenceImpulseInventoryKg": 26228.111328278872
+    },
+    {
+      "ispS": 360,
+      "accepted": true,
+      "attempts": 1,
+      "source": "results/p3/propulsion/isp-360.json",
+      "selectedHistoryIndex": 0,
+      "propellantKg": 24198.86293302942,
+      "consumedKg": 19123.604758437083,
+      "retainedUsableKg": 5075.258174592338,
+      "methaneKg": 5377.52509622876,
+      "liquidOxygenKg": 18821.33783680066,
+      "shipLocationM": 278259.9659728348,
+      "ignitionTimeS": 176.69979723601318,
+      "ignitionAltitudeM": 5928.270836036067,
+      "contactTimeS": 207.52246470581446,
+      "burnDurationS": 30.822667469801274,
+      "touchdown": {
+        "shipErrorM": 0.0014348693075589836,
+        "horizontalMps": 0.0012495716779619076,
+        "verticalMps": 1.503555110167199,
+        "tiltDeg": 6.697587466354853e-05,
+        "pitchRateDegS": 0.006369191152328736,
+        "reserveKg": 5075.258174592338
+      },
+      "peakQPa": {
+        "value": 293561.1760818494,
+        "timeS": 170.80999999988092,
+        "altitudeM": 9763.706697234618
+      },
+      "peakLoadG": {
+        "value": 7.636069571506101,
+        "timeS": 183.09979723600736,
+        "altitudeM": 2983.3428901236725
+      },
+      "solverStatus": "Solve_Succeeded",
+      "stepTargetS": 0.55,
+      "loadDifferenceFromReferenceKg": -2029.2483952494513,
+      "loadChangePercent": -7.736921541359851,
+      "fixedReferenceImpulseInventoryKg": 24465.581759768414
+    }
+  ]
+}

@@ -44,3 +44,4 @@ latexmk -pdf -outdir=paper/build paper/main.tex
 - [风估计误差分析](docs/p3-wind-estimation.md)固定 30 t 主情景指令，记录风信息不准确时的剩余敏感性。
 - [持续状态修正第一轮](docs/p3-tracking-control.md)采用带调节余量的参考轨迹和 20 ms 周期反馈，在 0、±0.05、±0.1 m/s 五个未知风误差点通过触舰检查。
 - [全程安全分析](docs/p3-flight-safety.md)区分点火前的动压/来流能量峰值与燃烧中的法向载荷峰值，报告相对 P2 的受力代价；结构与热安全尚未确定。
+- [发动机效率与推进剂需求](docs/p3-propulsion-sensitivity.md)完成有效比冲 300、330、360 s 的独立设计比较，已接受局部候选的分离总推进剂为 28.781、26.228、24.199 t；每档分别选择船位。

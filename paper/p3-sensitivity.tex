@@ -101,5 +101,6 @@ These comparisons assume exact state measurements and instantaneous actuator res
 \input{paper/p3-safety.tex}
 
 \subsection{Whole-Flight Parameters and Reserve}
-For each complete trajectory, we distinguish a recovery site chosen for that trajectory from an already positioned ship whose location must remain fixed. The full-flight comparison varies flight-path angle, effective specific impulse, thrust, aerodynamic parameters, and reserve using the reference scenario points. Reserve contributes to vehicle mass, so its effect can include a change in burn consumption as well as the extra mass retained. The resulting range describes the scenarios examined.
-\draftnote{Add reoptimized propellant and feasibility results for the engine, aerodynamic, and reserve scenarios. Report the governing contact or flight limit for each case.}
+We first examine effective engine efficiency using the P0 scenario points. A recovery site selected separately for each design differs from an already positioned ship that must remain fixed across disturbances.
+\input{paper/p3-propulsion.tex}
+\draftnote{Continue with separately reoptimized thrust, aerodynamic, and reserve scenarios. Reserve changes vehicle mass as well as the amount retained. Report the governing touchdown or flight limit for each case.}
