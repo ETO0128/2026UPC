@@ -58,6 +58,13 @@ The common 30 t inventory is a trial design choice, 3.772 t above the nominal P2
 
 The calculation assumes exact initial-state information, known uniform wind, and the reference dynamics. Commands are then executed as a precomputed schedule. Wind changes or state errors arising later in flight require further estimation and guidance updates. Actuator rate limits, sensing and computation delays, three-dimensional motion, Earth curvature and rotation, and structural and thermal limits also remain to be incorporated before operational safety can be assessed.
 
+\subsection{Error in the Wind Used for Planning}
+We hold the revised 30 t nominal schedule fixed and change the actual uniform wind while the wind used to plan the schedule remains zero. We examine thirteen wind speeds between $-1$ and $+1$ m/s, with more closely spaced points near zero. The event types and lists of violated touchdown limits agree for replay steps of 0.005 s and 0.0025 s.
+
+The tested points from $-0.05$ through $+0.05$ m/s satisfy the touchdown criteria. At $+0.05$ m/s, the downward contact speed is 1.993 m/s and the pitch-rate magnitude is $0.945^\circ$/s, close to their respective limits of 2 m/s and $1^\circ$/s. At $+0.1$ m/s, the position error remains within tolerance at 3.833 m, but the downward speed rises to 2.338 m/s and the pitch-rate magnitude to $1.608^\circ$/s. At $-0.1$ m/s, the command window ends with the lowest point of the body 0.571 m above the deck plane.
+
+These results quantify the remaining sensitivity to wind information in the revised nominal schedule. The successful case-specific plans use the actual steady wind as an input. Continued adjustment to state deviations is needed to address errors in that input. The examined wind points provide a sampled comparison, with the precise feasibility boundary left for further analysis.
+
 \subsection{Whole-Flight Parameters and Reserve}
 For each complete trajectory, we distinguish a recovery site chosen for that trajectory from an already positioned ship whose location must remain fixed. The full-flight comparison varies flight-path angle, effective specific impulse, thrust, aerodynamic parameters, and reserve using the reference scenario points. Reserve contributes to vehicle mass, so its effect can include a change in burn consumption as well as the extra mass retained. The resulting range describes the scenarios examined.
 \draftnote{Add reoptimized propellant and feasibility results for the engine, aerodynamic, and reserve scenarios. Report the governing contact or flight limit for each case.}

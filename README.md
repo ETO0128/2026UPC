@@ -41,3 +41,4 @@ latexmk -pdf -outdir=paper/build paper/main.tex
 - [完整轨迹复算结果](results/p3/replanned/summary.json)及同目录中的逐情景控制节点。
 - [英文 P3 正文](paper/p3-sensitivity.tex)。
 - [本轮 PDF 工作稿](output/pdf/758A-P3-progress.pdf)。
+- [风估计误差分析](docs/p3-wind-estimation.md)固定 30 t 主情景指令，记录风信息不准确时的剩余敏感性。
