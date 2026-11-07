@@ -6,3 +6,6 @@ paper/build/
 *.synctex.gz
 .DS_Store
 Thumbs.db
+
+.tools/
+.matplotlib/

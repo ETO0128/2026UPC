@@ -51,44 +51,7 @@ $q$ & Dynamic pressure & Pa \\
 \bottomrule
 \end{tabular}
 \end{center}
-\section{Model Force Analysis}
-\subsection{Gravitational Force}
-\draftnote{Define altitude-dependent gravity and assess the constant-gravity approximation.}
-\subsection{Aerodynamic Forces}
-\subsubsection{Atmospheric Density and Relative Air Velocity}
-\subsubsection{Drag Coefficient and Reference Area}
-\draftnote{Discuss Mach number and orientation dependence. Use the diameter for axial reference area and account for the 65 m length when assessing attitude effects.}
-\subsection{Reference Parameter Selection}
-Guided by the cited propulsion and aerodynamic references, we define a reference design rather than identify an unspecified flight engine. We adopt a maximum landing thrust of 2.846 MN using the published BE-4 thrust scale~\cite{be4}. We assume an effective specific impulse of 330 s, oxygen-to-methane mass ratio of 3.5, minimum operating throttle of 40\%, and gimbal limit of $10^\circ$. Except for the analogous thrust scale, these are explicit design assumptions, not manufacturer specifications for this booster. The mixture-ratio choice is informed by a methane/oxygen mission study~\cite{methaneStudy}; its vacuum performance is not assigned to our sea-level engine.
-
-For a tractable first model, axial and crossflow coefficients are set to 0.8 and 1.2, respectively. Cylinder research motivates separating the flow components~\cite{cylinder}, but these constants are engineering closures rather than fitted experimental data. The equivalent center-of-pressure offset is assumed to be $+0.05L$ toward the nose. Standard-atmosphere properties follow the 1976 model~\cite{atmosphere}. A trial inventory of 80 tonnes and initial flight-path angle of $15^\circ$ define the full-trajectory demonstration; this inventory is not an optimized fuel estimate.
-\subsection{Engine Thrust and Propellant Consumption}
-\draftnote{Specify thrust limits, throttling, restart assumptions, specific impulse, and mixture ratio with sources.}
-\section{Model Motion Analysis}
-\subsection{Axial and Crossflow Aerodynamic Model}
-Let $\mathbf e=(\cos\theta,\sin\theta)$ and $\mathbf n=(-\sin\theta,\cos\theta)$, with $\theta$ measured counterclockwise from horizontal. Resolve air-relative velocity into $u_a$ and $u_n$. For equal-length equivalent strips with signed moment arms $s_i$,
-\begin{align}
- F_a&=-\tfrac12\rho C_a A_{end}u_a|u_a|,\\
- F_{n,i}&=-\tfrac12\rho C_n D\Delta s\,(u_n+\omega s_i)|u_n+\omega s_i|,\\
- \mathbf F_D&=F_a\mathbf e+\sum_i F_{n,i}\mathbf n,\qquad M_a=\sum_i s_iF_{n,i}.
-\end{align}
-The strip distribution incorporates rotational damping and an assumed pressure-center offset. It is a low-order closure, not a resolved surface-pressure calculation.
-\subsection{Equations of Translational Motion}
-\begin{align}
- \dot{\mathbf r}&=\mathbf v, &
- \dot{\mathbf v}&=\mathbf g(h)+\frac{\mathbf F_D+T\mathbf e(\theta+\delta)}{m},\\
- \dot m&=-\frac{T}{g_0I_{sp}}, &
- \dot\theta&=\omega,\qquad
- I_d\dot\omega=M_a-\frac{L}{2}T\sin\delta.
-\end{align}
-Here $I_d=m_d(3R^2+L^2)/12$. The dry body is uniform and the remaining propellant is idealized as concentrated at the center of mass with negligible pitch inertia and no additional rotational angular-momentum flux. This explicit simplification keeps $I_d$ constant; a distributed-tank model requires a consistent open-system angular-momentum balance.
-\draftnote{Formulate coupled position, velocity, and mass equations. Clearly define thrust direction and aerodynamic forces.}
-\subsection{Initial Conditions and Landing Constraints}
-\draftnote{Use the given separation altitude and speed. Parameterize the unspecified velocity direction. Define deck-relative touchdown velocity, position, and vertical attitude tolerances.}
-\subsection{Descent Phases and Combined Model}
-\draftnote{Identify coasting, any required entry braking, and terminal landing burn. Determine which phases are necessary rather than imposing all burns in advance.}
-\subsection{Numerical Solution and Primary Results}
-\draftnote{Describe event detection, integration tolerances, feasibility checks, and trajectory outputs. Report altitude, velocity, mass, thrust, and dynamic pressure versus time.}
+\input{paper/p1-model.tex}
 \section{Landing Strategy and Propellant Estimation}
 \subsection{Baseline Estimates and Limiting Cases}
 \draftnote{Use ballistic and ideal rocket-equation estimates as checks, identifying gravity and drag losses.}
@@ -106,7 +69,7 @@ Here $I_d=m_d(3R^2+L^2)/12$. The dry body is uniform and the remaining propellan
 \section{Model Evaluation}
 \subsection{Overview and Comparison of Model Levels}
 \subsection{Verification and Validation}
-\draftnote{Check mass balance, vacuum limits, numerical convergence, touchdown event accuracy, and independent baseline estimates. Distinguish internal verification from validation against external data.}
+\input{paper/p1-verification.tex}
 \subsection{Strengths and Weaknesses}
 \subsection{Discussion of Sources of Error}
 \subsubsection{Simplified Physical Forces and Attitude Dynamics}
@@ -120,7 +83,7 @@ Here $I_d=m_d(3R^2+L^2)/12$. The dry body is uniform and the remaining propellan
 \subsection{Conclusions and Practical Recommendations}
 \draftnote{Answer the separation-fuel question with assumptions, units, uncertainty, and feasibility limits.}
 \section{Report on the Use of AI}
-AI assistance was used to organize the initial manuscript framework from the supplied problem and reference-paper structure. Update this statement to reflect subsequent work and human verification according to competition requirements.
+AI assistance was used to organize the manuscript, develop the reference dynamics and verification scripts, derive model equations, and generate P1 figures and draft text. The team must review the derivations, assumptions, code, and numerical results, and retain the required interaction records before submission.
 \begin{thebibliography}{9}
 \bibitem{be4} Blue Origin. BE-4. Manufacturer webpage, accessed November 7, 2026. \url{https://www.blueorigin.com/es-MX/engines/be-4}.
 \bibitem{cylinder} F. E. Gowen and E. W. Perkins. Drag of Circular Cylinders for a Wide Range of Reynolds Numbers and Mach Numbers. NACA-TN-2960, 1953.

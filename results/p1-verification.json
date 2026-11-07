@@ -1,0 +1,297 @@
+{
+  "status": "internal verification, not flight-data validation",
+  "checks": [
+    {
+      "name": "Atmosphere pressure H=0",
+      "error": 0,
+      "tolerance": 0.00002,
+      "unit": "1"
+    },
+    {
+      "name": "Atmosphere temperature H=0",
+      "error": 0,
+      "tolerance": 1e-8,
+      "unit": "K"
+    },
+    {
+      "name": "Atmosphere pressure H=11000",
+      "error": 8.79504216958901e-7,
+      "tolerance": 0.00002,
+      "unit": "1"
+    },
+    {
+      "name": "Atmosphere temperature H=11000",
+      "error": 2.842170943040401e-14,
+      "tolerance": 1e-8,
+      "unit": "K"
+    },
+    {
+      "name": "Atmosphere pressure H=20000",
+      "error": 0.000002114329432666391,
+      "tolerance": 0.00002,
+      "unit": "1"
+    },
+    {
+      "name": "Atmosphere temperature H=20000",
+      "error": 2.842170943040401e-14,
+      "tolerance": 1e-8,
+      "unit": "K"
+    },
+    {
+      "name": "Atmosphere pressure H=32000",
+      "error": 0.0000033678765042600534,
+      "tolerance": 0.00002,
+      "unit": "1"
+    },
+    {
+      "name": "Atmosphere temperature H=32000",
+      "error": 2.842170943040401e-14,
+      "tolerance": 1e-8,
+      "unit": "K"
+    },
+    {
+      "name": "Atmosphere pressure H=47000",
+      "error": 0.000004748447021601308,
+      "tolerance": 0.00002,
+      "unit": "1"
+    },
+    {
+      "name": "Atmosphere temperature H=47000",
+      "error": 0,
+      "tolerance": 1e-8,
+      "unit": "K"
+    },
+    {
+      "name": "Out-of-range atmosphere rejected",
+      "error": 0,
+      "tolerance": 0,
+      "unit": "boolean"
+    },
+    {
+      "name": "Vacuum vertical mechanical energy",
+      "error": 7.450580596923828e-9,
+      "tolerance": 0.00001,
+      "unit": "J/kg"
+    },
+    {
+      "name": "Coast mass conservation",
+      "error": 0,
+      "tolerance": 1e-9,
+      "unit": "kg"
+    },
+    {
+      "name": "Torque-free pitch",
+      "error": 2.6645352591003757e-15,
+      "tolerance": 1e-10,
+      "unit": "rad"
+    },
+    {
+      "name": "Constant-thrust mass history",
+      "error": 7.566995918750763e-10,
+      "tolerance": 0.000001,
+      "unit": "kg"
+    },
+    {
+      "name": "Ideal rocket equation horizontal delta-v",
+      "error": 2.842170943040401e-14,
+      "tolerance": 1e-7,
+      "unit": "m/s"
+    },
+    {
+      "name": "Axial force exact limit",
+      "error": 0,
+      "tolerance": 1e-8,
+      "unit": "N"
+    },
+    {
+      "name": "Crossflow force exact limit",
+      "error": 9.313225746154785e-10,
+      "tolerance": 1e-7,
+      "unit": "N"
+    },
+    {
+      "name": "Static pressure-center moment",
+      "error": 5.587935447692871e-9,
+      "tolerance": 0.000001,
+      "unit": "N m"
+    },
+    {
+      "name": "Uniform wind produces nonzero offset moment",
+      "error": 0,
+      "tolerance": 0,
+      "unit": "boolean"
+    },
+    {
+      "name": "160-strip pure-rotation quadrature",
+      "error": 0.00007812499999998676,
+      "tolerance": 0.0001,
+      "unit": "1"
+    },
+    {
+      "name": "Smooth RK4 position at dt=.01",
+      "error": 2.7563176863380905e-10,
+      "tolerance": 0.000001,
+      "unit": "m"
+    },
+    {
+      "name": "RK4 error decreases",
+      "error": 0.00028264661006165956,
+      "tolerance": 0.01,
+      "unit": "1"
+    },
+    {
+      "name": "Contact clearance dt=0.08",
+      "error": 2.143131898507868e-16,
+      "tolerance": 0.000001,
+      "unit": "m"
+    },
+    {
+      "name": "Contact clearance dt=0.04",
+      "error": 2.143131898507868e-16,
+      "tolerance": 0.000001,
+      "unit": "m"
+    },
+    {
+      "name": "Contact clearance dt=0.02",
+      "error": 2.143131898507868e-16,
+      "tolerance": 0.000001,
+      "unit": "m"
+    },
+    {
+      "name": "Contact clearance dt=0.01",
+      "error": 2.143131898507868e-16,
+      "tolerance": 0.000001,
+      "unit": "m"
+    },
+    {
+      "name": "Contact clearance dt=0.005",
+      "error": 2.143131898507868e-16,
+      "tolerance": 0.000001,
+      "unit": "m"
+    },
+    {
+      "name": "Fuel event no dry-mass overshoot",
+      "error": 0,
+      "tolerance": 0,
+      "unit": "kg"
+    }
+  ],
+  "analytic": {
+    "verticalSpeedAtSeparation": 431.36507517087654,
+    "horizontalSpeedAtSeparation": 1609.8763771484794,
+    "constantGravityApexM": 79487.2269366795,
+    "constantGravityApexTimeS": 43.98699608641856,
+    "gravityAt70km": 9.5941863668779,
+    "initialThrustWeight": 1.3819582581596115,
+    "dryThrustWeight": 2.2323941093347566,
+    "idealDeltaVWith80tAnd5tReserve": 1429.8567228452891,
+    "constantMassStoppingDistanceAt180t90mps": 674.4984978761161
+  },
+  "stripConvergence": [
+    {
+      "strips": 10,
+      "relativeError": 0.020000000000000104
+    },
+    {
+      "strips": 20,
+      "relativeError": 0.0049999999999999906
+    },
+    {
+      "strips": 40,
+      "relativeError": 0.0012500000000002073
+    },
+    {
+      "strips": 80,
+      "relativeError": 0.0003125000000002264
+    },
+    {
+      "strips": 160,
+      "relativeError": 0.00007812499999998676
+    }
+  ],
+  "timeConvergence": [
+    {
+      "dt": 0.08,
+      "positionErrorM": 9.751815830151998e-7,
+      "pitchErrorRad": 1.2158043016796682e-8
+    },
+    {
+      "dt": 0.04,
+      "positionErrorM": 6.269013261235588e-8,
+      "pitchErrorRad": 1.4893410948957353e-9
+    },
+    {
+      "dt": 0.02,
+      "positionErrorM": 3.690331683420346e-9,
+      "pitchErrorRad": 2.4675683718555774e-10
+    },
+    {
+      "dt": 0.01,
+      "positionErrorM": 2.7563176863380905e-10,
+      "pitchErrorRad": 2.1738166822160565e-12
+    }
+  ],
+  "eventConvergence": [
+    {
+      "dt": 0.08,
+      "timeS": 35.9759446575985,
+      "vh": -1.5029397989469584,
+      "consumedKg": 22679.54399607348
+    },
+    {
+      "dt": 0.04,
+      "timeS": 35.975285675328536,
+      "vh": -1.5037555411977939,
+      "consumedKg": 22679.19113273025
+    },
+    {
+      "dt": 0.02,
+      "timeS": 35.9750971774999,
+      "vh": -1.5029777786052665,
+      "consumedKg": 22679.139415417798
+    },
+    {
+      "dt": 0.01,
+      "timeS": 35.975063352281225,
+      "vh": -1.502985784019542,
+      "consumedKg": 22679.122938816115
+    },
+    {
+      "dt": 0.005,
+      "timeS": 35.975047409927946,
+      "vh": -1.5029088567813726,
+      "consumedKg": 22679.119104944257
+    }
+  ],
+  "terminal": {
+    "timeS": 35.975047409927946,
+    "state": [
+      5.15269121104742e-13,
+      32.5,
+      2.7018575694314073e-14,
+      -1.5029088567813726,
+      157320.88089505574,
+      1.5707963267948966,
+      -2.6185757543596987e-50
+    ],
+    "consumedKg": 22679.119104944257
+  },
+  "perturbed": {
+    "timeS": 35.97472736137687,
+    "state": [
+      16.56010319614433,
+      32.50000000003303,
+      0.4670843931808624,
+      -1.5029853313675732,
+      157320.89840520997,
+      1.5707963267854597,
+      6.365063275752317e-12
+    ],
+    "consumedKg": 22679.10159479003
+  },
+  "fuelEvent": {
+    "event": "fuel_exhausted",
+    "remainingKg": 1,
+    "meaning": "conservative stop before depletion; not an exact depletion-time solution"
+  }
+}
