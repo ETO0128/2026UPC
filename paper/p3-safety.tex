@@ -1,47 +1,22 @@
-\subsection{Flight Loads and Aerothermal Exposure}
+\subsection{Loads Along the Nominal Descent}
 \label{sec:flight-exposure}
-We now separate the touchdown requirements from the environment encountered before contact. We evaluate the selected P2 trajectory and the five P3 feedback cases using the same P1 forces, with a 0.0025 s integration step and the existing 20 ms feedback period. The control schedules, initial inventories, and ship position are unchanged. Figure~\ref{fig:flight-exposure} compares the two nominal trajectories.
-
-The dynamic pressure is $q=\rho U^2/2$, where $U$ is the speed relative to the air~\cite{dynamicPressure}. The non-gravitational specific-force magnitude at the centre of mass is
-\begin{equation}
- n=\frac{\lVert\mathbf F_a+\mathbf T\rVert}{m g_0}.
-\end{equation}
-This quantity differs from the magnitude of the ground-relative acceleration, which also includes gravity. Body-axis force components, integrated normal aerodynamic force, and external pitch moments provide additional information about loading. Neither $n$ nor a resultant moment about the centre of mass determines the stress or internal bending moment at a structural section.
+Safe descent requires considering the flight before touchdown. We use the same 26.228 t nominal trajectory as the fuel calculation, so the load discussion and budget describe one design. Dynamic pressure is $q=\rho U^2/2$, with air-relative speed $U$~\cite{dynamicPressure}. The non-gravitational specific-force magnitude is $\lVert\mathbf F_a+\mathbf T\rVert/(m g_0)$; it differs from ground-relative acceleration, which includes gravity.
 
 \begin{table}[htbp]
 \centering
-\caption{Peak environment quantities for the nominal 30 t feedback trajectory. Altitude denotes centre-of-mass height. The energy-flux entry describes the incoming flow, not heat transferred to the surface.}
+\caption{Nominal-trajectory load peaks, extracted at a 0.0025 s replay step. Height denotes centre-of-mass altitude.}
 \label{tab:flight-exposure}
 \begin{tabular}{@{}lrrl@{}}
 \toprule
-Quantity & Time (s) & Altitude (km) & Peak \\
+Quantity & Time (s) & Height (km) & Peak \\
 \midrule
-Flow kinetic-energy flux & 168.980 & 11.019 & 382.31 MW/m$^2$ \\
-Dynamic pressure & 170.905 & 9.553 & 304.315 kPa \\
-Specific-force magnitude & 181.577 & 3.400 & $8.132\,g_0$ \\
-Normal aerodynamic force & 181.597 & 3.392 & 9.541 MN \\
-Aerodynamic pitch moment & 181.445 & 3.454 & 35.099 MN m \\
+Dynamic pressure & 170.837 & 9.694 & 297.334 kPa \\
+Specific-force magnitude & 183.126 & 2.895 & $7.703\,g_0$ \\
+Normal aerodynamic force & 183.221 & 2.861 & 9.615 MN \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Peak dynamic pressure occurs during the unpowered descent, 3.23 s before ignition. At this point the air-relative speed is approximately 1180 m/s. The specific-force peak occurs later, during the burn, when the body axis makes an acute angle of approximately $18.39^\circ$ with the air-relative velocity line. At that instant the normal aerodynamic force is approximately 9.535 MN, compared with 4.852 MN axially. Its magnitude subsequently reaches the value in Table~\ref{tab:flight-exposure}. The crossflow strip model includes local velocity due to rotation, so the reported normal force is not inferred from the centre-of-mass angle alone.
+Maximum dynamic pressure precedes ignition at 176.68 s, whereas the largest specific force occurs during the burn. Near the force peak, the body axis makes an acute angle of about $20^\circ$ with the air-relative velocity line, producing substantial normal loading. Thus attitude matters as well as speed and density. Reducing a pre-ignition load peak requires changing the preceding descent or adding earlier braking; a later correction alone cannot remove it. Such a change would also alter the propellant budget.
 
-At the specific-force peak, aerodynamic and thrust magnitudes divided by $m g_0$ are approximately 6.972 and 1.761, respectively. These magnitudes cannot be added as scalars; their vector sum gives 8.132. In body coordinates the combined components are approximately $4.901\,g_0$ axially and $-6.489\,g_0$ normally. The strong normal loading explains why a lower dynamic pressure during the burn can coincide with a higher specific force than at max-$q$.
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\textwidth]{figure/p3-flight-exposure.png}
-\caption{Nominal flight environments. Dotted lines mark P3 ignition. Panel (c) uses P3 alone and the acute body-axis/flow-line angle. Panel (d) is a flow-energy indicator, not wall heat flux. Inventory, reference planning, and feedback differ between P2 and P3.}
-\label{fig:flight-exposure}
-\end{figure}
-
-The P2 nominal peaks are 297.334 kPa and $7.703\,g_0$. The P3 nominal values are higher by approximately 2.35\% and 5.56\%, respectively. Improved touchdown recovery therefore comes with increased peak requirements in this comparison; it does not establish reduced structural loading. This comparison changes inventory and reference planning together with feedback, and does not isolate the effect of feedback alone. Across the five small wind-error cases, peak dynamic pressure ranges from 304.302 to 304.327 kPa and peak specific force from 8.1311 to $8.1325\,g_0$ (rounded outward). This narrow sampled variation is not a result for broader wind or combined errors.
-
-For thermal exposure, we record the free-stream kinetic-energy flux per area normal to the flow,
-\begin{equation}
- \Phi_k=\tfrac12\rho U^3=qU.
-\end{equation}
-This flow quantity identifies a period when dense, fast air carries substantial kinetic energy. It peaks before both ignition and max-$q$. It is distinct from the wall heat flux and its time integral is not the heat absorbed by the booster. Surface heating depends on local flow, geometry, wall conditions, and heat transfer~\cite{tfawsAero}. The Sutton--Graves study concerns stagnation-point heating of axisymmetric blunt bodies~\cite{suttonGraves}. Applying such a relation here requires a justified effective leading-surface radius and flow regime; the cylinder diameter alone does not supply these inputs for every attitude. We therefore report $\Phi_k$ as an exposure indicator and leave wall heat flux, surface temperature, and thermal-protection thickness undetermined.
-
-The five trajectories meet the adopted touchdown constraints while imposing the load requirements above. These magnitudes inherit the constant-coefficient aerodynamics and rigid-body approximations. Structural and thermal safety remain undetermined without allowables, structural geometry and material properties, and local heating and material-response models. Both max-$q$ and peak flow energy precede ignition. Reducing them requires changing the preceding descent or introducing earlier braking or attitude control; the present burn-only feedback cannot change an already encountered peak. Such changes require a new propellant estimate.
+These are external-load requirements under the adopted constant-coefficient, rigid-body model. They do not determine shell stress, buckling, or local bending without structural dimensions, internal pressure, and material properties. Surface heating also requires local geometry, flow, and wall-response information: incoming flow energy is not the heat transferred to the wall~\cite{tfawsAero}. We therefore leave wall temperature and thermal-protection requirements undetermined. The nominal trajectory satisfies the selected touchdown conditions, but structural and thermal safety cannot be concluded from those endpoint checks.

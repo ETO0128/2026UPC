@@ -36,15 +36,17 @@ latexmk -pdf -outdir=paper/build paper/main.tex
 
 ## P3 本轮交付
 
-[P3 收尾交接](docs/p3-closeout.md)汇总当前结论和未覆盖条件。本轮仅补两档代表性横流阻力对比后收尾，推力/储备等扩展不再阻塞 P4 全文整理。
+[P3 收尾交接](docs/p3-closeout.md)与[正文修整记录](docs/p3-editorial-revision.md)说明当前主线：发动机与阻力假设怎样改变分离装载量，以及同一条名义轨迹的全程载荷和安全局限。P3 已完成本轮约定范围，没有新增计算或控制方案。
 
-[控制修正与局限](docs/p3-control-revision.md)说明固定原船位、统一 30 t 试算库存的分离时重规划。主情景和十个单因素扰动均满足 P0 触舰条件，前提为初态和恒定风准确已知。下方另列小风误差持续反馈；联合误差、最低共同库存及结构和热条件保留为局限。
+- [发动机效率与推进剂需求](docs/p3-propulsion-sensitivity.md)：三档已知有效比冲的局部设计库存为 28.781、26.228、24.199 t，每档分别选择合适船位。
+- [限定阻力对比](docs/p3-drag-sensitivity.md)：横流系数 1.6 的已接受局部设计为 27.130 t；系数 0.8 的限时搜索未得到通过候选，不作为燃料需求。
+- [载荷计算记录](docs/p3-flight-safety.md)：正文已改用 26.228 t 名义轨迹，与燃料预算对应；结构和热安全尚未确定。
+- [英文 P3 正文](paper/p3-sensitivity.tex)及[论文工作稿](output/pdf/758A-P3-progress.pdf)。
 
-- [完整轨迹复算结果](results/p3/replanned/summary.json)及同目录中的逐情景控制节点。
-- [英文 P3 正文](paper/p3-sensitivity.tex)。
-- [本轮 PDF 工作稿](output/pdf/758A-P3-progress.pdf)。
-- [风估计误差分析](docs/p3-wind-estimation.md)固定 30 t 主情景指令，记录风信息不准确时的剩余敏感性。
-- [持续状态修正第一轮](docs/p3-tracking-control.md)采用带调节余量的参考轨迹和 20 ms 周期反馈，在 0、±0.05、±0.1 m/s 五个未知风误差点通过触舰检查。
-- [全程安全分析](docs/p3-flight-safety.md)区分点火前的动压/来流能量峰值与燃烧中的法向载荷峰值，报告相对 P2 的受力代价；结构与热安全尚未确定。
-- [发动机效率与推进剂需求](docs/p3-propulsion-sensitivity.md)完成有效比冲 300、330、360 s 的独立设计比较，已接受局部候选的分离总推进剂为 28.781、26.228、24.199 t；每档分别选择船位。
-- [限定阻力对比](docs/p3-drag-sensitivity.md)记录横流系数 1.6 的 27.130 t 已接受局部设计，以及系数 0.8 在限时内未获得通过候选的结果；不据此宣称全区间可行或物理不可行。
+### 补充计算记录
+
+以下材料保留为扩展记录，不作为名义燃料答案或最终回收方案的组成部分。正文仅保留一段有限反馈示例。
+
+- [分离时重规划](docs/p3-control-revision.md)及[逐情景结果](results/p3/replanned/summary.json)：30 t 共同试算库存、固定船位、准确初态和恒定风已知。
+- [风估计误差扫描](docs/p3-wind-estimation.md)：固定 30 t 计划下的输入误差影响。
+- [持续反馈示例](docs/p3-tracking-control.md)：带调节余量的参考轨迹及五个小风误差点，不能推广为普遍鲁棒结论。

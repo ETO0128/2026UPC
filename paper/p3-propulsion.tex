@@ -1,11 +1,9 @@
-\subsubsection{Effective Specific Impulse and the Separation Budget}
-We compare the P0 effective specific impulses of 300, 330, and 360 s while keeping maximum thrust, minimum throttle, gimbal limits, aerodynamic parameters, initial direction, and the 5 t reserve requirement unchanged. The oxygen-to-methane mass ratio remains 3.5. This is an effective-parameter comparison, rather than a thermochemically coupled engine redesign. Each value is treated as known when planning the trajectory.
-
-For each changed value, we reoptimize the separation inventory, phase durations, throttle, and gimbal history using the P2 single-ignition family and a 0.55 s target shooting interval. Each design selects its own ship position, which is then fixed during full-flight replay. The 330 s row retains the selected P2 solution. All three rows satisfy the P0 touchdown criteria at integration steps of 0.005 s and 0.0025 s. Table~\ref{tab:p3-isp-budget} uses the latter. These are accepted local candidates; the search does not establish global minima.
+\subsubsection{Effective Specific Impulse}
+We compare effective specific impulses of 300, 330, and 360 s, with maximum thrust, minimum throttle, gimbal limits, aerodynamic coefficients, and oxygen-to-methane mass ratio unchanged. Each changed case reoptimizes inventory, phase durations, and controls within the P2 single-ignition family. The 330 s row uses the selected nominal result. All three candidates satisfy the adopted touchdown conditions in full-flight replay at steps of 0.005 s and 0.0025 s; Table~\ref{tab:p3-isp-budget} uses the finer replay. The candidates are local solutions, not proven global minima.
 
 \begin{table}[htbp]
 \centering
-\caption{Effective-Isp scenario budgets in tonnes. Separation inventory includes the retained amount, which exceeds the common 5 t requirement. Methane and oxygen are components of the separation inventory. Values are rounded independently.}
+\caption{Effective-Isp budgets in tonnes, including at least 5 t retained propellant. Methane and oxygen are components of the separation inventory. Values are rounded independently.}
 \label{tab:p3-isp-budget}
 \begin{tabular}{@{}rrrrrr@{}}
 \toprule
@@ -18,17 +16,4 @@ $I_{sp}$ (s) & Inventory & Consumed & Retained & Methane & Oxygen \\
 \end{tabular}
 \end{table}
 
-Relative to 330 s, accepted inventory rises by 2.552 t (9.73\%) at 300 s and falls by 2.029 t (7.74\%) at 360 s. Figure~\ref{fig:p3-isp-budget} separates consumption from the nearly constant retained inventory. The examined separation-load range is 24.199--28.781 t, including 5.378--6.396 t of methane. This is a deterministic scenario range, not a confidence interval or a universal requirement for the unspecified booster.
-
-At a prescribed thrust, $\dot m=-T/(g_0 I_{sp})$ links efficiency to consumption. However, scaling the reference consumed mass by $330/I_{sp}$ and retaining its 5.078 t endpoint inventory would predict total loads of 28.343 t at 300 s and 24.466 t at 360 s. These differ from the reoptimized values. Initial inventory affects the mass throughout the coast, while the optimized controls and durations also change. The total thrust impulse therefore need not remain that of the reference trajectory.
-
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=.88\textwidth]{figure/p3-propulsion-budget.png}
-\caption{Separation inventory split into consumed and retained propellant for the three known-efficiency designs. Each design has its own optimized commands and selected recovery site.}
-\label{fig:p3-isp-budget}
-\end{figure}
-
-The selected ship positions for 300, 330, and 360 s are 278.455, 278.310, and 278.260 km downrange, respectively. Ignition occurs at approximately 176.27, 176.68, and 176.70 s. The changed plans are thus separate design cases, rather than a demonstration that one command history recovers unknown engine errors at a fixed ship. Their inventories also differ from the 30 t feedback trials of the preceding subsections.
-
-The corresponding peak dynamic pressures are approximately 302.062, 297.334, and 293.561 kPa, and peak specific forces are 7.835, 7.703, and $7.636\,g_0$. These values retain the structural and thermal limitations of Section~\ref{sec:flight-exposure}. The budgets meet the adopted touchdown conditions without additional structural or thermal constraints. The crossflow comparison below changes a different parameter independently.
+Relative to 330 s, accepted inventory rises by 2.552 t (9.73\%) at 300 s and falls by 2.029 t (7.74\%) at 360 s. Higher specific impulse reduces consumption at a prescribed thrust, but total inventory also includes the retained amount, and the changed mass affects the descent. Replanning the complete trajectory therefore differs from simply scaling inventory inversely with specific impulse. The range 24.199--28.781 t describes these known-efficiency designs, not a confidence interval. Holding thrust and mixture ratio fixed is an effective-parameter approximation rather than a thermochemically coupled engine redesign.

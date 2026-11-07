@@ -1,107 +1,14 @@
-\section{Sensitivity and Uncertainty Analysis}
-\subsection{Initial Flight-Path Angle and Atmospheric Coverage}
-We first use an unpowered ascent to determine whether the selected flight-path angles stay within the range of the implemented atmosphere. The initial body pitch follows the flight-path angle in each case. At $0^\circ$ the booster starts descending from 70.0 km. At $15^\circ$ the simulated ascent reaches approximately 79.71 km. At $30^\circ$ an integration stage exceeds the atmosphere ceiling near 86 km while the vehicle is still climbing. The last supported step is at 85.99 km, about 22.0 s after separation. The $30^\circ$ result identifies a model coverage limit for a coast-first trajectory. Evaluating that trajectory through its apex requires a higher-altitude atmosphere model.
+\section{Sensitivity and Safety Limits}
+\label{sec:p3}
+The propellant estimate depends on quantities not fully specified by the problem. We examine effective engine efficiency and crossflow drag while retaining the reference initial direction and 5 t planned reserve. Each known-parameter design selects a convenient recovery site, as permitted by the problem, and holds that site fixed during replay. These separate designs do not establish recovery from unknown parameter errors at one prepositioned ship. The larger influence of the unspecified separation direction is reported in Section~\ref{sec:separation-direction}.
 
-\subsection{Wind, Initial Attitude, and Fixed-Ship Capture}
-We replay the selected one-ignition schedule from separation with the ship fixed at 278.310 km downrange and the initial inventory fixed at 26.228 t. The ignition time, throttle, and gimbal commands are held at their nominal histories, so the replay does not correct for perturbations. We change one input at a time. Wind is uniform and positive downrange. Pitch offsets are applied to the body alone, leaving the initial flight-path angle at $15^\circ$. Each replay runs until first contact with the deck plane or the end of the P2 replay window, which extends 0.5 s beyond the last control knot.
-
-\begin{table}[htbp]
-\centering
-\caption{Full-flight replay with the nominal P2 commands and fixed ship position. The signed position error is measured from the ship. Positive vertical velocity points upward. Contact quantities are shown only when the booster reaches the deck plane.}
-\label{tab:fixed-ship-p2}
-\begin{tabular}{@{}llrrr@{}}
-\toprule
-Input change & Outcome & $\Delta x$ (m) & $v_x$ (m/s) & $v_h$ (m/s) \\
-\midrule
-Nominal & Within limits & 0.0 & $-0.01$ & $-1.53$ \\
-Wind $-10$ m/s & Schedule ended & -- & -- & -- \\
-Wind $+10$ m/s & Outside limits & $+378.3$ & 9.31 & $-14.80$ \\
-Pitch $-2^\circ$ & Schedule ended & -- & -- & -- \\
-Pitch $+2^\circ$ & Outside limits & $+139.0$ & 25.97 & $-25.16$ \\
-Pitch rate $-1^\circ$/s & Outside limits & $-1061.7$ & 151.71 & $-71.68$ \\
-Pitch rate $+1^\circ$/s & Outside limits & $+34.1$ & 106.40 & $-72.73$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-The nominal replay passes all P0 touchdown criteria. In Table~\ref{tab:fixed-ship-p2}, the $-10$ m/s wind case and the $-2^\circ$ pitch case end with the lowest point of the body still 9.6 m and 46.8 m above the deck plane, respectively. Each of the four perturbed trajectories that reaches the deck plane exceeds the 5 m position tolerance and both speed limits. The $+1^\circ$/s pitch-rate case reaches the deck plane within $2^\circ$ of upright but still exceeds the position, speed, and pitch-rate limits. Thus the conditions for a controlled landing must be met together. These deterministic cases characterize the nominal commands without feedback correction. Estimating recovery under perturbations would require replaying a guidance law that adjusts the trajectory toward the fixed ship.
-
-\subsection{Separation-Time Replanning at a Fixed Inventory}
-We next use the initial state and steady wind as known inputs at separation and compute a new schedule for each case. The ship remains at the reference location. We select a common separation inventory of 30 t and retain the 5 t minimum usable reserve. A coast prediction supplies a state at 25 km. From that state, the optimizer chooses the remaining coast duration and the throttle and gimbal histories, with fixed initial mass and fixed ship position. The resulting commands are replayed from separation, including the preceding coast. This procedure uses the flight time before ignition to prepare a case-specific schedule.
-
-The reference case and ten one-factor perturbations satisfy all P0 touchdown criteria at replay steps of 0.005 s and 0.0025 s. Table~\ref{tab:p3-replanned} uses the finer replay. The largest position error among these cases is approximately 0.026 m, and the largest downward contact speed is approximately 1.584 m/s. Each case retains more than 7.16 t. With the same 30 t inventory but the original P2 commands, all eleven cases fail at least one touchdown criterion.
-
-\begin{table}[htbp]
-\centering
-\caption{Full-flight replay after case-specific planning at separation. The ship position and 30 t initial inventory are common to all cases. Each row satisfies the P0 touchdown criteria.}
-\label{tab:p3-replanned}
-\begin{tabular}{@{}lrrr@{}}
-\toprule
-Input change & Retained (t) & $|v_x|$ (m/s) & $|v_h|$ (m/s) \\
-\midrule
-Nominal & 7.882 & 0.03 & 1.58 \\
-Wind $-1$ m/s & 7.939 & 0.00 & 1.49 \\
-Wind $+1$ m/s & 7.793 & 0.03 & 1.42 \\
-Pitch $-0.1^\circ$ & 7.866 & 0.03 & 1.42 \\
-Pitch $+0.1^\circ$ & 7.861 & 0.02 & 1.43 \\
-Wind $-10$ m/s & 8.497 & 0.00 & 1.51 \\
-Wind $+10$ m/s & 7.165 & 0.02 & 1.45 \\
-Pitch $-2^\circ$ & 7.951 & 0.00 & 1.51 \\
-Pitch $+2^\circ$ & 7.809 & 0.02 & 1.54 \\
-Pitch rate $-1^\circ$/s & 7.434 & 0.02 & 1.56 \\
-Pitch rate $+1^\circ$/s & 7.551 & 0.00 & 1.49 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-The common 30 t inventory is a trial design choice, 3.772 t above the nominal P2 inventory. These runs establish feasibility for the individual modeled cases. The minimum common inventory and combined disturbances remain open questions. Planning takes approximately 14--43 s on the machine used here, with first ignition approximately 173--176 s after separation. These timings describe the recorded computations and leave room before ignition in these runs.
-
-The calculation assumes exact initial-state information, known uniform wind, and the reference dynamics. Commands are then executed as a precomputed schedule. Wind changes or state errors arising later in flight require further estimation and guidance updates. Actuator rate limits, sensing and computation delays, three-dimensional motion, Earth curvature and rotation, and structural and thermal limits also remain to be incorporated before operational safety can be assessed.
-
-\subsection{Error in the Wind Used for Planning}
-We hold the revised 30 t nominal schedule fixed and change the actual uniform wind while the wind used to plan the schedule remains zero. We examine thirteen wind speeds between $-1$ and $+1$ m/s, with more closely spaced points near zero. The event types and lists of violated touchdown limits agree for replay steps of 0.005 s and 0.0025 s.
-
-The tested points from $-0.05$ through $+0.05$ m/s satisfy the touchdown criteria. At $+0.05$ m/s, the downward contact speed is 1.993 m/s and the pitch-rate magnitude is $0.945^\circ$/s, close to their respective limits of 2 m/s and $1^\circ$/s. At $+0.1$ m/s, the position error remains within tolerance at 3.833 m, but the downward speed rises to 2.338 m/s and the pitch-rate magnitude to $1.608^\circ$/s. At $-0.1$ m/s, the command window ends with the lowest point of the body 0.571 m above the deck plane.
-
-These results quantify the remaining sensitivity to wind information in the revised nominal schedule. The successful case-specific plans use the actual steady wind as an input. Continued adjustment to state deviations is needed to address errors in that input. The examined wind points provide a sampled comparison, with the precise feasibility boundary left for further analysis.
-
-\subsection{Tracking with Control Margins}
-We prepare a new nominal reference with throttle limited to 95\% of maximum thrust and gimbal deflection limited to $9^\circ$. Ignition is advanced by 1 s relative to the preceding 30 t nominal schedule, to approximately 174.14 s after separation. The planned contact speed is reduced to 1 m/s downward. A penalty on changes between adjacent control nodes encourages smoother commands. The execution model retains the P0 actuator magnitude limits.
-
-We linearize the dynamics along the powered reference and compute finite-horizon quadratic tracking gains before flight. During the burn, the controller reads the state every 20 ms, applies a correction to the reference throttle and gimbal commands, and holds those commands until the next update. Corrections are clipped to the permitted actuator range. The controller uses the nominal zero-wind model. Actual wind affects the simulated vehicle through the aerodynamic forces.
-
-For normalized input $\mathbf u=(u_T,\delta/\delta_{max})$, the correction is
-\begin{equation}
- \mathbf u_{cmd}=\operatorname{clip}_{\mathcal U}\!\left[\mathbf u_{ref}-K(t)S^{-1}(\mathbf y-\mathbf y_{ref})\right],
- \qquad \mathcal U=[0.4,1]\times[-1,1].
-\end{equation}
-The seven diagonal scales in $S$ are 100 m, 100 m, 30 m/s, 30 m/s, 1000 kg, 0.2 rad, and 0.2 rad/s, in the P1 state order. Pitch error is wrapped to its equivalent principal angle. Numerical transition derivatives on a reference mesh of at most 0.1 s supply the state and input matrices for a backward Riccati recursion. Reference states use cubic Hermite interpolation, and the gain is held over each reference interval. The saved controller file specifies the quadratic weights and gains.
-
-\begin{table}[htbp]
-\centering
-\caption{Tracking results for unknown steady wind relative to the zero-wind reference. Each feedback case satisfies all P0 touchdown criteria at both integration step sizes. Values use the 0.0025 s replay.}
-\label{tab:p3-tracking}
-\begin{tabular}{@{}rrrr@{}}
-\toprule
-Wind (m/s) & Position error (m) & Downward speed (m/s) & Retained (t) \\
-\midrule
-$-0.10$ & 2.882 & 0.587 & 6.043 \\
-$-0.05$ & 1.422 & 0.585 & 6.041 \\
-0 & 0.038 & 0.582 & 6.038 \\
-$+0.05$ & 1.495 & 0.580 & 6.036 \\
-$+0.10$ & 2.953 & 0.578 & 6.034 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-The largest touchdown pitch-rate magnitude is approximately $0.740^\circ$/s. Peak commanded throttle and gimbal magnitude are approximately 95.9\% and $9.09^\circ$, within the original capability limits. Holding the same new reference commands fixed passes only the zero-wind case among these five comparisons. The feedback cases consume approximately 23.96 t and retain more than 6.03 t from the common 30 t separation load.
-
-These comparisons assume exact state measurements and instantaneous actuator response, with a fixed 20 ms control update period. Measurement noise, additional delay, actuator rate limits, changing wind, combined initial errors, and a broader wind range remain to be assessed. Ignition uses a prescribed nominal time.
+\subsection{Dependence of the Propellant Budget on Assumptions}
+\input{paper/p3-propulsion.tex}
+\input{paper/p3-drag.tex}
 
 \input{paper/p3-safety.tex}
 
-\subsection{Propulsion and Aerodynamic Design Comparisons}
-We examine effective engine efficiency and two crossflow-coefficient changes using the P0 scenario points. A recovery site selected separately for each design differs from an already positioned ship that must remain fixed across disturbances.
-\input{paper/p3-propulsion.tex}
-\input{paper/p3-drag.tex}
+\subsection{A Limited Guidance Extension}
+Holding the nominal commands fixed does not generally preserve touchdown under wind or initial-attitude errors. An illustrative 30 t feedback design recovered five tested steady-wind errors, $-0.1$, $-0.05$, 0, $+0.05$, and $+0.1$ m/s, at the same ship under exact state information and instantaneous actuator response. Its nominal peak specific force was approximately $8.13\,g_0$, above the reference value. This supplementary calculation demonstrates local corrective action, not a general recovery envelope. The trial inventory is not a replacement for the nominal propellant estimate. Detailed replanning, wind-error sweeps, and controller settings are retained in the repository's supplementary calculation records.
+
 \input{paper/p3-conclusions.tex}

@@ -61,5 +61,5 @@ python src/plot-p3-propulsion.py
 - `results/p3/propulsion/isp-*.json` 保留候选、两档完整复算和求解来源；重复求解追加历史。
 - `results/p3/propulsion/summary.json` 汇总预算、时序、船位、触舰和载荷，以及固定冲量缩放参照。
 - `figure/p3-propulsion-budget.png` 为预算图。
-- `paper/p3-propulsion.tex` 为新增英文部分，归入第 7.7 节。
+- `paper/p3-propulsion.tex` 为当前压缩后的英文效率比较，归入第 7 节；本说明和预算图保留较完整的计算记录。
 - 此处 330 s 消耗量取 0.0025 s 复算；与旧 P2 表按 0.005 s 复算取整的末位可能不同，不改变原装载结论。
