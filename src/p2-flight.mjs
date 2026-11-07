@@ -111,7 +111,22 @@ export function replay(p, contract, propellant, phases, {step = 0.02, samples = 
   }
 
   try {
-    flight: for (const phase of phases) {
+    flight: for (const specifiedPhase of phases) {
+      const period = specifiedPhase.samplePeriodS;
+      if (period !== undefined && (!Number.isFinite(period) || period <= 0)) {
+        throw new Error('A sampled controller needs a positive finite period');
+      }
+      let heldCommand;
+      let nextSample = time;
+      const phase = period === undefined ? specifiedPhase : {
+        ...specifiedPhase, command: () => heldCommand,
+      };
+      const updateControl = () => {
+        if (period !== undefined && time >= nextSample - 1e-10) {
+          heldCommand = specifiedPhase.command(time, y, aero(y, p));
+          nextSample += period;
+        }
+      };
       const start = time;
       const startState = [...y];
       const finish = start + (phase.duration ?? (600 - start));
@@ -121,10 +136,12 @@ export function replay(p, contract, propellant, phases, {step = 0.02, samples = 
       }
       if (phase.powered && !powered) ignitionCount++;
       powered = phase.powered;
+      updateControl();
       record(phase, true);
       let phaseEnded = false;
       while (time < finish - 1e-9) {
-        const dt = Math.min(step, finish - time);
+        updateControl();
+        const dt = Math.min(step, finish - time, period === undefined ? Infinity : nextSample - time);
         const next = rk4(time, y, dt, p, phase.command);
         if (!next.every(Number.isFinite)) {
           event = 'nonfinite_state';

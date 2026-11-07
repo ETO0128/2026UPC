@@ -42,3 +42,4 @@ latexmk -pdf -outdir=paper/build paper/main.tex
 - [英文 P3 正文](paper/p3-sensitivity.tex)。
 - [本轮 PDF 工作稿](output/pdf/758A-P3-progress.pdf)。
 - [风估计误差分析](docs/p3-wind-estimation.md)固定 30 t 主情景指令，记录风信息不准确时的剩余敏感性。
+- [持续状态修正第一轮](docs/p3-tracking-control.md)采用带调节余量的参考轨迹和 20 ms 周期反馈，在 0、±0.05、±0.1 m/s 五个未知风误差点通过触舰检查。

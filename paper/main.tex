@@ -92,11 +92,12 @@ python src/p3-replan.py --case nominal
 python src/p3-replan.py --replay-all
 \end{verbatim}
 The schedules are stored in \path{results/p3/replanned/}. The planner uses the dependencies in \path{requirements-p2.txt}.
+Run \texttt{python src/p3-tracking.py} to prepare the control-margin reference and regenerate the tracking gains and two-step-size comparison in \path{results/p3/tracking/}.
 \draftnote{Add the full-flight solver and final figure generation commands and versions.}
 \section{Supplementary Derivations and Results}
 \draftnote{Include dimensional checks, convergence tables, and additional scenario results.}
 \section*{Report on the Use of AI}
 \addcontentsline{toc}{section}{Report on the Use of AI}
-AI assistance was used to organize the manuscript, develop the reference dynamics and verification scripts, derive model equations, and generate P1 figures and draft text. It was also used to implement the P2 search, optimization, and replay, generate its figure, and draft the landing-strategy section. OpenAI Codex also assisted with the sensitivity calculations, corrective planning, and manuscript integration.
+AI assistance was used to organize the manuscript, develop the reference dynamics and verification scripts, derive model equations, and generate P1 figures and draft text. It was also used to implement the P2 search, optimization, and replay, generate its figure, and draft the landing-strategy section. OpenAI Codex also assisted with the sensitivity calculations, corrective planning, tracking-controller implementation, and manuscript integration.
 \draftnote{Complete the disclosure with the tools used, exact prompts, and complete outputs required by the competition rules.}
 \end{document}

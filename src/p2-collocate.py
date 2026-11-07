@@ -103,7 +103,10 @@ def rk_interval(rhs, substeps):
 
 
 def optimize(p, contract, seed, step, max_iter, *, shooting=False, altitude_buffer=0, substeps=8,
-             fixed_initial_mass=False, fixed_ship=None):
+             fixed_initial_mass=False, fixed_ship=None, throttle_ceiling=1, gimbal_fraction=1,
+             control_smoothing=0, touchdown_vertical_speed=-1.5):
+    if not p["minThrottle"] <= throttle_ceiling <= 1 or not 0 < gimbal_fraction <= 1 or control_smoothing < 0:
+        raise ValueError("Planning limits must fit inside the reference actuator limits")
     nlp = ca.Opti()
     rhs = p1_rhs(p)
     step_function = rk_interval(rhs, substeps) if shooting else None
@@ -143,8 +146,8 @@ def optimize(p, contract, seed, step, max_iter, *, shooting=False, altitude_buff
             nlp.subject_to(x[fixed, 0] == np.array(seed["initialState"])[fixed] / SCALE[fixed])
         if powered:
             u = nlp.variable(2, intervals + 1)
-            nlp.subject_to(nlp.bounded(p["minThrottle"], u[0, :], 1))
-            nlp.subject_to(nlp.bounded(-1, u[1, :], 1))
+            nlp.subject_to(nlp.bounded(p["minThrottle"], u[0, :], throttle_ceiling))
+            nlp.subject_to(nlp.bounded(-gimbal_fraction, u[1, :], gimbal_fraction))
             nlp.set_initial(u, u_guess)
         else:
             u = ca.DM.zeros(2, intervals + 1)
@@ -168,13 +171,16 @@ def optimize(p, contract, seed, step, max_iter, *, shooting=False, altitude_buff
 
     first, final = stages[0][2][:, 0], stages[-1][2][:, -1]
     # Interior targets leave room for numerical differences on replay.
-    nlp.subject_to(final[1:4] == np.array([p["deckHeightM"] + p["lengthM"] / 2, 0, -1.5]) / SCALE[1:4])
+    nlp.subject_to(final[1:4] == np.array([p["deckHeightM"] + p["lengthM"] / 2, 0, touchdown_vertical_speed]) / SCALE[1:4])
     upright = 0.5 + 2 * round((seed["finalState"][5] - np.pi / 2) / (2 * np.pi))
     nlp.subject_to(final[5:7] == [upright, 0])
     nlp.subject_to(final[4] >= (floor + 75) / SCALE[4])
     if fixed_ship is not None:
         nlp.subject_to(final[0] == fixed_ship / SCALE[0])
-    nlp.minimize(first[4] - final[4] if fixed_initial_mass else first[4])
+    objective = first[4] - final[4] if fixed_initial_mass else first[4]
+    if control_smoothing:
+        objective += control_smoothing * sum(ca.sumsqr(stage[3][:, 1:] - stage[3][:, :-1]) for stage in stages if stage[0]["powered"])
+    nlp.minimize(objective)
     nlp.solver("ipopt", {"print_time": False}, {"print_level": 0, "max_iter": max_iter,
                "max_wall_time": 140, "tol": 1e-8, "acceptable_tol": 2e-6,
                "acceptable_iter": 10, "bound_relax_factor": 0})

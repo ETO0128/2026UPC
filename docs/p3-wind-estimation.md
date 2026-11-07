@@ -31,3 +31,5 @@ node src/p3-wind-estimate.mjs
 ```
 
 完整结果保存为 [wind-estimation.json](../results/p3/wind-estimation.json)。首次接触事件之后的速度才用于触舰判断。窗口结束行保留终态和剩余高度，触舰字段为空。
+
+后续的[持续状态修正第一轮](p3-tracking-control.md)在有调节余量的新参考轨迹上加入 20 ms 周期反馈，已通过 0、±0.05、±0.1 m/s 五个未知风误差点的触舰检查。

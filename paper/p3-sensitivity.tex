@@ -65,6 +65,39 @@ The tested points from $-0.05$ through $+0.05$ m/s satisfy the touchdown criteri
 
 These results quantify the remaining sensitivity to wind information in the revised nominal schedule. The successful case-specific plans use the actual steady wind as an input. Continued adjustment to state deviations is needed to address errors in that input. The examined wind points provide a sampled comparison, with the precise feasibility boundary left for further analysis.
 
+\subsection{Tracking with Control Margins}
+We prepare a new nominal reference with throttle limited to 95\% of maximum thrust and gimbal deflection limited to $9^\circ$. Ignition is advanced by 1 s relative to the preceding 30 t nominal schedule, to approximately 174.14 s after separation. The planned contact speed is reduced to 1 m/s downward. A penalty on changes between adjacent control nodes encourages smoother commands. The execution model retains the P0 actuator magnitude limits.
+
+We linearize the dynamics along the powered reference and compute finite-horizon quadratic tracking gains before flight. During the burn, the controller reads the state every 20 ms, applies a correction to the reference throttle and gimbal commands, and holds those commands until the next update. Corrections are clipped to the permitted actuator range. The controller uses the nominal zero-wind model. Actual wind affects the simulated vehicle through the aerodynamic forces.
+
+For normalized input $\mathbf u=(u_T,\delta/\delta_{max})$, the correction is
+\begin{equation}
+ \mathbf u_{cmd}=\operatorname{clip}_{\mathcal U}\!\left[\mathbf u_{ref}-K(t)S^{-1}(\mathbf y-\mathbf y_{ref})\right],
+ \qquad \mathcal U=[0.4,1]\times[-1,1].
+\end{equation}
+The seven diagonal scales in $S$ are 100 m, 100 m, 30 m/s, 30 m/s, 1000 kg, 0.2 rad, and 0.2 rad/s, in the P1 state order. Pitch error is wrapped to its equivalent principal angle. Numerical transition derivatives on a reference mesh of at most 0.1 s supply the state and input matrices for a backward Riccati recursion. Reference states use cubic Hermite interpolation, and the gain is held over each reference interval. The saved controller file specifies the quadratic weights and gains.
+
+\begin{table}[htbp]
+\centering
+\caption{Tracking results for unknown steady wind relative to the zero-wind reference. Each feedback case satisfies all P0 touchdown criteria at both integration step sizes. Values use the 0.0025 s replay.}
+\label{tab:p3-tracking}
+\begin{tabular}{@{}rrrr@{}}
+\toprule
+Wind (m/s) & Position error (m) & Downward speed (m/s) & Retained (t) \\
+\midrule
+$-0.10$ & 2.882 & 0.587 & 6.043 \\
+$-0.05$ & 1.422 & 0.585 & 6.041 \\
+0 & 0.038 & 0.582 & 6.038 \\
+$+0.05$ & 1.495 & 0.580 & 6.036 \\
+$+0.10$ & 2.953 & 0.578 & 6.034 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The largest pitch-rate magnitude is approximately $0.740^\circ$/s. Peak commanded throttle and gimbal magnitude are approximately 95.9\% and $9.09^\circ$, within the original capability limits. Holding the same new reference commands fixed passes only the zero-wind case among these five comparisons. The feedback cases consume approximately 23.96 t and retain more than 6.03 t from the common 30 t separation load.
+
+These comparisons assume exact state measurements and instantaneous actuator response, with a fixed 20 ms control update period. Measurement noise, additional delay, actuator rate limits, changing wind, combined initial errors, and a broader wind range remain to be assessed. Ignition uses a prescribed nominal time.
+
 \subsection{Whole-Flight Parameters and Reserve}
 For each complete trajectory, we distinguish a recovery site chosen for that trajectory from an already positioned ship whose location must remain fixed. The full-flight comparison varies flight-path angle, effective specific impulse, thrust, aerodynamic parameters, and reserve using the reference scenario points. Reserve contributes to vehicle mass, so its effect can include a change in burn consumption as well as the extra mass retained. The resulting range describes the scenarios examined.
 \draftnote{Add reoptimized propellant and feasibility results for the engine, aerodynamic, and reserve scenarios. Report the governing contact or flight limit for each case.}

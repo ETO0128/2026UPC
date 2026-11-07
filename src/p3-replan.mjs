@@ -9,7 +9,7 @@ const options = { step: request.stepS ?? .005, samples: request.samples ?? false
 let result;
 if (request.mode === 'observe') {
   const coast = { name: 'coast', powered: false, command: () => ({ throttle: 0, gimbalRad: 0 }),
-    altitude: request.observationAltitudeM, duration: 400 };
+    altitude: request.observationAltitudeM, duration: request.coastDurationS ?? 400 };
   result = replay(params, contract, request.propellantKg, [coast], { ...options, startState: request.startState ?? null });
 } else {
   const phases = scheduledPhases(request.phases);
