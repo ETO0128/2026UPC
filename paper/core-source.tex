@@ -1,0 +1,14 @@
+\clearpage
+\subsection{Core Source Listings}
+The listings are drawn directly from the source files. They show the atmospheric model, force and contact calculations, constrained optimization, and independent replay used for the spherical reference. The driver scripts and case settings are identified above.
+
+\lstset{basicstyle=\footnotesize\ttfamily, numbers=left,
+  numberstyle=\scriptsize, numbersep=7pt, xleftmargin=2em,
+  columns=fullflexible, keepspaces=true, showstringspaces=false,
+  breaklines=true, breakindent=1em,
+  postbreak=\mbox{\ensuremath{\hookrightarrow}\space}, captionpos=t, tabsize=4}
+\lstinputlisting[caption={Standard atmosphere and isothermal extension}]{src/atmosphere.mjs}
+\lstinputlisting[caption={Aerodynamic strip forces, rigid-body dynamics, RK4 and deck clearance},lastline=61]{src/planar.mjs}
+\lstinputlisting[caption={Symbolic dynamics and constrained trajectory optimization},language=Python,lastline=236]{src/p2-collocate.py}
+\lstinputlisting[caption={Control interpolation and touchdown replay},firstline=57,firstnumber=57]{src/p2-flight.mjs}
+\lstinputlisting[caption={Spherical trajectory replay entry point}]{src/spherical-replay.mjs}

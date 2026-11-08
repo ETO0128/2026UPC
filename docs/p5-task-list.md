@@ -60,9 +60,9 @@
 | T6 | 完成 | 说明分离方向由上升任务决定，不是回收方案的优化变量；15° 为假设的中等爬升角，并写入摘要与结论作为最大不确定性。 |
 | T7 | 完成 | 符号表补全，删去未使用的 C_D、A，统一使用 "specific force"。 |
 | T8 | 完成 | 正文内部代号已去除，章节引用改为 `\ref`；静态检查无未定义引用、重复标签或未定义文献。 |
-| T9 | 完成 | 用 `python src/build-paper.py` 编译（经 Python 调用 `.tools/TinyTeX` 的 pdflatex，直接从 PowerShell 启动会被本机安全软件拦截），已覆盖 `output/pdf/758A.pdf`，共 30 页。无未定义引用、无溢出行，字体全部嵌入，每页页眉含队号。文字与数字已核对，页面图像未做目视检查。 |
+| T9 | 完成 | `python src/build-paper.py` 编译后已更新 `output/pdf/758A.pdf`，共 31 页。已比对前 30 页的渲染结果并检查第 31 页，编译日志无未定义引用和溢出警告。 |
 | T10 | 完成 | 已更新 `README.md`、`ref/todo/README.md`、`docs/spherical-correction.md`。 |
-| T11 | 已起草，待队伍确认 | `paper/ai-report.tex` 收录本机的 Codex 会话（41 轮）和 Kiro 会话（8 轮）：提问为英文译文，回复为摘要，姓名、路径、账号已替换为占位。文末留有占位，供补入其他队员的会话。原始日志在 `~/.codex/sessions/2026/11/07/` 和 DSH 会话记录中。 |
+| T11 | 已摘录代码生成条目 | 论文附入队友 disclosure 的 C19、C25 和 K2 的代码生成内容，材料为提问英译及输出摘要。 |
 
 另外，名义解在 0.40 s 网格上补跑三轮（26.020、25.967、26.011 t），选最低的 25.967 t，船位 284.120 km；`selected.json`、图和 `spherical-results.tex` 已据此重新生成。
 

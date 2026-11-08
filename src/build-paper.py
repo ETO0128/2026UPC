@@ -6,7 +6,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-TEX = ROOT / '.tools/TinyTeX/bin/windows/pdflatex.exe'
+TEX = ROOT / '.tools/TinyTeX/bin/windows/xelatex.exe'
 OUT = ROOT / 'paper/build/p5'
 OUT.mkdir(parents=True, exist_ok=True)
 env = dict(os.environ, TEXINPUTS=str(ROOT / '.tools/fhdr') + '//;')

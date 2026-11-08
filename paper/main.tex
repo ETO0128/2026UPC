@@ -3,6 +3,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb,graphicx,booktabs,hyperref,fancyhdr}
+\usepackage{listings}
+\usepackage{fontspec}
 \hypersetup{hidelinks}
 \makeatletter\g@addto@macro\UrlBreaks{\do\-\do\.}\makeatother
 \setcounter{tocdepth}{2}
@@ -18,9 +20,12 @@
 \upctitle{Controlled Descent and Propellant Estimation\\for a First-Stage Rocket Booster}
 \renewcommand{\abstractname}{Summary}
 \begin{abstract}
-We model the descent and vertical landing of a first-stage booster with coupled translation, pitch rotation, aerodynamic forces, and propellant consumption on a nonrotating spherical Earth. Taking the stated 130 t as dry mass and assuming the booster separates while climbing at $15^\circ$, the best trajectory we found coasts for 181 s and then makes a single landing burn from 6.2 km altitude. It needs 25.97 t of propellant at separation, 5.77 t of methane and 20.20 t of liquid oxygen. Of this, 20.89 t is burned and the rest includes the 5 t reserve we require at touchdown. The ship is placed 284.12 km downrange. At contact after 213.25 s the booster is upright, descends at 1.51 m/s, and drifts sideways at 0.003 m/s; replays with time steps down to 0.00125 s meet all the touchdown limits. The separation direction, which the problem leaves open, matters most: separating level or at $30^\circ$ requires 24.32 or 32.46 t. Effective specific impulse between 300 and 360 s gives 28.48 to 23.98 t, and crossflow drag changes the result by less than 0.5 t. The descent reaches 293 kPa dynamic pressure and an estimated 130--250 kW/m$^2$ stagnation heat flux before the burn; holding the pressure below 200 or 150 kPa with an extra braking burn raises the requirement to about \QcapTwoHundred{} or \QcapOneFifty{} t. These figures assume a rigid booster, a stationary ship, fixed engine and drag parameters, and ideal engine control, and they are local optima.\end{abstract}
+We model a first-stage booster on a nonrotating spherical Earth with coupled translation, pitch, aerodynamics, and propellant consumption. For a 130 t dry mass and a $15^\circ$ climb angle at separation, the lowest verified inventory is 25.97 t, comprising 5.77 t of methane and 20.20 t of liquid oxygen. The booster coasts for 181 s and ignites once at 6.2 km altitude, burning 20.89 t and retaining the required 5 t reserve. It touches down upright after 213.25 s, with the ship at 284.12 km downrange, a downward speed of 1.51 m/s, and a horizontal speed of 0.003 m/s. Independent replay meets the touchdown limits at steps down to 0.00125 s. Among the parameters varied without a pressure cap, the separation direction has the largest effect. Level and $30^\circ$ separations use 24.32 and 32.46 t, respectively. Varying effective specific impulse from 300 to 360 s gives 28.48 to 23.98 t, while the tested crossflow coefficients change the inventory by less than 0.5 t. The nominal descent reaches 293 kPa dynamic pressure and an estimated 130--250 kW/m$^2$ stagnation heat flux before ignition. With an extra braking burn, the lowest verified inventories for 200 and 150 kPa caps are \QcapTwoHundred{} and \QcapOneFifty{} t. These capped values are feasible upper estimates. All results are conditional on the reference rigid-body, stationary-deck, and ideal-actuator assumptions.
+\end{abstract}
 \clearpage
+\begingroup\small
 \tableofcontents
+\endgroup
 \clearpage
 \section{Introduction}
 \subsection{Background}
@@ -63,8 +68,8 @@ $q$ & Dynamic pressure, $\rho U^2/2$ & Pa \\
 \input{paper/p1-model.tex}
 \section{Landing Strategy and Propellant Estimation}
 \label{sec:strategy}
-\input{paper/p2-optimization.tex}
 \input{paper/spherical-results.tex}
+\input{paper/p2-optimization.tex}
 \input{paper/separation-angle.tex}
 \input{paper/p3-sensitivity.tex}
 \section{Model Evaluation}
@@ -84,7 +89,9 @@ For the spherical-Earth reference with a $15^\circ$ separation direction, a coas
 
 The answer depends most on inputs that the problem leaves open. The separation direction, which the ascent mission fixes, moves the requirement from 24.32 t at $0^\circ$ to 32.46 t at $30^\circ$, and the ship moves from 199 to 349 km downrange. Effective specific impulse between 300 and 360 s gives 28.48 to 23.98 t, whereas crossflow drag between $C_n=0.8$ and 1.6 changes the result by less than 0.5 t. In practice, the separation direction and the engine efficiency should be fixed first, because together they determine both the propellant load and where the ship must wait.
 
-The reference descent reaches 293 kPa dynamic pressure before ignition. If a structural assessment sets a lower limit, an extra braking burn is needed and the propellant requirement rises steeply: about \QcapTwoHundred{} t for a 200 kPa limit and \QcapOneFifty{} t for 150 kPa (Section~\ref{sec:qcap}). All figures assume the reference engine and drag parameters, a nonrotating Earth, a stationary ship, ideal actuators, and a rigid structure.\clearpage\begin{thebibliography}{99}
+The reference descent reaches 293 kPa dynamic pressure before ignition. With a separate entry burn, we found feasible inventories of about \QcapTwoHundred{} t at a 200 kPa cap and \QcapOneFifty{} t at a 150 kPa cap (Section~\ref{sec:qcap}). These are upper estimates within the tested strategy family. All figures assume the reference engine and drag parameters, a nonrotating Earth, a stationary ship, ideal actuators, and a rigid structure.
+
+\begin{thebibliography}{99}
 \bibitem{be4} Blue Origin. BE-4. Manufacturer webpage, accessed November 7, 2026. \url{https://www.blueorigin.com/es-MX/engines/be-4}.
 \bibitem{cylinder} F. E. Gowen and E. W. Perkins. Drag of Circular Cylinders for a Wide Range of Reynolds Numbers and Mach Numbers. NACA-TN-2960, 1953.
 \bibitem{atmosphere} NOAA, NASA, and USAF. U.S. Standard Atmosphere, 1976. NASA-TM-X-74335, 1976.
@@ -96,9 +103,10 @@ The reference descent reaches 293 kPa dynamic pressure before ignition. If a str
 \bibitem{suttonGraves} K. Sutton and R. A. Graves, Jr. A General Stagnation-Point Convective Heating Equation for Arbitrary Gas Mixtures. NASA-TR-R-376, 1971. \url{https://ntrs.nasa.gov/citations/19720003329}.
 \bibitem{problem} The University Physics Competition. Problem A: Landing a First-Stage Rocket Booster, 2026. \href{https://university-physics-competition.com/2026-competition}{Official problem statement.}
 \end{thebibliography}
+\clearpage
 \appendix
 \section{Reproducibility and Source Code}
-\begingroup\sloppy
+\begingroup\raggedright
 The corrected reference parameters are in \path{config/spherical.json}. The planar comparison uses \path{config/reference.json}.
 
 The touchdown conventions are stored in \path{config/p0-contract.json}. Spherical optimization and replay are reproduced with \path{src/spherical-optimize.py} and \path{src/spherical-report.py}. The accepted controls and finer-step replay are archived in \path{results/spherical/selected.json}. The selected complete trajectories and inventories are in \path{results/p2-p0-v1/}; solver commands and dependencies are documented in \path{docs/p2-landing-strategy.md} and \path{requirements-p2.txt}.
@@ -115,6 +123,8 @@ The spherical separation-angle, parameter, dynamic-pressure-cap, and heating stu
 \item Tables and generated text: \path{src/spherical-tables.py} and \path{src/spherical-report.py}.
 \end{itemize}
 Commands are listed in \path{docs/p5-task-list.md}.
-\endgroup\clearpage
+\endgroup
+\input{paper/core-source.tex}
+\clearpage
 \input{paper/ai-report.tex}
 \end{document}

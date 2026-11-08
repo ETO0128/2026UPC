@@ -17,10 +17,10 @@
 - [`docs/p2-landing-strategy.md`](docs/p2-landing-strategy.md)：P2 复现命令、优化结果和模型边界。
 
 ## 论文编译
-安装含 latexmk 的 TeX 发行版，在项目根目录运行：
+使用含 XeLaTeX、fontspec 和 latexmk 的 TeX 发行版。在项目根目录运行以下命令。
 
 ```powershell
-latexmk -pdf -outdir=paper/build paper/main.tex
+latexmk -xelatex -outdir=paper/build paper/main.tex
 ```
 
 当前工作稿已编译并检查版面。已完成部分及剩余工作见各交接文档。
@@ -58,5 +58,5 @@ P0历史参数入口为 config/reference.json；场景、预算及约束规范�
 当前参数为config/spherical.json，说明见docs/spherical-correction.md。球面重优化并补跑0.40 s网格后得到25.967 t总推进剂、284.120 km地表弧长船位。结构能力按用户研究范围排除。
 
 ## P5 修订（任务书 docs/p5-task-list.md，收尾说明与仍存问题见 docs/p5-closeout.md）
-分离角、比冲、横流系数和动压上限都已在球面模型上重算，汇总见 results/spherical/summary.json。大气在84.852 km以上可选等温外推（upperAtmosphere: isothermal），30°情景因此不再被迫上升段制动。output/pdf/758A.pdf 已按最新源文件重新编译。本机可运行 python src/build-paper.py（使用 .tools 里的便携 TinyTeX），其他机器用 latexmk -pdf -outdir=paper/build paper/main.tex。
+分离角、比冲、横流系数和动压上限都已在球面模型上重算，汇总见 results/spherical/summary.json。大气在84.852 km以上可选等温外推（upperAtmosphere: isothermal），30°情景因此不再被迫上升段制动。output/pdf/758A.pdf 已按最新源文件重新编译。本机可运行 `python src/build-paper.py`，使用 `.tools` 中的便携 TinyTeX 和 XeLaTeX。
 

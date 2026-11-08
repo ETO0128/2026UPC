@@ -1,6 +1,6 @@
 \subsection{Loads Along the Nominal Descent}
 \label{sec:flight-exposure}
-A safe descent depends on the loads during the whole flight, not only at touchdown. Table~\ref{tab:flight-exposure} uses the same 25.97 t spherical trajectory as the propellant answer, so loads and budget refer to one design. Dynamic pressure is $q=\rho U^2/2$, where $U$ is the speed relative to the air~\cite{dynamicPressure}. The specific force $\lVert\mathbf F_a+\mathbf T\rVert/(m g_0)$ is the non-gravitational acceleration that the structure actually carries.
+The loads on the 25.97 t spherical trajectory vary throughout the descent (Table~\ref{tab:flight-exposure}). Dynamic pressure is $q=\rho U^2/2$, where $U$ is the speed relative to the air~\cite{dynamicPressure}. We express the magnitude of the specific force in units of $g_0$ as $\lVert\mathbf F_a+\mathbf T\rVert/(m g_0)$.
 
 \begin{table}[htbp]
 \centering
@@ -25,7 +25,7 @@ To gauge the heating, we apply the Sutton--Graves correlation for the convective
 \begin{equation}\label{eq:sutton}
  \dot q_s=k\sqrt{\frac{\rho}{R_n}}\,U^3,\qquad k=1.7415\times10^{-4}\ \mathrm{kg^{1/2}\,m^{-1}},
 \end{equation}
-along the reference trajectory, where $R_n$ is the effective nose radius of the windward surface. The booster changes attitude during the descent and meets the air partly tail first, so $R_n$ is uncertain. We bracket it between 1 m, for a rounded edge, and the 3.5 m body radius. The peak occurs at 168.7 s, at 15.5 km altitude and 1500 m/s, before the dynamic-pressure peak. It is 249 kW/m$^2$ for $R_n=1$ m and 133 kW/m$^2$ for $R_n=3.5$ m, and the heat absorbed per unit area over the whole flight is 8.6 and 4.6 MJ/m$^2$. Equation~\eqref{eq:sutton} is intended for blunt bodies at hypersonic speed, and the separation speed is only about Mach 5, so these values indicate the order of magnitude. They are the design heating that a thermal protection system would have to handle; sizing that system is outside this study.
+along the reference trajectory, where $R_n$ is the effective nose radius of the windward surface. The booster changes attitude during descent and meets the air partly tail first, so we evaluate two representative radii, 1 m for a rounded edge and 3.5 m for the body radius. The peak occurs at 168.7 s, at 15.5 km altitude and 1500 m/s, before the dynamic-pressure peak. It is 249 kW/m$^2$ for $R_n=1$ m and 133 kW/m$^2$ for $R_n=3.5$ m. Integrating the estimated stagnation-point heat flux over flight gives incident convective heat loads of 8.6 and 4.6 MJ/m$^2$, respectively. The calculation omits radiation, conduction, and the surface temperature response. The correlation and the assumed effective radii support an order-of-magnitude estimate of the thermal environment.
 
 \subsection{Cost of Limiting Dynamic Pressure}
 \label{sec:qcap}
@@ -33,4 +33,4 @@ The 293 kPa peak occurs while the engine is off, so a later correction cannot re
 
 \input{paper/qcap-results.tex}
 
-At the masses involved, the 2.846 MN engine decelerates the booster at roughly $1.5$--$2\,g_0$, far less than aerodynamic drag near peak dynamic pressure. Lowering $q$ therefore takes a long burn while the booster is still fast, and all the propellant burned early has to be carried from separation. If a structural limit near or below 200 kPa applied, it rather than the landing burn would set the propellant requirement.
+Across the modeled mass range, full thrust contributes roughly $1.5$--$2.2\,g_0$ of acceleration before projection onto the flight direction. In the two capped trajectories, the long entry burn reduces speed before the booster reaches denser air and accounts for most of the added propellant.
